@@ -20,7 +20,8 @@ public class WebSocketJetty {
     }
 
     @OnWebSocketMessage
-    public void onMessage(Session session, String text){
+    public void onMessage(Session session, String text) throws ClassNotFoundException
+    {
         ServiceBean.getService().sendmessage(session, text);
     }
 

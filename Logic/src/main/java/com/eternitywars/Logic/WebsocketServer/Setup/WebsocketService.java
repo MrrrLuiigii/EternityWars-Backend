@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -23,9 +24,11 @@ public class WebsocketService {
         listenerSessions.add(session);
     }
 
-    public void sendmessage(Session session, String message){
+    public void sendmessage(Session session, String message) throws ClassNotFoundException
+    {
         JSONObject jsonObject = new JSONObject(message);
-        messageHandler.handleMessage(session,  jsonObject);
+        Class ReflectionClass = Class.forName("com.eternitywars.Logic.WebsocketServer.Message." + jsonObject.getString("class"));
+        Method[] m = ReflectionClass.getDeclaredMethods();
     }
 
     @PostConstruct
