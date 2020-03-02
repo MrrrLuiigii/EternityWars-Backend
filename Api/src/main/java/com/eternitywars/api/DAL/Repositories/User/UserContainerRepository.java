@@ -9,10 +9,9 @@ public class UserContainerRepository implements IUserContainerContext
 {
     private IUserContainerContext userContainerContext;
 
-    public UserContainerRepository()
+    public UserContainerRepository(IUserContainerContext userContainerContext)
     {
-        UserContainerFactory userContainerFactory = new UserContainerFactory();
-        this.userContainerContext = userContainerFactory.getUserContainerHibernate();
+        this.userContainerContext = userContainerContext;
     }
 
     public UserContainerRepository(UserContainerFactory userContainerFactory)

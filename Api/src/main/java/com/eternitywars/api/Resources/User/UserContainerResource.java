@@ -1,6 +1,7 @@
 package com.eternitywars.api.Resources.User;
 
 import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
+import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Models.User;
 import com.eternitywars.api.Models.UserCollection;
 import org.json.JSONObject;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/public/user")
 public class UserContainerResource
 {
-    private UserContainerRepository userContainerRepository = new UserContainerRepository();
+    private UserContainerRepository userContainerRepository = new UserContainerRepository(UserContainerFactory.getUserContainerHibernate());
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public User AddUser(@RequestBody User user)

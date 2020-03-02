@@ -18,7 +18,7 @@ public class UserContainerFactory
         return new UserContainerSqlContext(new TestDatabaseConnection());
     }
 
-    public IUserContainerContext getUserContainerHibernate()
+    public  static IUserContainerContext getUserContainerHibernate()
     {
         return new UserContainerHibernateContext();
     }
