@@ -31,26 +31,18 @@ public class Card
     @Column(name = "taunt")
     private boolean taunt;
 
-    private boolean isSleeping;
+
 
 
 
     public Card()
     {
-        isSleeping = true;
+
     }
 
     public Card(int cardId)
     {
         this.cardId = cardId;
-    }
-
-    public boolean getSleeping() {
-        return isSleeping;
-    }
-
-    public void setSleeping(boolean sleeping) {
-        this.isSleeping = sleeping;
     }
 
     public int getCardId()
