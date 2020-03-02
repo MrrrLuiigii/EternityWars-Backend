@@ -2,17 +2,24 @@ package com.eternitywars.api.Models;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.websocket.Session;
+import java.io.Serializable;
 import java.net.Socket;
 
-public class User extends Account
+@Entity
+@Table(name = "user")
+public class User extends Account implements Serializable
 {
+    @Column(name = "email", nullable = false)
     private String email;
+    @Column(name = "gold")
     private int gold;
+    @Column(name = "pack_amount")
     private int packAmount;
-    private FriendCollection friendCollection;
-    private DeckCollection deckCollection;
-    private CardCollection cardCollection;
 
     public User(){}
 
@@ -29,15 +36,13 @@ public class User extends Account
         this.packAmount = packAmount;
     }
 
-    public User(int id, String username, AccountStatus accountStatus, Session session, String email, int gold, int packAmount, FriendCollection friendCollection, DeckCollection deckCollection, CardCollection cardCollection)
+    public User(int id, String username, AccountStatus accountStatus, String email, int gold, int packAmount)
     {
-        super(id, username, accountStatus, session);
+        super(id, username, accountStatus);
         this.email = email;
         this.gold = gold;
         this.packAmount = packAmount;
-        this.friendCollection = friendCollection;
-        this.deckCollection = deckCollection;
-        this.cardCollection = cardCollection;
+
     }
 
     public String getEmail()
@@ -70,33 +75,4 @@ public class User extends Account
         this.packAmount = packAmount;
     }
 
-    public FriendCollection getFriendCollection()
-    {
-        return friendCollection;
-    }
-
-    public void setFriendCollection(FriendCollection friendCollection)
-    {
-        this.friendCollection = friendCollection;
-    }
-
-    public DeckCollection getDeckCollection()
-    {
-        return deckCollection;
-    }
-
-    public void setDeckCollection(DeckCollection deckCollection)
-    {
-        this.deckCollection = deckCollection;
-    }
-
-    public CardCollection getCardCollection()
-    {
-        return cardCollection;
-    }
-
-    public void setCardCollection(CardCollection cardCollection)
-    {
-        this.cardCollection = cardCollection;
-    }
 }

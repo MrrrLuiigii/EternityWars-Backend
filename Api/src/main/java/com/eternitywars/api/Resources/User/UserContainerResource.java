@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/private/user")
+@RequestMapping(value = "/api/public/user")
 public class UserContainerResource
 {
     private UserContainerRepository userContainerRepository = new UserContainerRepository();
@@ -18,11 +18,9 @@ public class UserContainerResource
         return userContainerRepository.AddUser(user);
     }
 
-    @GetMapping(value = "/getById", consumes = "application/json", produces = "application/json")
-    public User GetUserById(@RequestBody String json)
+    @GetMapping(value = "/getById/{userId}")
+    public User GetUserById(@PathVariable("userId") int userId)
     {
-        JSONObject jsonObject = new JSONObject(json);
-        int userId = jsonObject.getInt("userId");
         return userContainerRepository.GetUserById(userId);
     }
 

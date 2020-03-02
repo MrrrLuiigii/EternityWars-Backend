@@ -12,7 +12,7 @@ public class UserContainerRepository implements IUserContainerContext
     public UserContainerRepository()
     {
         UserContainerFactory userContainerFactory = new UserContainerFactory();
-        this.userContainerContext = userContainerFactory.getUserContainerSqlContext();
+        this.userContainerContext = userContainerFactory.getUserContainerHibernate();
     }
 
     public UserContainerRepository(UserContainerFactory userContainerFactory)

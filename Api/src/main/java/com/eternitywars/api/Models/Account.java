@@ -2,15 +2,21 @@ package com.eternitywars.api.Models;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
 
+import javax.persistence.*;
 import javax.websocket.Session;
 import java.net.Socket;
 
+@MappedSuperclass
 public abstract class Account
 {
+    @Id
+    @Column(name = "id", unique = true)
     protected int userId;
+    @Column(name = "username")
     protected String username;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "account_status")
     protected AccountStatus accountStatus;
-    private Session session;
 
     public Account(){}
 
@@ -19,14 +25,6 @@ public abstract class Account
         this.userId = userId;
         this.username = username;
         this.accountStatus = accountStatus;
-    }
-
-    public Account(int userId, String username, AccountStatus accountStatus, Session session)
-    {
-        this.userId = userId;
-        this.username = username;
-        this.accountStatus = accountStatus;
-        this.session = session;
     }
 
     public int getUserId()
@@ -59,13 +57,4 @@ public abstract class Account
         this.accountStatus = accountStatus;
     }
 
-    public Session getSession()
-    {
-        return session;
-    }
-
-    public void setSession(Session session)
-    {
-        this.session = session;
-    }
 }

@@ -19,7 +19,7 @@ public class Friend extends Account
 
     public Friend(int id, String username, AccountStatus accountStatus, Session session, FriendStatus friendStatus)
     {
-        super(id, username, accountStatus, session);
+        super(id, username, accountStatus);
         this.friendStatus = friendStatus;
     }
 
