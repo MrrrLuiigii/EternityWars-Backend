@@ -10,7 +10,7 @@ import com.eternitywars.api.Models.User;
 public class ShopSqlContext implements IShopContext
 {
     private DatabaseConnection dbc = new DatabaseConnection();
-    UserRepository userRepository = new UserRepository();
+    
 
     public ShopSqlContext(DatabaseConnection dbc)
     {
