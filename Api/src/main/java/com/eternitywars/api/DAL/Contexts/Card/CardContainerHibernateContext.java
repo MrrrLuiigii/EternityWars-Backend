@@ -5,7 +5,14 @@ import com.eternitywars.api.Models.Card;
 import com.eternitywars.api.Models.CardCollection;
 import com.eternitywars.api.Models.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
 public class CardContainerHibernateContext implements ICardContainerContext {
+
+    private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("eternitywars");
+
     @Override
     public CardCollection GetCards() {
         return null;
@@ -18,7 +25,20 @@ public class CardContainerHibernateContext implements ICardContainerContext {
 
     @Override
     public Card GetCardById(int cardId) {
-        return null;
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+
+        Card card;
+
+        try {
+            card = entityManager.find(Card.class, cardId);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return null;
+        } finally {
+            entityManager.close();
+        }
+
+        return card;
     }
 
     @Override

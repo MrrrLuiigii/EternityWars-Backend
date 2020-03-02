@@ -1,14 +1,15 @@
 package com.eternitywars.api.Resources.Card;
 
 import com.eternitywars.api.DAL.Repositories.Card.CardContainerRepository;
+import com.eternitywars.api.Factories.Card.CardContainerFactory;
 import com.eternitywars.api.Models.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/private/card")
+@RequestMapping(value = "/api/public/card")
 public class CardContainerResource
 {
-    private CardContainerRepository cardContainerRepository = new CardContainerRepository();
+    private CardContainerRepository cardContainerRepository = new CardContainerRepository(CardContainerFactory.getCardContainerHibernateContext());
 
 
 
