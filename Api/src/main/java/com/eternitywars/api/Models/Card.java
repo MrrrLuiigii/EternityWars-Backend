@@ -1,14 +1,36 @@
 package com.eternitywars.api.Models;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "card")
 public class Card
 {
+    @Id
+    @Column(name = "id", unique = true)
     private int cardId;
+
+    @Column(name = "name", unique = true)
     private String name;
+
+    @Column(name = "health")
     private int health;
+
+    @Column(name = "attack")
     private int attack;
+
+    @Column(name = "blue_mana")
     private int blue_mana;
+
+    @Column(name = "death_essence")
     private int death_essence;
+
+    @Column(name = "taunt")
     private boolean taunt;
+
     private boolean isSleeping;
 
 
@@ -30,7 +52,6 @@ public class Card
     public void setSleeping(boolean sleeping) {
         this.isSleeping = sleeping;
     }
-
 
     public int getCardId()
     {

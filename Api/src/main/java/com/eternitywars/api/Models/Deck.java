@@ -1,10 +1,26 @@
 package com.eternitywars.api.Models;
 
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+//@Entity
+//@Table(name = "deck")
 public class Deck
 {
+//    @Id
+//    @Column(name = "id", unique = true)
     private int deckId;
+
+//    @Column()
     private int userId;
+
+//    @Column(name = "name", nullable = false)
     private String name;
+
+
     private CardCollection cards;
 
     public Deck(){}
