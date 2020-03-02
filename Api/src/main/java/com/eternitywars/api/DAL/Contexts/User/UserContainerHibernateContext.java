@@ -10,23 +10,23 @@ import java.util.List;
 public class UserContainerHibernateContext implements IUserContainerContext {
 
     private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("eternitywars");
+
     @Override
     public User GetUserById(int userId) {
-        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-        String hql = "SELECT c FROM User c WHERE c.id = :userID";
-        TypedQuery<User> typedQuery = entityManager.createQuery(hql, User.class);
-        typedQuery.setParameter("userID", userId);
-        User user = null;
-        try {
-            user = typedQuery.getSingleResult();
 
-        }catch (Exception ex){
-            ex.printStackTrace();
-        }
-        finally {
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+
+        User returnUser;
+
+        try {
+            returnUser = entityManager.find(User.class, userId);
+        } catch (Exception ex) {
+            return null;
+        } finally {
             entityManager.close();
         }
-        return user;
+
+        return returnUser;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class UserContainerHibernateContext implements IUserContainerContext {
     }
 
     @Override
-    public User GetUserByEmail(String userEmail){
+    public User GetUserByEmail(String userEmail) {
     EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
     String hql = "SELECT c FROM User c WHERE c.email = :email";
     TypedQuery<User> typedQuery = entityManager.createQuery(hql, User.class);
