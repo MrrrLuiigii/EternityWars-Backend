@@ -12,25 +12,25 @@ public class UserResource
     private UserRepository userRepository = new UserRepository();
     private UserContainerRepository userContainerRepository = new UserContainerRepository();
 
-    @PostMapping(value = "/updateUsername", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/updateUsername", consumes = "application/json", produces = "application/json")
     public boolean UpdateUsername(@RequestBody User user)
     {
         return userRepository.UpdateUsername(user);
     }
 
-    @PostMapping(value = "/updateAccountStatus", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/updateAccountStatus", consumes = "application/json", produces = "application/json")
     public boolean UpdateAccountStatus(@RequestBody User user)
     {
         return userRepository.UpdateAccountStatus(user);
     }
 
-    @PostMapping(value = "/updatePackAmount", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/updatePackAmount", consumes = "application/json", produces = "application/json")
     public boolean UpdatePackAmount(@RequestBody User user)
     {
         return userRepository.UpdatePackAmount(user);
     }
 
-    @PostMapping(value = "/updateGold", consumes = "application/json", produces = "application/json")
+    @PutMapping(value = "/updateGold", consumes = "application/json", produces = "application/json")
     public boolean UpdateGold(@RequestBody User user)
     {
         User updatedUser = userContainerRepository.GetUserById(user.getUserId());
