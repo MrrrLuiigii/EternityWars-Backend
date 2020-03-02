@@ -4,10 +4,8 @@ import com.eternitywars.api.Interfaces.User.IUserContainerContext;
 import com.eternitywars.api.Models.User;
 import com.eternitywars.api.Models.UserCollection;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
+import java.util.List;
 
 public class UserContainerHibernateContext implements IUserContainerContext {
 
@@ -72,16 +70,68 @@ public class UserContainerHibernateContext implements IUserContainerContext {
 
     @Override
     public UserCollection GetUsers() {
-        return null;
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        String hql = "FROM User";
+        TypedQuery<User> typedQuery = entityManager.createQuery(hql, User.class);
+        List<User> users = null;
+        UserCollection userCollection = new UserCollection();
+        try {
+            users = typedQuery.getResultList();
+            userCollection.setUsers(users);
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return userCollection;
     }
 
     @Override
     public User AddUser(User user) {
-        return null;
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction entityTransaction = null;
+        try {
+            entityTransaction = entityManager.getTransaction();
+            entityTransaction.begin();
+            entityManager.persist(user);
+            entityTransaction.commit();
+        }catch (Exception ex){
+            if(entityTransaction != null){
+                entityTransaction.rollback();
+            }
+            ex.printStackTrace();
+        }
+        finally {
+            entityManager.close();
+        }
+        return user;
     }
 
     @Override
     public boolean DeleteUser(User user) {
-        return false;
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+        EntityTransaction entityTransaction = null;
+        User returnUser = null;
+        try {
+            entityTransaction = entityManager.getTransaction();
+            entityTransaction.begin();
+
+            returnUser = entityManager.find(User.class, user.getUserId());
+            entityManager.remove(returnUser);
+
+            entityTransaction.commit();
+        }catch (Exception ex){
+            if(entityTransaction != null){
+                entityTransaction.rollback();
+            }
+            ex.printStackTrace();
+            return false;
+        }
+        finally {
+            entityManager.close();
+        };
+        return true;
     }
 }
