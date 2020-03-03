@@ -1,9 +1,10 @@
 package com.eternitywars.api.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.eternitywars.api.Models.Enums.CardCollection;
+import org.hibernate.annotations.Fetch;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "card")
@@ -31,6 +32,8 @@ public class Card
     @Column(name = "taunt")
     private boolean taunt;
 
+//    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
+//    private List<CardCollection> cardCollections;
 
     public Card()
     {
@@ -111,4 +114,14 @@ public class Card
     {
         this.taunt = taunt;
     }
+
+//    public List<CardCollection> getCardCollections()
+//    {
+//        return cardCollections;
+//    }
+//
+//    public void setCardCollections(List<CardCollection> cardCollections)
+//    {
+//        this.cardCollections = cardCollections;
+//    }
 }
