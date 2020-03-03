@@ -15,6 +15,7 @@
         <class>com.eternitywars.api.Models.User</class>
         <class>com.eternitywars.api.Models.Card</class>
         <class>com.eternitywars.api.Models.Deck</class>
+        <class>com.eternitywars.api.Models.Enums.CardCollection</class>
         <properties>
             <!-- Driver for DB database -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
