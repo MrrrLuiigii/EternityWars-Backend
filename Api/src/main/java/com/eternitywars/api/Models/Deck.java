@@ -13,12 +13,11 @@ public class Deck
    @Id
    @Column(name = "id", unique = true)
     private int deckId;
-
+    @Column(name = "user_id")
     private int userId;
-
+    @Column(name = "name")
     private String name;
 
-    private int cards;
 
     public Deck(){}
 
@@ -30,7 +29,6 @@ public class Deck
     public Deck(Cards cards, int deckId)
     {
         this.deckId = deckId;
-        this.cards = 1;
     }
 
     public Deck(int deckId, int userId, String name)
@@ -75,8 +73,4 @@ public class Deck
         return null;
     }
 
-    public void setCards(Cards cards)
-    {
-        this.cards = 1;
-    }
 }

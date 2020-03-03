@@ -21,7 +21,6 @@ public class Lobby
     @OneToMany(mappedBy = "lobby_id", fetch = FetchType.EAGER)
     private List<Player> players;
 
-
     public Lobby(){}
 
     public Lobby(int lobbyId, String name, String description, boolean hasPassword, String password)

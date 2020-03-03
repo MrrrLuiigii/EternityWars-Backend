@@ -2,7 +2,6 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
 import com.eternitywars.api.Models.User;
 
 import javax.persistence.EntityManager;

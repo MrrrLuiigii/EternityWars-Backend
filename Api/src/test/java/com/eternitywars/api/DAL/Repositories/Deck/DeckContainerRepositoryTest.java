@@ -33,7 +33,7 @@ class DeckContainerRepositoryTest {
         card.setDeath_essence(1);
         card.setTaunt(true);
         deckOneCards.AddCard(card);
-        userOneDeckOne.setCards(deckOneCards);
+       // userOneDeckOne.setCards(deckOneCards);
 
         Deck userOneDeckTwo = new Deck();
         userOneDeckTwo.setDeckId(2);
@@ -60,7 +60,7 @@ class DeckContainerRepositoryTest {
         card.setDeath_essence(1);
         card.setTaunt(true);
         deckOneCards.AddCard(card);
-        deck.setCards(deckOneCards);
+       // deck.setCards(deckOneCards);
 
         return deck;
     }

@@ -9,17 +9,20 @@ import javax.persistence.*;
 public class Player
 {
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue
     private int id;
+
     @OneToOne
     @JoinColumn(name="user_id", nullable=false)
     private User user;
-    @ManyToOne()
-    @JoinColumn(name="lobby_id", nullable=false)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     private Lobby lobby_id;
+
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "lobby_player_status")
     private LobbyPlayerStatus lobbyPlayerStatus;
+
     @OneToOne()
     @JoinColumn(name = "deck_id")
     private Deck deck;

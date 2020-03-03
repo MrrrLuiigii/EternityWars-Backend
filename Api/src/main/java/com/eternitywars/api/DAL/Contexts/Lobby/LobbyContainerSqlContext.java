@@ -176,7 +176,7 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
                         if (oldLobbyId != lobbyId)
                         {
                             lobby = new Lobby(lobbyId, name, description, hasPassword, password);
-                            lobbyCollection.addLobby(lobby);
+                            //lobbyCollection.addLobby(lobby);
                            // lobby.setPlayerOne(player);
                         }
                         else
