@@ -10,12 +10,15 @@ import java.net.Socket;
 public abstract class Account
 {
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue
+    @Column(name = "id", unique = true, updatable = false)
     protected int userId;
+
     @Column(name = "username")
     protected String username;
+
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "account_status")
+    @Column(name = "account_status", columnDefinition = "int default 0")
     protected AccountStatus accountStatus;
 
     public Account(){}

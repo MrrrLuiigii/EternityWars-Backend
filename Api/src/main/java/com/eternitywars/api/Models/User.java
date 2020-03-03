@@ -19,11 +19,11 @@ public class User extends Account implements Serializable
     @Column(name = "pack_amount")
     private int packAmount;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "card_collection",
-            joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
-    private List<Card> cards;
+//    @OneToMany(fetch = FetchType.EAGER)
+//    @JoinTable(name = "card_collection",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "card_id"))
+//    private List<Card> cards;
 
     public User()
     {
@@ -81,13 +81,13 @@ public class User extends Account implements Serializable
         this.packAmount = packAmount;
     }
 
-    public List<Card> getCards()
-    {
-        return cards;
-    }
-
-    public void setCards(List<Card> cards)
-    {
-        this.cards = cards;
-    }
+//    public List<Card> getCards()
+//    {
+//        return cards;
+//    }
+//
+//    public void setCards(List<Card> cards)
+//    {
+//        this.cards = cards;
+//    }
 }
