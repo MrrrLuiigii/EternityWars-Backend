@@ -33,15 +33,15 @@ public class ShopExecutor implements IExecutor{
         String token = message.getString("Token");
         User user = gson.fromJson(json, User.class);
         switch (message.getString("Action")) {
-            case "BUYPACK":
-                shopLogic.PurchaseSomePacks(user, message.getInt("Amount"), token);
-                MessageSender.SendGenericMessageToUser(user, "BUYPACK", user);
-                break;
-            case "OPENPACK":
-                Pack pack = shopLogic.OpenPack(user, token);
-                MessageSender.SendGenericMessageToUser(pack, "OPENPACK", user);
-                MessageSender.SendGenericMessageToUser(user, "UPDATEUSERINFO", user);
-                break;
+//            case "BUYPACK":
+//                shopLogic.PurchaseSomePacks(user, message.getInt("Amount"), token);
+//                MessageSender.SendGenericMessageToUser(user, "BUYPACK", user);
+//                break;
+//            case "OPENPACK":
+//                Pack pack = shopLogic.OpenPack(user, token);
+//                MessageSender.SendGenericMessageToUser(pack, "OPENPACK", user);
+//                MessageSender.SendGenericMessageToUser(user, "UPDATEUSERINFO", user);
+//                break;
         }
     }
 
