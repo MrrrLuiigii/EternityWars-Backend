@@ -1,11 +1,6 @@
 package com.eternitywars.api.Models;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
 //@Entity
 //@Table(name = "deck")
 public class Deck
@@ -21,7 +16,7 @@ public class Deck
     private String name;
 
 
-    private CardCollection cards;
+    private Cards cards;
 
     public Deck(){}
 
@@ -30,7 +25,7 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public Deck(CardCollection cards, int deckId)
+    public Deck(Cards cards, int deckId)
     {
         this.deckId = deckId;
         this.cards = cards;
@@ -73,12 +68,12 @@ public class Deck
         this.name = name;
     }
 
-    public CardCollection getCards()
+    public Cards getCards()
     {
         return cards;
     }
 
-    public void setCards(CardCollection cards)
+    public void setCards(Cards cards)
     {
         this.cards = cards;
     }

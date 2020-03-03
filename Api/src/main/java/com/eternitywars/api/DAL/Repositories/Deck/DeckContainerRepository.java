@@ -2,10 +2,9 @@ package com.eternitywars.api.DAL.Repositories.Deck;
 
 import com.eternitywars.api.DAL.Contexts.Deck.DeckContainerSqlContext;
 import com.eternitywars.api.Factories.Deck.DeckContainerFactory;
-import com.eternitywars.api.Factories.Deck.DeckFactory;
 import com.eternitywars.api.Interfaces.Deck.IDeckContainerContext;
 import com.eternitywars.api.Models.Deck;
-import com.eternitywars.api.Models.DeckCollection;
+import com.eternitywars.api.Models.Decks;
 
 public class DeckContainerRepository implements IDeckContainerContext
 {
@@ -32,7 +31,7 @@ public class DeckContainerRepository implements IDeckContainerContext
         return deckContainerSqlContext.DeleteDeck(deck);
     }
 
-    public DeckCollection GetEmptyDecksByUserId(int userId)
+    public Decks GetEmptyDecksByUserId(int userId)
     {
         return deckContainerSqlContext.GetEmptyDecksByUserId(userId);
     }
@@ -42,7 +41,7 @@ public class DeckContainerRepository implements IDeckContainerContext
         return deckContainerSqlContext.GetEmptyDeckById(deckId);
     }
 
-    public DeckCollection GetDecksByUserId(int userId)
+    public Decks GetDecksByUserId(int userId)
     {
         return deckContainerSqlContext.GetDecksByUserId(userId);
     }

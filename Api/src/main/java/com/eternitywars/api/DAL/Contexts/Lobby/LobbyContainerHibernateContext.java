@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
+import com.eternitywars.api.Models.Lobbies;
 
 public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     @Override
@@ -21,7 +21,7 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     }
 
     @Override
-    public LobbyCollection GetLobbies() {
+    public Lobbies GetLobbies() {
         return null;
     }
 }

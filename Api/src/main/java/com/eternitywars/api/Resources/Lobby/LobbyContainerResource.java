@@ -2,8 +2,7 @@ package com.eternitywars.api.Resources.Lobby;
 
 import com.eternitywars.api.DAL.Repositories.Lobby.LobbyContainerRepository;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Lobbies;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -31,7 +30,7 @@ public class LobbyContainerResource
     }
 
     @GetMapping(value = "/get")
-    public LobbyCollection GetLobbies()
+    public Lobbies GetLobbies()
     {
         return lobbyContainerRepository.GetLobbies();
     }

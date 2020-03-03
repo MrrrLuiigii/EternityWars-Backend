@@ -14,7 +14,7 @@ public class CardContainerResource
 
 
     @GetMapping(value = "/getByUserId/{userId}")
-    public CardCollection GetCardsByUser(@PathVariable("userId")int userId)
+    public Cards GetCardsByUser(@PathVariable("userId")int userId)
     {
         return cardContainerRepository.GetCardsByUser(userId);
     }
@@ -26,7 +26,7 @@ public class CardContainerResource
     }
 
     @GetMapping(value = "/get")
-    public CardCollection GetCards()
+    public Cards GetCards()
     {
         return cardContainerRepository.GetCards();
     }
