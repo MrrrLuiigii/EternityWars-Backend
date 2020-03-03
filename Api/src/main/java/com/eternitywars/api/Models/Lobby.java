@@ -1,14 +1,26 @@
 package com.eternitywars.api.Models;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Entity
+@Table(name = "lobby")
 public class Lobby
 {
+    @Id
+    @Column(name = "id", unique = true)
     private int id;
+    @Column(name = "name", unique = true)
     private String name;
+    @Column(name = "description")
     private String description;
+    @Column(name = "has_Password")
     private boolean hasPassword;
+    @Column(name = "password")
     private String password;
-    private Player playerOne;
-    private Player playerTwo;
+    @OneToMany(mappedBy = "lobby_id", fetch = FetchType.EAGER)
+    private List<Player> players;
+
 
     public Lobby(){}
 
@@ -71,23 +83,14 @@ public class Lobby
         this.password = password;
     }
 
-    public Player getPlayerOne()
-    {
-        return playerOne;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public void setPlayerOne(Player playerOne)
-    {
-        this.playerOne = playerOne;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
-    public Player getPlayerTwo()
-    {
-        return playerTwo;
-    }
 
-    public void setPlayerTwo(Player playerTwo)
-    {
-        this.playerTwo = playerTwo;
-    }
+
 }

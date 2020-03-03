@@ -6,22 +6,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "deck")
+@Entity
+@Table(name = "deck")
 public class Deck
 {
-//    @Id
-//    @Column(name = "id", unique = true)
+   @Id
+   @Column(name = "id", unique = true)
     private int deckId;
 
-//    @Column()
     private int userId;
 
-//    @Column(name = "name", nullable = false)
     private String name;
 
-
-    private CardCollection cards;
+    private int cards;
 
     public Deck(){}
 
@@ -33,7 +30,7 @@ public class Deck
     public Deck(CardCollection cards, int deckId)
     {
         this.deckId = deckId;
-        this.cards = cards;
+        this.cards = 1;
     }
 
     public Deck(int deckId, int userId, String name)
@@ -75,11 +72,11 @@ public class Deck
 
     public CardCollection getCards()
     {
-        return cards;
+        return null;
     }
 
     public void setCards(CardCollection cards)
     {
-        this.cards = cards;
+        this.cards = 1;
     }
 }

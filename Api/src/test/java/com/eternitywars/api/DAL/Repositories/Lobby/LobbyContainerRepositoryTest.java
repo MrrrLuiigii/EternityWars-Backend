@@ -19,8 +19,8 @@ class LobbyContainerRepositoryTest {
         Lobby lobby = new Lobby();
         lobby.setName("TestLobby");
         lobby.setDescription("desc");
-        lobby.setPlayerOne(new Player());
-        lobby.getPlayerOne().setUserId(1);
+       // lobby.setPlayerOne(new Player());
+        //lobby.getPlayerOne().setUserId(1);
         return lobby;
     }
 

@@ -2,21 +2,34 @@ package com.eternitywars.api.Models;
 
 import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 
-import java.util.List;
+import javax.persistence.*;
 
-public class Player extends Account
+@Entity
+@Table(name = "player")
+public class Player
 {
+    @Id
+    @Column(name = "id", unique = true)
+    private int id;
+    @OneToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
+    @ManyToOne()
+    @JoinColumn(name="lobby_id", nullable=false)
+    private Lobby lobby_id;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "lobby_player_status")
     private LobbyPlayerStatus lobbyPlayerStatus;
+    @OneToOne()
+    @JoinColumn(name = "deck_id")
     private Deck deck;
-    private List<Card> cardsInHand;
-    private List<Card> cardsInDeck;
 
     public Player(){}
 
-    public Player(int id, String username, LobbyPlayerStatus lobbyPlayerStatus, int deckId)
+    public Player(int userId ,String username, LobbyPlayerStatus lobbyPlayerStatus, int deckId)
     {
-        this.userId = id;
-        this.username = username;
+        this.user.setUserId(userId);
+        this.user.setUsername(username);
         this.lobbyPlayerStatus = lobbyPlayerStatus;
         this.deck = new Deck(deckId);
     }
@@ -43,23 +56,19 @@ public class Player extends Account
         this.deck = deck;
     }
 
-    public List<Card> getCardsInHand()
-    {
-        return cardsInHand;
+    public Lobby getLobby_id() {
+        return lobby_id;
     }
 
-    public void setCardsInHand(List<Card> cardsInHand)
-    {
-        this.cardsInHand = cardsInHand;
+    public void setLobby_id(Lobby lobby_id) {
+        this.lobby_id = lobby_id;
     }
 
-    public List<Card> getCardsInDeck()
-    {
-        return cardsInDeck;
+    public User getUser() {
+        return user;
     }
 
-    public void setCardsInDeck(List<Card> cardsInDeck)
-    {
-        this.cardsInDeck = cardsInDeck;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
