@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LobbyRepositoryTest {
 
-    private LobbyRepository lobbyRepository = new LobbyRepository(new LobbyFactory());
+    private LobbyRepository lobbyRepository = new LobbyRepository(LobbyFactory.getLobbyHibernateContext());
 
     private Lobby EmptyLobby(){
         Lobby lobby = new Lobby();
