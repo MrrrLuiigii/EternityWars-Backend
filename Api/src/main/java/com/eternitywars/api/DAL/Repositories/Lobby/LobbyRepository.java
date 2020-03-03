@@ -8,38 +8,30 @@ import com.eternitywars.api.Models.Player;
 
 public class LobbyRepository implements ILobbyContext
 {
-    private LobbySqlContext lobbySqlContext;
+    private ILobbyContext iLobbyContext;
 
-    public LobbyRepository()
+    public LobbyRepository(ILobbyContext context)
     {
-        LobbyFactory lobbyFactory = new LobbyFactory();
-        this.lobbySqlContext = lobbyFactory.getLobbySqlContext();
+        this.iLobbyContext = context;
     }
-
-    public LobbyRepository(LobbyFactory lobbyFactory)
-    {
-        this.lobbySqlContext = lobbyFactory.getTestLobbySqlContext();
-    }
-
-
 
     public boolean JoinLobby(Lobby lobby, Player player)
     {
-        return lobbySqlContext.JoinLobby(lobby, player);
+        return iLobbyContext.JoinLobby(lobby, player);
     }
 
     public boolean LeaveLobby(Lobby lobby, Player player)
     {
-        return lobbySqlContext.LeaveLobby(lobby, player);
+        return iLobbyContext.LeaveLobby(lobby, player);
     }
 
     public boolean UpdatePlayerStatus(Lobby lobby, Player player)
     {
-        return lobbySqlContext.UpdatePlayerStatus(lobby, player);
+        return iLobbyContext.UpdatePlayerStatus(lobby, player);
     }
 
     public Lobby UpdatePlayerDeck(Lobby lobby, Player player)
     {
-        return lobbySqlContext.UpdatePlayerDeck(lobby, player);
+        return iLobbyContext.UpdatePlayerDeck(lobby, player);
     }
 }

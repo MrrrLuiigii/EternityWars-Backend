@@ -10,10 +10,9 @@ public class LobbyContainerRepository implements ILobbyContainerContext
     private ILobbyContainerContext lobbyContainerContext;
 
 
-    public LobbyContainerRepository()
+    public LobbyContainerRepository(ILobbyContainerContext containerContext)
     {
-        LobbyContainerFactory lobbyContainerFactory = new LobbyContainerFactory();
-        this.lobbyContainerContext = lobbyContainerFactory.getLobbyContainerSqlContext();
+        this.lobbyContainerContext = containerContext;
     }
 
     public LobbyContainerRepository(LobbyContainerFactory lobbyContainerFactory)
