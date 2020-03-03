@@ -27,7 +27,6 @@ public class CardContainerHibernateContext implements ICardContainerContext
         {
             cards = typedQuery.getResultList();
             cardCollection.setCards(cards);
-
         } catch (Exception ex)
         {
             ex.printStackTrace();
@@ -51,7 +50,6 @@ public class CardContainerHibernateContext implements ICardContainerContext
         {
             cards = typedQuery.getResultList();
             cardCollection.setCards(cards);
-
         } catch (Exception ex)
         {
             ex.printStackTrace();
