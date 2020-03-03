@@ -56,7 +56,7 @@ public class DeckBuilderContainerLogic
 
         JSONObject content = jsonObject.getJSONObject("Content");
         int userId = content.getInt("userId");
-        Deck deck = gson.fromJson(content.getJSONObject("deck").toString(), Deck.class);
+        Deck deck = (Deck)MessageHandler.HandleMessage(jsonObject.getString("deck"), Deck.class);
         deck.setUserId(userId);
 
         HttpHeaders httpHeaders = GetHttpHeaders(jsonObject);
@@ -112,25 +112,29 @@ public class DeckBuilderContainerLogic
         return response.getBody();
     }
 
-    public Deck GetDeckById(JSONObject jsonObject)
+    public Deck GetDeckById(int deckid, String token)
     {
-        HttpHeaders httpHeaders = GetHttpHeaders(jsonObject);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setBearerAuth(token);
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
 
         GsonBuilder gs = new GsonBuilder();
         gs.serializeNulls();
         Gson gson = gs.create();
 
-        JSONObject content = jsonObject.getJSONObject("Content");
-        Player player = gson.fromJson(content.getJSONObject("player").toString(), Player.class);
-        HttpEntity<String> request = new HttpEntity<>(content.getJSONObject("player").toString(), httpHeaders);
+
+        HttpEntity<String> request = new HttpEntity<>(httpHeaders);
 
         String url = "http://localhost:8083/api/private/deck/get/{deckId}";
-        ResponseEntity<Deck> response = restTemplate.exchange(url, HttpMethod.GET, request , Deck.class, player.getDeck().getDeckId());
+        ResponseEntity<Deck> response = restTemplate.exchange(url, HttpMethod.GET, request , Deck.class, deckid);
         return response.getBody();
     }
 
-    public Deck GetEmptyDeckById(int id, String token)
+    public Deck GetEmptyDeckById(JSONObject jsonObject)
     {
+        String token = jsonObject.getString("token");
+        int id = jsonObject.getInt("content");
+
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.setBearerAuth(token);
         httpHeaders.setContentType(MediaType.APPLICATION_JSON);
@@ -138,19 +142,6 @@ public class DeckBuilderContainerLogic
         HttpEntity<String> request = new HttpEntity<>(httpHeaders);
 
         String url = "http://localhost:8083/api/private/deck/getEmptyByDeckId/{deckId}";
-        ResponseEntity<Deck> response = restTemplate.exchange(url, HttpMethod.GET, request , Deck.class, id);
-        return response.getBody();
-    }
-
-    public Deck GetDeckById(int id, String token)
-    {
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setBearerAuth(token);
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<String> request = new HttpEntity<>(httpHeaders);
-
-        String url = "http://localhost:8083/api/private/deck/getByDeckId/{deckId}";
         ResponseEntity<Deck> response = restTemplate.exchange(url, HttpMethod.GET, request , Deck.class, id);
         return response.getBody();
     }

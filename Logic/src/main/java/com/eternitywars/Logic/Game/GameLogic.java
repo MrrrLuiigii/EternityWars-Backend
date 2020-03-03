@@ -8,6 +8,8 @@ import com.eternitywars.Logic.utils.MessageSender;
 import com.eternitywars.Models.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -101,7 +103,8 @@ public class GameLogic
     return game;
    }
 
-   public Game EndTurn(Game game) throws IOException {
+   public Game EndTurn(JSONObject jsonObject) throws IOException {
+        Game game = (Game)MessageHandler.HandleMessage(jsonObject.getString("content"), Game.class);
         IncreaseMaxMana(game);
         IncreaseMaxDeathessence(game);
         RechargeMana(game);
@@ -154,7 +157,13 @@ public class GameLogic
         return game;
    }
 
-   public Game AttackCard(Game game, int attacker, int target) throws IOException {
+   public Game AttackCard(JSONObject jsonObject) throws IOException {
+
+        //Game game, int attacker, int target
+        Game game = (Game)MessageHandler.HandleMessage(jsonObject.getString("content"), Game.class);
+        int attacker = (int)MessageHandler.HandleMessage(jsonObject.getString("CardToAttackWith"), int.class);
+        int target = (int)MessageHandler.HandleMessage(jsonObject.getString("TargetToAttack"), int.class);
+
         if(!CheckForTurn(game))
         {
             return game;
@@ -223,7 +232,12 @@ public class GameLogic
        return false;
    }
 
-   public Game AttackHero(Game game, int CardToAttackHeroWith, String token) throws IOException {
+   public Game AttackHero(JSONObject jsonObject) throws IOException {
+
+       Game game = (Game)MessageHandler.HandleMessage(jsonObject.getString("content"), Game.class);
+       int CardToAttackHeroWith = (int)MessageHandler.HandleMessage(jsonObject.getString("CardToAttackHeroWith"), int.class);
+       String token = (String)MessageHandler.HandleMessage(jsonObject.getString("token"), String.class);
+
        if(game.getPlayerTurn() != game.getConnectedPlayers().get(0).getUserId())
        {
            MessageSender.SendError(game.getConnectedPlayers().get(0).getUserId(), "This isn't your turn");
@@ -261,7 +275,12 @@ public class GameLogic
        game.getConnectedPlayers().get(0).getCardsInHand().remove(cardToPlay);
    }
 
-   public Game PlayCard(Game game, int cardToPlay, int target) throws IOException {
+   public Game PlayCard(JSONObject jsonObject) throws IOException {
+
+       Game game = (Game)MessageHandler.HandleMessage(jsonObject.getString("content"), Game.class);
+       int cardToPlay = (int)MessageHandler.HandleMessage(jsonObject.getString("CardToPlay"), int.class);
+       int target = (int)MessageHandler.HandleMessage(jsonObject.getString("SpotToPlace"), int.class);
+
         if(!CheckForTurn(game))
         {
             return game;

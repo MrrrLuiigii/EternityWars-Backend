@@ -1,19 +1,17 @@
 package com.eternitywars.Logic.WebsocketServer.Setup;
 
-import com.eternitywars.Logic.WebsocketServer.MessageHandler.MessageHandler;
 import org.eclipse.jetty.websocket.api.Session;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Service("WebsocketService")
 public class WebsocketService {
-    private MessageHandler messageHandler = new MessageHandler();
     private Set<Session> listenerSessions = new CopyOnWriteArraySet<>();
 
     public void removeSession(Session session){
@@ -24,11 +22,12 @@ public class WebsocketService {
         listenerSessions.add(session);
     }
 
-    public void sendmessage(Session session, String message) throws ClassNotFoundException
+    public void sendmessage(Session session, String message) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
     {
         JSONObject jsonObject = new JSONObject(message);
-        Class ReflectionClass = Class.forName("com.eternitywars.Logic.WebsocketServer.Message." + jsonObject.getString("class"));
-        Method[] m = ReflectionClass.getDeclaredMethods();
+        Class ReflectionClass = Class.forName("com.eternitywars.Logic." + jsonObject.getString("class"));
+        Method method = ReflectionClass.getMethod(jsonObject.getString("method"), JSONObject.class);
+        method.invoke(ReflectionClass.getDeclaredConstructor().newInstance(), jsonObject);
     }
 
     @PostConstruct

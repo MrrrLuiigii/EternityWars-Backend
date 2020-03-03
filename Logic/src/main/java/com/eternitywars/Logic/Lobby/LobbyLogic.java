@@ -116,8 +116,11 @@ public class LobbyLogic
 
 
 
-    public Lobby SetDeck(Lobby lobby, Player player, String token)
+    public Lobby SetDeck(JSONObject jsonObject)
     {
+        Lobby lobby = (Lobby)MessageHandler.HandleMessage(jsonObject.getString("content"), Lobby.class);
+        Player player = (Player)MessageHandler.HandleMessage(jsonObject.getString("player"), Player.class);
+        String token = jsonObject.getString("token");
 //        HttpHeaders headers = new HttpHeaders();
 //        headers.setBearerAuth(token);
 //        headers.setContentType(MediaType.APPLICATION_JSON);

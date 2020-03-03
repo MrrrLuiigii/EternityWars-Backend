@@ -1,8 +1,5 @@
 package com.eternitywars.Logic.User;
 
-import com.eternitywars.Logic.utils.APIRequest;
-import com.eternitywars.Logic.utils.MessageConverter;
-import com.eternitywars.Models.Enums.AccountStatus;
 import com.eternitywars.Models.User;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +15,8 @@ public class UserLogic
 
     HttpHeaders headers =  new HttpHeaders();
     private JSONObject jsonObject;
+
+
 
     public boolean ChangeUsername(User user, String token) throws JSONException
     {

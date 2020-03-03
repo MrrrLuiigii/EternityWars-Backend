@@ -1,6 +1,7 @@
 package com.eternitywars.Logic.User;
 
 import com.eternitywars.Models.Enums.AccountStatus;
+import com.eternitywars.Models.MessageHandler;
 import com.eternitywars.Models.User;
 import com.eternitywars.Models.UserCollection;
 import org.json.JSONObject;
@@ -10,6 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class UserContainerLogic
 {
     private RestTemplate restTemplate = new RestTemplate();
+
 
     public UserCollection GetUsers(String token)
     {
@@ -21,24 +23,10 @@ public class UserContainerLogic
         return response.getBody();
     }
 
-
-    public User AddUserByUsernameAndEmail(User user)
+    public User AddUser(JSONObject jsonObject)
     {
-        //todo add token in headers
-        String token = "";
-
-        UserCollection userCollection = GetUserCollectionFromAPI(token);
-
-        if (CheckUserTaken(userCollection, user))
-        {
-            return null;
-        }
-
-        return AddUser(user, token);
-    }
-
-    public User AddUser(User user, String token)
-    {
+        User user = (User)MessageHandler.HandleMessage(jsonObject.getString("Content"), User.class);
+        String token = (String)MessageHandler.HandleMessage(jsonObject.getString("token"), String.class);
         if(CheckUserTaken(GetUsers(token), user))
         {
             HttpHeaders headers = new HttpHeaders();
@@ -62,10 +50,10 @@ public class UserContainerLogic
         return restTemplate.postForObject("http://localhost:8083/api/private/user/get", request, UserCollection.class);
     }
 
-    public User GetUserByEmail(JSONObject json)
+    public User GetUserByEmail(JSONObject jsonObject)
     {
-        String email = json.getString("Content");
-        String token = json.getString("Token");
+        String email = jsonObject.getString("Content");
+        String token = jsonObject.getString("Token");
         System.out.println(token);
 
         HttpHeaders headers = new HttpHeaders();
@@ -147,4 +135,6 @@ public class UserContainerLogic
         return response.getBody();
 
     }
+
+
 }

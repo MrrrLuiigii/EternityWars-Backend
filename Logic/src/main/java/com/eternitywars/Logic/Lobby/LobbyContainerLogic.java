@@ -3,6 +3,8 @@ package com.eternitywars.Logic.Lobby;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.Models.Lobby;
 import com.eternitywars.Models.LobbyCollection;
+import com.eternitywars.Models.MessageHandler;
+import com.google.gson.JsonObject;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -13,8 +15,10 @@ public class LobbyContainerLogic
 
 
 
-    public Lobby AddLobby(Lobby lobby, String token)
+    public Lobby AddLobby(JSONObject jsonObject)
     {
+        String token = jsonObject.getString("token");
+        Lobby lobby = (Lobby) MessageHandler.HandleMessage(jsonObject.getString("content"), Lobby.class);
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         headers.setContentType(MediaType.APPLICATION_JSON);

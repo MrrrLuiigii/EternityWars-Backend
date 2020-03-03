@@ -45,20 +45,20 @@ public class UserExecutor implements IExecutor
                 System.out.println(user);
                 break;
             case "GetUserByEmail":
-                returnMessage.setAction("GetUserByEmail");
-                user = userContainerLogic.GetUserByEmail(message);
-                returnMessage.setContent(user);
-                session.getRemote().sendString(gson.toJson(returnMessage));
-                break;
+//                returnMessage.setAction("GetUserByEmail");
+//                user = userContainerLogic.GetUserByEmail("yeet");
+//                returnMessage.setContent(user);
+//                session.getRemote().sendString(gson.toJson(returnMessage));
+//                break;
             case "GetUsers":
 
                 break;
             case "AddUser":
-                user = gson.fromJson(message.getJSONObject("Content").toString(), User.class);
-                userContainerLogic.AddUser(user, token);
-                returnMessage.setAction("AddUser");
-                returnMessage.setContent(user);
-                session.getRemote().sendString(gson.toJson(returnMessage));
+//                user = gson.fromJson(message.getJSONObject("Content").toString(), User.class);
+//                userContainerLogic.AddUser("Yoink");
+//                returnMessage.setAction("AddUser");
+//                returnMessage.setContent(user);
+//                session.getRemote().sendString(gson.toJson(returnMessage));
 
                 break;
             case "UpdateUsername":

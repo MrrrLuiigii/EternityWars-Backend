@@ -5,6 +5,7 @@ import com.eternitywars.Models.*;
 import com.eternitywars.Models.Enums.FriendStatus;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -37,14 +38,16 @@ public class FriendContainerLogic
     public void RemoveFriend(JSONObject jsonObject)
     {
         String token = jsonObject.getString("Token");
-        Relationship relationship = CreateRelationship(jsonObject, null);
+        Relationship relationship = CreateRelationship(jsonObject);
         String url = "http://localhost:8083/api/private/friend/delete";
 
         CreateUpdateRelationshipRequest(relationship, token, url);
     }
 
-    public FriendCollection GetAllFriends(User user, String token)
+    public FriendCollection GetAllFriends(JSONObject jsonObject)
     {
+        User user = (User)MessageHandler.HandleMessage(jsonObject.getString("content"), User.class);
+        String token = jsonObject.getString("token");
         String url = "http://localhost:8083/api/private/friend/get/{id}";
         RelationshipCollection relationshipCollection = CreateGetRelationshipCollectionRequest(user, token, url);
 
@@ -84,16 +87,15 @@ public class FriendContainerLogic
         return friendCollection;
     }
 
-    private Relationship CreateRelationship(JSONObject jsonObject, FriendStatus friendStatus)
+    private Relationship CreateRelationship(JSONObject jsonObject)
     {
-        GsonBuilder gs = new GsonBuilder();
-        gs.serializeNulls();
-        Gson gson = gs.create();
+        FriendStatus friendStatus = (FriendStatus)MessageHandler.HandleMessage(jsonObject.getString("content"), FriendStatus.class);
+
 
         //Get pojo's from the jsonObject
         JSONObject content = jsonObject.getJSONObject("Content");
-        User user = gson.fromJson(content.getJSONObject("user").toString(), User.class);
-        User friend = gson.fromJson(content.getJSONObject("friend").toString(), User.class);
+        User user = (User)MessageHandler.HandleMessage(jsonObject.getString("user"), User.class);
+        User friend = (User)MessageHandler.HandleMessage(jsonObject.getString("friend"), User.class);
 
         return new Relationship(user.getUserId(), friend.getUserId(), friendStatus);
     }

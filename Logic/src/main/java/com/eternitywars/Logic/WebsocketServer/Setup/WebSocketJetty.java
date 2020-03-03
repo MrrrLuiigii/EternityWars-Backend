@@ -6,6 +6,8 @@ import org.eclipse.jetty.websocket.api.Session;
 
 import org.eclipse.jetty.websocket.api.annotations.*;
 
+import java.lang.reflect.InvocationTargetException;
+
 @WebSocket
 public class WebSocketJetty {
     @OnWebSocketConnect
@@ -20,7 +22,7 @@ public class WebSocketJetty {
     }
 
     @OnWebSocketMessage
-    public void onMessage(Session session, String text) throws ClassNotFoundException
+    public void onMessage(Session session, String text) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException
     {
         ServiceBean.getService().sendmessage(session, text);
     }

@@ -51,14 +51,14 @@ public class FriendExecutor implements IExecutor
                 RespondFriendCollection(jsonObject);
                 break;
             default:
-                User user = gson.fromJson(jsonObject.getJSONObject("Content").toString(), User.class);
-                String token = jsonObject.getString("Token");
-                FriendCollection friendCollection = friendContainerLogic.GetAllFriends(user, token);
-
-                WsReturnMessage returnMessage = new WsReturnMessage();
-                returnMessage.setAction("GETALLFRIENDS");
-                returnMessage.setContent(friendCollection);
-                session.getRemote().sendString(gson.toJson(returnMessage));
+//                User user = gson.fromJson(jsonObject.getJSONObject("Content").toString(), User.class);
+//                String token = jsonObject.getString("Token");
+//                FriendCollection friendCollection = friendContainerLogic.GetAllFriends(user, token);
+//
+//                WsReturnMessage returnMessage = new WsReturnMessage();
+//                returnMessage.setAction("GETALLFRIENDS");
+//                returnMessage.setContent(friendCollection);
+//                session.getRemote().sendString(gson.toJson(returnMessage));
                 break;
         }
     }
@@ -86,11 +86,11 @@ public class FriendExecutor implements IExecutor
         }
 
         //Get friendCollection from API via friendContainerLogic
-        FriendCollection friendCollection = friendContainerLogic.GetAllFriends(user, token);
+        //FriendCollection friendCollection = friendContainerLogic.GetAllFriends(user, token);
 
         WsReturnMessage returnMessage = new WsReturnMessage();
         returnMessage.setAction("GETALLFRIENDS");
-        returnMessage.setContent(friendCollection);
+        //returnMessage.setContent(friendCollection);
         session.getRemote().sendString(gson.toJson(returnMessage));
 
         for(User u : userCollection.getUsers())
