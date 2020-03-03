@@ -3,18 +3,23 @@ package com.eternitywars.api.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CardCollection
+public class Cards
 {
     private List<Card> cards;
 
-    public CardCollection()
+    public Cards()
     {
-        cards = new ArrayList<>();
+        this.cards = new ArrayList<>();
     }
 
     public List<Card> getCards()
     {
-        return cards;
+        return this.cards;
+    }
+
+    public void setCards(List<Card> cards)
+    {
+        this.cards = cards;
     }
 
     public void AddCard(Card card)

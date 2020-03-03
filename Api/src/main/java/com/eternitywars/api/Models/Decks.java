@@ -3,11 +3,11 @@ package com.eternitywars.api.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DeckCollection
+public class Decks
 {
     private List<Deck> decks;
 
-    public DeckCollection()
+    public Decks()
     {
         this.decks = new ArrayList<>();
     }

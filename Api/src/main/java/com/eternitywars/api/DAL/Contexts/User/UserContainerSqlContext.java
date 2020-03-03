@@ -6,7 +6,7 @@ import com.eternitywars.api.Database.TestDatabaseConnection;
 import com.eternitywars.api.Interfaces.User.IUserContainerContext;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.User;
-import com.eternitywars.api.Models.UserCollection;
+import com.eternitywars.api.Models.Users;
 
 import java.sql.*;
 
@@ -110,9 +110,9 @@ public class UserContainerSqlContext implements IUserContainerContext
         return user;
     }
 
-    public UserCollection GetUsers()
+    public Users GetUsers()
     {
-        UserCollection userCollection = new UserCollection();
+        Users users = new Users();
 
         try (Connection conn = dbc.getDatabaseConnection())
         {
@@ -122,7 +122,7 @@ public class UserContainerSqlContext implements IUserContainerContext
             {
                 try (ResultSet rs = cst.executeQuery())
                 {
-                    userCollection = FillUserCollection(rs);
+                    users = FillUserCollection(rs);
                 }
             }
         }
@@ -131,7 +131,7 @@ public class UserContainerSqlContext implements IUserContainerContext
             System.out.println(e);
         }
 
-        return userCollection;
+        return users;
     }
 
     public User AddUser(User user)
@@ -205,9 +205,9 @@ public class UserContainerSqlContext implements IUserContainerContext
         return user;
     }
 
-    private UserCollection FillUserCollection(ResultSet rs) throws SQLException
+    private Users FillUserCollection(ResultSet rs) throws SQLException
     {
-        UserCollection userCollection = new UserCollection();
+        Users users = new Users();
 
         while (rs.next())
         {
@@ -218,9 +218,9 @@ public class UserContainerSqlContext implements IUserContainerContext
             user.setAccountStatus(AccountStatus.valueOf(rs.getString("account_status")));
             user.setGold(rs.getInt("gold"));
             user.setPackAmount(rs.getInt("pack_amount"));
-            userCollection.addUser(user);
+            users.addUser(user);
         }
 
-        return userCollection;
+        return users;
     }
 }

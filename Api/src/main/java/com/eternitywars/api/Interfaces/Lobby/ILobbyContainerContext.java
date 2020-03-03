@@ -1,7 +1,7 @@
 package com.eternitywars.api.Interfaces.Lobby;
 
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
+import com.eternitywars.api.Models.Lobbies;
 
 public interface ILobbyContainerContext
 {
@@ -11,5 +11,5 @@ public interface ILobbyContainerContext
 
     Lobby GetLobbyById(int lobbyId);
 
-    LobbyCollection GetLobbies();
+    Lobbies GetLobbies();
 }

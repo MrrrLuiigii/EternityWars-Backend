@@ -1,7 +1,7 @@
 package com.eternitywars.api.Interfaces.Deck;
 
 import com.eternitywars.api.Models.Deck;
-import com.eternitywars.api.Models.DeckCollection;
+import com.eternitywars.api.Models.Decks;
 
 public interface IDeckContainerContext
 {
@@ -9,11 +9,11 @@ public interface IDeckContainerContext
 
     boolean DeleteDeck(Deck deck);
 
-    DeckCollection GetEmptyDecksByUserId(int userId);
+    Decks GetEmptyDecksByUserId(int userId);
 
     Deck GetEmptyDeckById(int deckId);
 
-    DeckCollection GetDecksByUserId(int userId);
+    Decks GetDecksByUserId(int userId);
 
     Deck GetDeckById(int deckId);
 }
