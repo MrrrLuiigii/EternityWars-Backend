@@ -37,7 +37,7 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
                 cst.setString(2, lobby.getDescription());
                 cst.setBoolean(3, lobby.getHasPassword());
                 cst.setString(4, lobby.getPassword());
-                cst.setInt(5, lobby.getPlayerOne().getUserId());
+                cst.setInt(5, lobby.getPlayers().get(0).getUser().getUserId());
 
                 try (ResultSet rs = cst.executeQuery())
                 {
@@ -118,11 +118,11 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
                         if (oldLobbyId != rsLobbyId)
                         {
                             lobby = new Lobby(rsLobbyId, name, description, hasPassword, password);
-                            lobby.setPlayerOne(player);
+                          //  lobby.setPlayerOne(player);
                         }
                         else
                         {
-                            lobby.setPlayerTwo(player);
+                          //  lobby.setPlayerTwo(player);
                         }
 
                         oldLobbyId = rsLobbyId;
@@ -176,12 +176,12 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
                         if (oldLobbyId != lobbyId)
                         {
                             lobby = new Lobby(lobbyId, name, description, hasPassword, password);
-                            lobbies.addLobby(lobby);
-                            lobby.setPlayerOne(player);
+                            //lobbyCollection.addLobby(lobby);
+                           // lobby.setPlayerOne(player);
                         }
                         else
                         {
-                            lobby.setPlayerTwo(player);
+                          //  lobby.setPlayerTwo(player);
                         }
 
                         oldLobbyId = lobbyId;

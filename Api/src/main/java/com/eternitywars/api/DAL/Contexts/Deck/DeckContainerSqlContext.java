@@ -190,7 +190,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                         {
                             if (completeDeck != null)
                             {
-                                completeDeck.setCards(cards);
+                                //completeDeck.setCards(cards);
                                 decks.AddDeck(completeDeck);
                                 completeDeck = null;
                             }
@@ -220,7 +220,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
 
                     if (decks.getDecks().isEmpty() && completeDeck != null)
                     {
-                        completeDeck.setCards(cards);
+                        //completeDeck.setCards(cards);
                         decks.AddDeck(completeDeck);
                     }
 
@@ -228,7 +228,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                     {
                         if (d.getDeckId() != deck.getDeckId() && completeDeck != null)
                         {
-                            completeDeck.setCards(cards);
+                            //completeDeck.setCards(cards);
                             decks.AddDeck(deck);
                             break;
                         }
@@ -293,7 +293,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                         }
                     }
 
-                    deck.setCards(cards);
+                    //deck.setCards(cards);
                 }
             }
         }

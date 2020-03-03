@@ -33,7 +33,7 @@ public class LobbySqlContext implements ILobbyContext
             try (CallableStatement cst = conn.prepareCall(query))
             {
                 cst.setInt(1, lobby.getId());
-                cst.setInt(2, player.getUserId());
+                cst.setInt(2, player.getUser().getUserId());
                 cst.executeQuery();
             }
         }
@@ -55,7 +55,7 @@ public class LobbySqlContext implements ILobbyContext
             try (PreparedStatement pst = conn.prepareStatement(query))
             {
                 pst.setInt(1, lobby.getId());
-                pst.setInt(2, player.getUserId());
+                pst.setInt(2, player.getUser().getUserId());
                 pst.executeUpdate();
             }
         }
@@ -80,7 +80,7 @@ public class LobbySqlContext implements ILobbyContext
             {
                 pst.setString(1, player.getLobbyPlayerStatus().toString());
                 pst.setInt(2, lobby.getId());
-                pst.setInt(3, player.getUserId());
+                pst.setInt(3, player.getUser().getUserId());
                 pst.executeUpdate();
             }
         }
@@ -105,7 +105,7 @@ public class LobbySqlContext implements ILobbyContext
             {
                 pst.setInt(1, player.getDeck().getDeckId());
                 pst.setInt(2, lobby.getId());
-                pst.setInt(3, player.getUserId());
+                pst.setInt(3, player.getUser().getUserId());
                 pst.executeUpdate();
             }
         }

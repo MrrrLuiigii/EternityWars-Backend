@@ -9,9 +9,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LobbyRepositoryTest {
 
-    private LobbyRepository lobbyRepository = new LobbyRepository(LobbyFactory.getLobbyHibernateContext());
+    private LobbyRepository lobbyRepository = new LobbyRepository(LobbyFactory.getTestLobbySqlContext());
 
-    private Lobby EmptyLobby(){
+    private Lobby EmptyLobby() {
         Lobby lobby = new Lobby();
         lobby.setName("Lobby");
         lobby.setDescription("desc");
@@ -20,21 +20,21 @@ class LobbyRepositoryTest {
 
     @Test
     void joinLobby() {
-        //lobbyRepository.JoinLobby();
+        // lobbyRepository.JoinLobby();
     }
 
     @Test
     void leaveLobby() {
-       // lobbyRepository.LeaveLobby();
+        // lobbyRepository.LeaveLobby();
     }
 
     @Test
     void updatePlayerStatus() {
-       // lobbyRepository.UpdatePlayerStatus();
+        // lobbyRepository.UpdatePlayerStatus();
     }
 
     @Test
     void updatePlayerDeck() {
-       // lobbyRepository.UpdatePlayerDeck();
+        // lobbyRepository.UpdatePlayerDeck();
     }
 }

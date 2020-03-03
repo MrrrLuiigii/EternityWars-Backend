@@ -34,7 +34,7 @@ public class CardContainerResource
     @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public boolean DeleteCard(@RequestBody Player player)
     {
-        User user = new User(player.getUserId());
+        User user = new User(player.getUser().getUserId());
         Card card = player.getDeck().getCards().getCards().get(0);
         return cardContainerRepository.DeleteCard(user, card);
     }
