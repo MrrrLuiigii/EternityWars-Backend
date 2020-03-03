@@ -3,7 +3,7 @@ package com.eternitywars.api.DAL.Repositories.Lobby;
 import com.eternitywars.api.Factories.Lobby.LobbyContainerFactory;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
+import com.eternitywars.api.Models.Lobbies;
 
 public class LobbyContainerRepository implements ILobbyContainerContext
 {
@@ -35,7 +35,7 @@ public class LobbyContainerRepository implements ILobbyContainerContext
         return lobbyContainerContext.GetLobbyById(lobbyId);
     }
 
-    public LobbyCollection GetLobbies()
+    public Lobbies GetLobbies()
     {
         return lobbyContainerContext.GetLobbies();
     }

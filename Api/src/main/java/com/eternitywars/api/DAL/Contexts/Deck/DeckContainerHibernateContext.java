@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Contexts.Deck;
 
 import com.eternitywars.api.Interfaces.Deck.IDeckContainerContext;
 import com.eternitywars.api.Models.Deck;
-import com.eternitywars.api.Models.DeckCollection;
+import com.eternitywars.api.Models.Decks;
 
 public class DeckContainerHibernateContext implements IDeckContainerContext {
     @Override
@@ -16,7 +16,7 @@ public class DeckContainerHibernateContext implements IDeckContainerContext {
     }
 
     @Override
-    public DeckCollection GetEmptyDecksByUserId(int userId) {
+    public Decks GetEmptyDecksByUserId(int userId) {
         return null;
     }
 
@@ -26,7 +26,7 @@ public class DeckContainerHibernateContext implements IDeckContainerContext {
     }
 
     @Override
-    public DeckCollection GetDecksByUserId(int userId) {
+    public Decks GetDecksByUserId(int userId) {
         return null;
     }
 

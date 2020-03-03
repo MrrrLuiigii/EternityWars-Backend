@@ -3,7 +3,7 @@ package com.eternitywars.api.DAL.Repositories.Card;
 import com.eternitywars.api.Factories.Card.CardContainerFactory;
 import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
 import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.CardCollection;
+import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.User;
 
 public class CardContainerRepository implements ICardContainerContext
@@ -22,12 +22,12 @@ public class CardContainerRepository implements ICardContainerContext
 
 
 
-    public CardCollection GetCards()
+    public Cards GetCards()
     {
         return cardContainerContext.GetCards();
     }
 
-    public CardCollection GetCardsByUser(int userId)
+    public Cards GetCardsByUser(int userId)
     {
         return cardContainerContext.GetCardsByUser(userId);
     }

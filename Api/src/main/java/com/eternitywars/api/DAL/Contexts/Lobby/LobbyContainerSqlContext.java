@@ -6,7 +6,7 @@ import com.eternitywars.api.Database.TestDatabaseConnection;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
+import com.eternitywars.api.Models.Lobbies;
 import com.eternitywars.api.Models.Player;
 
 import java.sql.*;
@@ -138,9 +138,9 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
         return lobby;
     }
 
-    public LobbyCollection GetLobbies()
+    public Lobbies GetLobbies()
     {
-        LobbyCollection lobbyCollection = new LobbyCollection();
+        Lobbies lobbies = new Lobbies();
 
         try (Connection conn = dbc.getDatabaseConnection())
         {
@@ -194,6 +194,6 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
             System.out.println(e);
         }
 
-        return lobbyCollection;
+        return lobbies;
     }
 }

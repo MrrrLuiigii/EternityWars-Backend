@@ -6,9 +6,8 @@ import com.eternitywars.api.Database.TestDatabaseConnection;
 import com.eternitywars.api.Interfaces.Friend.IRelationshipContainerContext;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Enums.FriendStatus;
-import com.eternitywars.api.Models.Friend;
 import com.eternitywars.api.Models.Relationship;
-import com.eternitywars.api.Models.RelationshipCollection;
+import com.eternitywars.api.Models.Relationships;
 import com.eternitywars.api.Models.User;
 
 import java.sql.CallableStatement;
@@ -79,9 +78,9 @@ public class RelationshipContainerSqlContext implements IRelationshipContainerCo
         return true;
     }
 
-    public RelationshipCollection GetRelationships(User user)
+    public Relationships GetRelationships(User user)
     {
-        RelationshipCollection relationshipCollection = new RelationshipCollection();
+        Relationships relationships = new Relationships();
 
         try (Connection conn = dbc.getDatabaseConnection())
         {
@@ -120,7 +119,7 @@ public class RelationshipContainerSqlContext implements IRelationshipContainerCo
                         relationship.setFriendTwoAccountStatus(AccountStatus.valueOf(rs.getString("friend_two_account_status")));
 
                         relationship.setFriendStatus(FriendStatus.valueOf(rs.getString("status")));
-                        relationshipCollection.getRelationships().add(relationship);
+                        relationships.getRelationships().add(relationship);
                     }
                 }
             }
@@ -130,6 +129,6 @@ public class RelationshipContainerSqlContext implements IRelationshipContainerCo
             System.out.println(e);
         }
 
-        return relationshipCollection;
+        return relationships;
     }
 }

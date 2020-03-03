@@ -8,6 +8,7 @@ import com.eternitywars.api.Models.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import com.eternitywars.api.Models.Lobbies;
 
 public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("eternitywars");
@@ -39,7 +40,7 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     }
 
     @Override
-    public LobbyCollection GetLobbies() {
+    public Lobbies GetLobbies() {
         return null;
     }
 }

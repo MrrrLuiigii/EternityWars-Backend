@@ -32,9 +32,6 @@ public class Card
     private boolean taunt;
 
 
-
-
-
     public Card()
     {
 
@@ -105,11 +102,13 @@ public class Card
         this.death_essence = death_essence;
     }
 
-    public boolean getTaunt() {
+    public boolean getTaunt()
+    {
         return taunt;
     }
 
-    public void setTaunt(boolean taunt) {
+    public void setTaunt(boolean taunt)
+    {
         this.taunt = taunt;
     }
 }

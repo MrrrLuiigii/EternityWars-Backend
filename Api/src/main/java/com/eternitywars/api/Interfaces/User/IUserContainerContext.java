@@ -1,7 +1,7 @@
 package com.eternitywars.api.Interfaces.User;
 
 import com.eternitywars.api.Models.User;
-import com.eternitywars.api.Models.UserCollection;
+import com.eternitywars.api.Models.Users;
 
 public interface IUserContainerContext
 {
@@ -11,7 +11,7 @@ public interface IUserContainerContext
 
     User GetUserByEmail(String userEmail);
 
-    UserCollection GetUsers();
+    Users GetUsers();
 
     User AddUser(User user);
 

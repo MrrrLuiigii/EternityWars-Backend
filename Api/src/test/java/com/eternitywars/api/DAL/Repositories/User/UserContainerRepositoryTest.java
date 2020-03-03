@@ -3,8 +3,7 @@ package com.eternitywars.api.DAL.Repositories.User;
 import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.User;
-import com.eternitywars.api.Models.UserCollection;
-import org.junit.jupiter.api.BeforeAll;
+import com.eternitywars.api.Models.Users;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,9 +24,9 @@ class UserContainerRepositoryTest
         return expectedUser;
     }
 
-    private UserCollection SetupExpectedUserCollection()
+    private Users SetupExpectedUserCollection()
     {
-        UserCollection expectedUserCollection = new UserCollection();
+        Users expectedUsers = new Users();
 
         User expectedUserOne = new User();
         expectedUserOne.setUserId(1);
@@ -36,7 +35,7 @@ class UserContainerRepositoryTest
         expectedUserOne.setAccountStatus(AccountStatus.Online);
         expectedUserOne.setGold(250);
         expectedUserOne.setPackAmount(3);
-        expectedUserCollection.addUser(expectedUserOne);
+        expectedUsers.addUser(expectedUserOne);
 
         User expectedUserTwo = new User();
         expectedUserTwo.setUserId(2);
@@ -45,9 +44,9 @@ class UserContainerRepositoryTest
         expectedUserTwo.setAccountStatus(AccountStatus.Offline);
         expectedUserTwo.setGold(300);
         expectedUserTwo.setPackAmount(2);
-        expectedUserCollection.addUser(expectedUserTwo);
+        expectedUsers.addUser(expectedUserTwo);
 
-        return expectedUserCollection;
+        return expectedUsers;
     }
 
     private User SetupNewUser()
@@ -108,18 +107,18 @@ class UserContainerRepositoryTest
 
     @Test
     void getUsers() {
-        UserCollection expectedUserCollection = SetupExpectedUserCollection();
+        Users expectedUsers = SetupExpectedUserCollection();
 
-        UserCollection userCollection = userContainerRepository.GetUsers();
+        Users users = userContainerRepository.GetUsers();
 
-        for (int i = 0; i < expectedUserCollection.getUsers().size(); i++)
+        for (int i = 0; i < expectedUsers.getUsers().size(); i++)
         {
-            assertEquals(expectedUserCollection.getUsers().get(i).getUserId(), userCollection.getUsers().get(i).getUserId());
-            assertEquals(expectedUserCollection.getUsers().get(i).getEmail(), userCollection.getUsers().get(i).getEmail());
-            assertEquals(expectedUserCollection.getUsers().get(i).getUsername(), userCollection.getUsers().get(i).getUsername());
-            assertEquals(expectedUserCollection.getUsers().get(i).getAccountStatus(), userCollection.getUsers().get(i).getAccountStatus());
-            assertEquals(expectedUserCollection.getUsers().get(i).getGold(), userCollection.getUsers().get(i).getGold());
-            assertEquals(expectedUserCollection.getUsers().get(i).getPackAmount(), userCollection.getUsers().get(i).getPackAmount());
+            assertEquals(expectedUsers.getUsers().get(i).getUserId(), users.getUsers().get(i).getUserId());
+            assertEquals(expectedUsers.getUsers().get(i).getEmail(), users.getUsers().get(i).getEmail());
+            assertEquals(expectedUsers.getUsers().get(i).getUsername(), users.getUsers().get(i).getUsername());
+            assertEquals(expectedUsers.getUsers().get(i).getAccountStatus(), users.getUsers().get(i).getAccountStatus());
+            assertEquals(expectedUsers.getUsers().get(i).getGold(), users.getUsers().get(i).getGold());
+            assertEquals(expectedUsers.getUsers().get(i).getPackAmount(), users.getUsers().get(i).getPackAmount());
         }
     }
 

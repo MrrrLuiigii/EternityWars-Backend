@@ -3,12 +3,11 @@ package com.eternitywars.api.DAL.Contexts.Deck;
 import com.eternitywars.api.Database.DatabaseConnection;
 import com.eternitywars.api.Database.IDatabaseConnection;
 import com.eternitywars.api.Database.TestDatabaseConnection;
-import com.eternitywars.api.Factories.Deck.DeckFactory;
 import com.eternitywars.api.Interfaces.Deck.IDeckContainerContext;
 import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.CardCollection;
+import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.Deck;
-import com.eternitywars.api.Models.DeckCollection;
+import com.eternitywars.api.Models.Decks;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -95,9 +94,9 @@ public class DeckContainerSqlContext implements IDeckContainerContext
         return true;
     }
 
-    public DeckCollection GetEmptyDecksByUserId(int userId)
+    public Decks GetEmptyDecksByUserId(int userId)
     {
-        DeckCollection deckCollection = new DeckCollection();
+        Decks decks = new Decks();
 
         try(Connection conn = dbc.getDatabaseConnection())
         {
@@ -115,7 +114,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                         deck.setDeckId(rs.getInt("id"));
                         deck.setName(rs.getString("name"));
                         deck.setUserId(rs.getInt("user_id"));
-                        deckCollection.AddDeck(deck);
+                        decks.AddDeck(deck);
                     }
                 }
             }
@@ -125,7 +124,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
             System.out.println(e);
         }
 
-        return deckCollection;
+        return decks;
     }
 
     public Deck GetEmptyDeckById(int deckId)
@@ -159,9 +158,9 @@ public class DeckContainerSqlContext implements IDeckContainerContext
         return deck;
     }
 
-    public DeckCollection GetDecksByUserId(int userId)
+    public Decks GetDecksByUserId(int userId)
     {
-        DeckCollection deckCollection = new DeckCollection();
+        Decks decks = new Decks();
 
         try(Connection conn = dbc.getDatabaseConnection())
         {
@@ -183,7 +182,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                 {
                     Deck deck = new Deck(0);
                     Deck completeDeck = null;
-                    CardCollection cardCollection = new CardCollection();
+                    Cards cards = new Cards();
 
                     while(rs.next())
                     {
@@ -191,8 +190,8 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                         {
                             if (completeDeck != null)
                             {
-                                completeDeck.setCards(cardCollection);
-                                deckCollection.AddDeck(completeDeck);
+                                completeDeck.setCards(cards);
+                                decks.AddDeck(completeDeck);
                                 completeDeck = null;
                             }
 
@@ -200,7 +199,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                             deck.setDeckId(rs.getInt("deck_id"));
                             deck.setName(rs.getString("deck_name"));
                             deck.setUserId(rs.getInt("user_id"));
-                            cardCollection = new CardCollection();
+                            cards = new Cards();
                         }
 
                         if (rs.getInt("deck_id") == deck.getDeckId())
@@ -213,24 +212,24 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                             card.setBlue_mana(rs.getInt("blue_mana"));
                             card.setDeath_essence(rs.getInt("death_essence"));
                             card.setTaunt(rs.getBoolean("taunt"));
-                            cardCollection.AddCard(card);
+                            cards.AddCard(card);
 
                             completeDeck = deck;
                         }
                     }
 
-                    if (deckCollection.getDecks().isEmpty() && completeDeck != null)
+                    if (decks.getDecks().isEmpty() && completeDeck != null)
                     {
-                        completeDeck.setCards(cardCollection);
-                        deckCollection.AddDeck(completeDeck);
+                        completeDeck.setCards(cards);
+                        decks.AddDeck(completeDeck);
                     }
 
-                    for(Deck d : deckCollection.getDecks())
+                    for(Deck d : decks.getDecks())
                     {
                         if (d.getDeckId() != deck.getDeckId() && completeDeck != null)
                         {
-                            completeDeck.setCards(cardCollection);
-                            deckCollection.AddDeck(deck);
+                            completeDeck.setCards(cards);
+                            decks.AddDeck(deck);
                             break;
                         }
                     }
@@ -242,7 +241,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
             System.out.println(e);
         }
 
-        return deckCollection;
+        return decks;
     }
 
     public Deck GetDeckById(int deckId)
@@ -268,7 +267,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                 try(ResultSet rs = pst.executeQuery())
                 {
                     deck.setDeckId(0);
-                    CardCollection cardCollection = new CardCollection();
+                    Cards cards = new Cards();
 
                     while(rs.next())
                     {
@@ -277,7 +276,7 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                             deck.setDeckId(rs.getInt("deck_id"));
                             deck.setName(rs.getString("deck_name"));
                             deck.setUserId(rs.getInt("user_id"));
-                            cardCollection = new CardCollection();
+                            cards = new Cards();
                         }
 
                         if (rs.getInt("deck_id") == deck.getDeckId())
@@ -290,11 +289,11 @@ public class DeckContainerSqlContext implements IDeckContainerContext
                             card.setBlue_mana(rs.getInt("blue_mana"));
                             card.setDeath_essence(rs.getInt("death_essence"));
                             card.setTaunt(rs.getBoolean("taunt"));
-                            cardCollection.AddCard(card);
+                            cards.AddCard(card);
                         }
                     }
 
-                    deck.setCards(cardCollection);
+                    deck.setCards(cards);
                 }
             }
         }

@@ -3,7 +3,7 @@ package com.eternitywars.api.DAL.Repositories.User;
 import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Interfaces.User.IUserContainerContext;
 import com.eternitywars.api.Models.User;
-import com.eternitywars.api.Models.UserCollection;
+import com.eternitywars.api.Models.Users;
 
 public class UserContainerRepository implements IUserContainerContext
 {
@@ -36,7 +36,7 @@ public class UserContainerRepository implements IUserContainerContext
         return userContainerContext.GetUserByEmail(userEmail);
     }
 
-    public UserCollection GetUsers()
+    public Users GetUsers()
     {
           return userContainerContext.GetUsers();
     }

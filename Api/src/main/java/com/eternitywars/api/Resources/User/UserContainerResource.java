@@ -3,8 +3,7 @@ package com.eternitywars.api.Resources.User;
 import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Models.User;
-import com.eternitywars.api.Models.UserCollection;
-import org.json.JSONObject;
+import com.eternitywars.api.Models.Users;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -38,7 +37,7 @@ public class UserContainerResource
     }
 
     @GetMapping(value = "/get")
-    public UserCollection GetUsers()
+    public Users GetUsers()
     {
         return userContainerRepository.GetUsers();
     }

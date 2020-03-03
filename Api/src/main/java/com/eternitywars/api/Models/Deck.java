@@ -27,7 +27,7 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public Deck(CardCollection cards, int deckId)
+    public Deck(Cards cards, int deckId)
     {
         this.deckId = deckId;
         this.cards = 1;
@@ -70,12 +70,12 @@ public class Deck
         this.name = name;
     }
 
-    public CardCollection getCards()
+    public Cards getCards()
     {
         return null;
     }
 
-    public void setCards(CardCollection cards)
+    public void setCards(Cards cards)
     {
         this.cards = 1;
     }

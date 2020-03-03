@@ -1,15 +1,14 @@
 package com.eternitywars.api.Interfaces.Card;
 
-import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.CardCollection;
+import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.User;
 
 public interface ICardContainerContext
 {
-    CardCollection GetCards();
+    Cards GetCards();
 
-    CardCollection GetCardsByUser(int userId);
+    Cards GetCardsByUser(int userId);
 
     Card GetCardById(int cardId);
 
