@@ -2,6 +2,8 @@ package com.eternitywars.api.Resources.User;
 
 import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.DAL.Repositories.User.UserRepository;
+import com.eternitywars.api.Factories.User.UserContainerFactory;
+import com.eternitywars.api.Factories.User.UserFactory;
 import com.eternitywars.api.Models.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/public/user")
 public class UserResource
 {
-    private UserRepository userRepository = new UserRepository();
-    private UserContainerRepository userContainerRepository = new UserContainerRepository();
+    private UserRepository userRepository = new UserRepository(UserFactory.getUserHibernateContext());
+    private UserContainerRepository userContainerRepository = new UserContainerRepository(UserContainerFactory.getUserContainerHibernate());
 
     @PutMapping(value = "/updateUsername", consumes = "application/json", produces = "application/json")
     public boolean UpdateUsername(@RequestBody User user)

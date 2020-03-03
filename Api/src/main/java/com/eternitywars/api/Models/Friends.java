@@ -2,13 +2,13 @@ package com.eternitywars.api.Models;
 
 import java.util.List;
 
-public class FriendCollection
+public class Friends
 {
     private List<Friend> friends;
 
-    public FriendCollection(){}
+    public Friends(){}
 
-    public FriendCollection(List<Friend> friends)
+    public Friends(List<Friend> friends)
     {
         this.friends = friends;
     }

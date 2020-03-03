@@ -1,9 +1,10 @@
 package com.eternitywars.api.Models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.eternitywars.api.Models.Enums.CardCollection;
+import org.hibernate.annotations.Fetch;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "card")
@@ -31,26 +32,17 @@ public class Card
     @Column(name = "taunt")
     private boolean taunt;
 
-    private boolean isSleeping;
-
-
+//    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
+//    private List<CardCollection> cardCollections;
 
     public Card()
     {
-        isSleeping = true;
+
     }
 
     public Card(int cardId)
     {
         this.cardId = cardId;
-    }
-
-    public boolean getSleeping() {
-        return isSleeping;
-    }
-
-    public void setSleeping(boolean sleeping) {
-        this.isSleeping = sleeping;
     }
 
     public int getCardId()
@@ -113,11 +105,23 @@ public class Card
         this.death_essence = death_essence;
     }
 
-    public boolean getTaunt() {
+    public boolean getTaunt()
+    {
         return taunt;
     }
 
-    public void setTaunt(boolean taunt) {
+    public void setTaunt(boolean taunt)
+    {
         this.taunt = taunt;
     }
+
+//    public List<CardCollection> getCardCollections()
+//    {
+//        return cardCollections;
+//    }
+//
+//    public void setCardCollections(List<CardCollection> cardCollections)
+//    {
+//        this.cardCollections = cardCollections;
+//    }
 }

@@ -3,7 +3,7 @@ package com.eternitywars.api.Models;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserCollection
+public class Users
 {
     public void setUsers(List<User> users) {
         this.users = users;
@@ -11,7 +11,7 @@ public class UserCollection
 
     private List<User> users;
 
-    public UserCollection()
+    public Users()
     {
         users = new ArrayList<>();
     }

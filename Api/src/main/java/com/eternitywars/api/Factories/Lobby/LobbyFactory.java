@@ -1,18 +1,25 @@
 package com.eternitywars.api.Factories.Lobby;
 
+import com.eternitywars.api.DAL.Contexts.Lobby.LobbyHibernateContext;
 import com.eternitywars.api.DAL.Contexts.Lobby.LobbySqlContext;
 import com.eternitywars.api.Database.DatabaseConnection;
 import com.eternitywars.api.Database.TestDatabaseConnection;
+import com.eternitywars.api.Interfaces.Lobby.ILobbyContext;
 
 public class LobbyFactory
 {
-    public LobbySqlContext getLobbySqlContext()
+    public static ILobbyContext getLobbySqlContext()
     {
         return new LobbySqlContext(new DatabaseConnection());
     }
 
-    public LobbySqlContext getTestLobbySqlContext()
+    public static ILobbyContext getTestLobbySqlContext()
     {
         return new LobbySqlContext(new TestDatabaseConnection());
+    }
+
+    public static ILobbyContext getLobbyHibernateContext()
+    {
+        return new LobbyHibernateContext();
     }
 }

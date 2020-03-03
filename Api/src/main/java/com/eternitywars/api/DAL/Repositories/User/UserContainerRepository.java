@@ -3,16 +3,15 @@ package com.eternitywars.api.DAL.Repositories.User;
 import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Interfaces.User.IUserContainerContext;
 import com.eternitywars.api.Models.User;
-import com.eternitywars.api.Models.UserCollection;
+import com.eternitywars.api.Models.Users;
 
 public class UserContainerRepository implements IUserContainerContext
 {
     private IUserContainerContext userContainerContext;
 
-    public UserContainerRepository()
+    public UserContainerRepository(IUserContainerContext userContainerContext)
     {
-        UserContainerFactory userContainerFactory = new UserContainerFactory();
-        this.userContainerContext = userContainerFactory.getUserContainerHibernate();
+        this.userContainerContext = userContainerContext;
     }
 
     public UserContainerRepository(UserContainerFactory userContainerFactory)
@@ -37,7 +36,7 @@ public class UserContainerRepository implements IUserContainerContext
         return userContainerContext.GetUserByEmail(userEmail);
     }
 
-    public UserCollection GetUsers()
+    public Users GetUsers()
     {
           return userContainerContext.GetUsers();
     }

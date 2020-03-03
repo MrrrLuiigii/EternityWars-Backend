@@ -1,16 +1,17 @@
 package com.eternitywars.api.Resources.Lobby;
 
 import com.eternitywars.api.DAL.Repositories.Lobby.LobbyContainerRepository;
+import com.eternitywars.api.Factories.Lobby.LobbyContainerFactory;
+import com.eternitywars.api.Factories.Lobby.LobbyFactory;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Lobbies;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/private/lobby")
+@RequestMapping(value = "/api/public/lobby")
 public class LobbyContainerResource
 {
-    private LobbyContainerRepository lobbyContainerRepository = new LobbyContainerRepository();
+    private LobbyContainerRepository lobbyContainerRepository = new LobbyContainerRepository(LobbyContainerFactory.getLobbyContainerHibernateContext());
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Lobby AddLobby(@RequestBody Lobby lobby)
@@ -18,7 +19,7 @@ public class LobbyContainerResource
         return lobbyContainerRepository.AddLobby(lobby);
     }
 
-    @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public boolean DeleteLobby(@RequestBody Lobby lobby)
     {
         return lobbyContainerRepository.DeleteLobby(lobby);
@@ -31,7 +32,7 @@ public class LobbyContainerResource
     }
 
     @GetMapping(value = "/get")
-    public LobbyCollection GetLobbies()
+    public Lobbies GetLobbies()
     {
         return lobbyContainerRepository.GetLobbies();
     }

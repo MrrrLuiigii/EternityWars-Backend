@@ -23,7 +23,7 @@ public class RelationshipContainerResource
     }
 
     @GetMapping(value = "/get/{userId}", consumes = "application/json", produces = "application/json")
-    public RelationshipCollection GetRelationshipByUserId(@PathVariable("userId") int userId)
+    public Relationships GetRelationshipByUserId(@PathVariable("userId") int userId)
     {
         User user = new User(userId);
         return relationshipContainerRepository.GetRelationships(user);

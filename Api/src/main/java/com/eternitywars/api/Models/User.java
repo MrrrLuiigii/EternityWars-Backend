@@ -2,13 +2,9 @@ package com.eternitywars.api.Models;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.websocket.Session;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.net.Socket;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -16,12 +12,25 @@ public class User extends Account implements Serializable
 {
     @Column(name = "email", nullable = false)
     private String email;
+
     @Column(name = "gold")
     private int gold;
+
     @Column(name = "pack_amount")
     private int packAmount;
 
-    public User(){}
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "card_collection",
+            joinColumns = @JoinColumn(name = "card_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
+    private List<Card> cards;
+
+//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+//    private List<CardCollection> cardCollections;
+
+    public User()
+    {
+    }
 
     public User(int userId)
     {
@@ -75,4 +84,24 @@ public class User extends Account implements Serializable
         this.packAmount = packAmount;
     }
 
+//    public List<CardCollection> getCardCollections()
+//    {
+//        return cardCollections;
+//    }
+//
+//    public void setCardCollections(List<CardCollection> cardCollections)
+//    {
+//        this.cardCollections = cardCollections;
+//    }
+
+
+    public List<Card> getCards()
+    {
+        return cards;
+    }
+
+    public void setCards(List<Card> cards)
+    {
+        this.cards = cards;
+    }
 }

@@ -2,9 +2,15 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
+import com.eternitywars.api.Models.User;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import com.eternitywars.api.Models.Lobbies;
 
 public class LobbyContainerHibernateContext implements ILobbyContainerContext {
+    private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("eternitywars");
     @Override
     public Lobby AddLobby(Lobby lobby) {
         return null;
@@ -17,11 +23,23 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
 
     @Override
     public Lobby GetLobbyById(int lobbyId) {
-        return null;
+        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
+
+        Lobby returnlobby;
+
+        try {
+            returnlobby = entityManager.find(Lobby.class, lobbyId);
+        } catch (Exception ex) {
+            return null;
+        } finally {
+            entityManager.close();
+        }
+
+        return returnlobby;
     }
 
     @Override
-    public LobbyCollection GetLobbies() {
+    public Lobbies GetLobbies() {
         return null;
     }
 }

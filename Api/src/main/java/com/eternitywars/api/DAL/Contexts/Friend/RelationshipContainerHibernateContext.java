@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Contexts.Friend;
 
 import com.eternitywars.api.Interfaces.Friend.IRelationshipContainerContext;
 import com.eternitywars.api.Models.Relationship;
-import com.eternitywars.api.Models.RelationshipCollection;
+import com.eternitywars.api.Models.Relationships;
 import com.eternitywars.api.Models.User;
 
 public class RelationshipContainerHibernateContext implements IRelationshipContainerContext {
@@ -17,7 +17,7 @@ public class RelationshipContainerHibernateContext implements IRelationshipConta
     }
 
     @Override
-    public RelationshipCollection GetRelationships(User user) {
+    public Relationships GetRelationships(User user) {
         return null;
     }
 }

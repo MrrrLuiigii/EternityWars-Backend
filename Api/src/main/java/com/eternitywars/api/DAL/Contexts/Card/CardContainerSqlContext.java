@@ -5,7 +5,7 @@ import com.eternitywars.api.Database.IDatabaseConnection;
 import com.eternitywars.api.Database.TestDatabaseConnection;
 import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
 import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.CardCollection;
+import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.User;
 
 import java.sql.*;
@@ -24,9 +24,9 @@ public class CardContainerSqlContext implements ICardContainerContext
     }
 
 
-    public CardCollection GetCardsByUser(int userId)
+    public Cards GetCardsByUser(int userId)
     {
-        CardCollection cardCollection = new CardCollection();
+        Cards cards = new Cards();
 
         try (Connection conn = dbc.getDatabaseConnection())
         {
@@ -45,7 +45,7 @@ public class CardContainerSqlContext implements ICardContainerContext
                     while (rs.next())
                     {
                         Card card = FillCard(rs);
-                        cardCollection.getCards().add(card);
+                        cards.getCards().add(card);
                     }
                 }
             }
@@ -55,7 +55,7 @@ public class CardContainerSqlContext implements ICardContainerContext
             System.out.println(e);
         }
 
-        return cardCollection;
+        return cards;
     }
 
     public Card GetCardById(int cardId)
@@ -88,9 +88,9 @@ public class CardContainerSqlContext implements ICardContainerContext
         return card;
     }
 
-    public CardCollection GetCards()
+    public Cards GetCards()
     {
-        CardCollection cardCollection = new CardCollection();
+        Cards cards = new Cards();
 
         try (Connection conn = dbc.getDatabaseConnection())
         {
@@ -103,7 +103,7 @@ public class CardContainerSqlContext implements ICardContainerContext
                     while (rs.next())
                     {
                         Card card = FillCard(rs);
-                        cardCollection.getCards().add(card);
+                        cards.getCards().add(card);
                     }
                 }
             }
@@ -113,7 +113,7 @@ public class CardContainerSqlContext implements ICardContainerContext
             System.out.println(e);
         }
 
-        return cardCollection;
+        return cards;
     }
 
     public boolean AddCard(User user, Card card)

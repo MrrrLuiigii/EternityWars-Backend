@@ -3,7 +3,7 @@ package com.eternitywars.api.DAL.Repositories.Friend;
 import com.eternitywars.api.Factories.Friend.RelationshipContainerFactory;
 import com.eternitywars.api.Interfaces.Friend.IRelationshipContainerContext;
 import com.eternitywars.api.Models.Relationship;
-import com.eternitywars.api.Models.RelationshipCollection;
+import com.eternitywars.api.Models.Relationships;
 import com.eternitywars.api.Models.User;
 
 public class RelationshipContainerRepository implements IRelationshipContainerContext
@@ -31,7 +31,7 @@ public class RelationshipContainerRepository implements IRelationshipContainerCo
         return relationshipContainerContext.DeleteRelationship(relationship);
     }
 
-    public RelationshipCollection GetRelationships(User user )
+    public Relationships GetRelationships(User user )
     {
         return relationshipContainerContext.GetRelationships(user);
     }

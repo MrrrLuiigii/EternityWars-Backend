@@ -3,7 +3,7 @@ package com.eternitywars.api.Resources.Deck;
 
 import com.eternitywars.api.DAL.Repositories.Deck.DeckContainerRepository;
 import com.eternitywars.api.Models.Deck;
-import com.eternitywars.api.Models.DeckCollection;
+import com.eternitywars.api.Models.Decks;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,7 +27,7 @@ public class DeckContainerResource
     }
 
     @GetMapping(value = "/getEmptyByUserId/{userId}")
-    public DeckCollection GetEmptyDecksByUserId(@PathVariable("userId") int userId)
+    public Decks GetEmptyDecksByUserId(@PathVariable("userId") int userId)
     {
         return deckContainerRepository.GetEmptyDecksByUserId(userId);
     }
@@ -39,7 +39,7 @@ public class DeckContainerResource
     }
 
     @GetMapping(value = "/getByUserId/{userId}")
-    public DeckCollection GetDecksByUserId(@PathVariable("userId") int userId)
+    public Decks GetDecksByUserId(@PathVariable("userId") int userId)
     {
         return deckContainerRepository.GetDecksByUserId(userId);
     }

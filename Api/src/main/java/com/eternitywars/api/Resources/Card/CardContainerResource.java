@@ -1,19 +1,20 @@
 package com.eternitywars.api.Resources.Card;
 
 import com.eternitywars.api.DAL.Repositories.Card.CardContainerRepository;
+import com.eternitywars.api.Factories.Card.CardContainerFactory;
 import com.eternitywars.api.Models.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/private/card")
+@RequestMapping(value = "/api/public/card")
 public class CardContainerResource
 {
-    private CardContainerRepository cardContainerRepository = new CardContainerRepository();
+    private CardContainerRepository cardContainerRepository = new CardContainerRepository(CardContainerFactory.getCardContainerHibernateContext());
 
 
 
     @GetMapping(value = "/getByUserId/{userId}")
-    public CardCollection GetCardsByUser(@PathVariable("userId")int userId)
+    public Cards GetCardsByUser(@PathVariable("userId")int userId)
     {
         return cardContainerRepository.GetCardsByUser(userId);
     }
@@ -25,7 +26,7 @@ public class CardContainerResource
     }
 
     @GetMapping(value = "/get")
-    public CardCollection GetCards()
+    public Cards GetCards()
     {
         return cardContainerRepository.GetCards();
     }
@@ -33,7 +34,7 @@ public class CardContainerResource
     @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public boolean DeleteCard(@RequestBody Player player)
     {
-        User user = new User(player.getUserId());
+        User user = new User(player.getUser().getUserId());
         Card card = player.getDeck().getCards().getCards().get(0);
         return cardContainerRepository.DeleteCard(user, card);
     }

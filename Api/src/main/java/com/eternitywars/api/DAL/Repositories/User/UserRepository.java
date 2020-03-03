@@ -8,10 +8,9 @@ public class UserRepository implements IUserContext
 {
     private IUserContext userContext;
 
-    public UserRepository()
+    public UserRepository(IUserContext userContext)
     {
-        UserFactory userFactory = new UserFactory();
-        this.userContext = userFactory.getUserHibernateContext();
+        this.userContext = userContext;
     }
 
     public UserRepository(UserFactory userFactory)

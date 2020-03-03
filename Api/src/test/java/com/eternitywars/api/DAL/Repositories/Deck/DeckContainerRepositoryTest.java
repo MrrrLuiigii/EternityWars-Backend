@@ -1,11 +1,10 @@
 package com.eternitywars.api.DAL.Repositories.Deck;
 
 import com.eternitywars.api.Factories.Deck.DeckContainerFactory;
-import com.eternitywars.api.Factories.Deck.DeckFactory;
 import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.CardCollection;
+import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.Deck;
-import com.eternitywars.api.Models.DeckCollection;
+import com.eternitywars.api.Models.Decks;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,15 +15,15 @@ class DeckContainerRepositoryTest {
 
     private int deckToDeleteId;
 
-    private DeckCollection SetupGetDeckByUserId() {
-        DeckCollection userOneDeckCollection = new DeckCollection();
+    private Decks SetupGetDeckByUserId() {
+        Decks userOneDecks = new Decks();
 
         Deck userOneDeckOne = new Deck();
         userOneDeckOne.setDeckId(1);
         userOneDeckOne.setUserId(1);
         userOneDeckOne.setName("getByUserIdDeckOne");
 
-        CardCollection deckOneCardCollection = new CardCollection();
+        Cards deckOneCards = new Cards();
         Card card = new Card();
         card.setCardId(2);
         card.setName("Africa");
@@ -33,15 +32,15 @@ class DeckContainerRepositoryTest {
         card.setBlue_mana(1);
         card.setDeath_essence(1);
         card.setTaunt(true);
-        deckOneCardCollection.AddCard(card);
-        userOneDeckOne.setCards(deckOneCardCollection);
+        deckOneCards.AddCard(card);
+       // userOneDeckOne.setCards(deckOneCards);
 
         Deck userOneDeckTwo = new Deck();
         userOneDeckTwo.setDeckId(2);
         userOneDeckTwo.setUserId(1);
         userOneDeckTwo.setName("getByUserIdDeckTwo");
 
-        return userOneDeckCollection;
+        return userOneDecks;
     }
 
     private Deck SetupGetDeckById()
@@ -51,7 +50,7 @@ class DeckContainerRepositoryTest {
         deck.setUserId(1);
         deck.setName("getByUserIdDeckOne");
 
-        CardCollection deckOneCardCollection = new CardCollection();
+        Cards deckOneCards = new Cards();
         Card card = new Card();
         card.setCardId(2);
         card.setName("Africa");
@@ -60,8 +59,8 @@ class DeckContainerRepositoryTest {
         card.setBlue_mana(1);
         card.setDeath_essence(1);
         card.setTaunt(true);
-        deckOneCardCollection.AddCard(card);
-        deck.setCards(deckOneCardCollection);
+        deckOneCards.AddCard(card);
+       // deck.setCards(deckOneCards);
 
         return deck;
     }
@@ -100,15 +99,15 @@ class DeckContainerRepositoryTest {
 
     @Test
     void getEmptyDecksByUserId() {
-        DeckCollection expectedDeckCollection = SetupGetDeckByUserId();
+        Decks expectedDecks = SetupGetDeckByUserId();
 
-        DeckCollection deckCollection = deckContainerRepository.GetEmptyDecksByUserId(1);
+        Decks decks = deckContainerRepository.GetEmptyDecksByUserId(1);
 
-        for (int i = 0; i < expectedDeckCollection.getDecks().size(); i++)
+        for (int i = 0; i < expectedDecks.getDecks().size(); i++)
         {
-            assertEquals(expectedDeckCollection.getDecks().get(i).getDeckId(), deckCollection.getDecks().get(i).getDeckId());
-            assertEquals(expectedDeckCollection.getDecks().get(i).getUserId(), deckCollection.getDecks().get(i).getUserId());
-            assertEquals(expectedDeckCollection.getDecks().get(i).getName(), deckCollection.getDecks().get(i).getName());
+            assertEquals(expectedDecks.getDecks().get(i).getDeckId(), decks.getDecks().get(i).getDeckId());
+            assertEquals(expectedDecks.getDecks().get(i).getUserId(), decks.getDecks().get(i).getUserId());
+            assertEquals(expectedDecks.getDecks().get(i).getName(), decks.getDecks().get(i).getName());
         }
     }
 
@@ -125,38 +124,38 @@ class DeckContainerRepositoryTest {
 
     @Test
     void getDecksByUserId() {
-        DeckCollection expectedDeckCollection = SetupGetDeckByUserId();
+        Decks expectedDecks = SetupGetDeckByUserId();
 
-        DeckCollection deckCollection = deckContainerRepository.GetDecksByUserId(1);
+        Decks decks = deckContainerRepository.GetDecksByUserId(1);
 
-        for (int i = 0; i < expectedDeckCollection.getDecks().size(); i++)
+        for (int i = 0; i < expectedDecks.getDecks().size(); i++)
         {
-            assertEquals(expectedDeckCollection.getDecks().get(i).getDeckId(), deckCollection.getDecks().get(i).getDeckId());
-            assertEquals(expectedDeckCollection.getDecks().get(i).getUserId(), deckCollection.getDecks().get(i).getUserId());
-            assertEquals(expectedDeckCollection.getDecks().get(i).getName(), deckCollection.getDecks().get(i).getName());
+            assertEquals(expectedDecks.getDecks().get(i).getDeckId(), decks.getDecks().get(i).getDeckId());
+            assertEquals(expectedDecks.getDecks().get(i).getUserId(), decks.getDecks().get(i).getUserId());
+            assertEquals(expectedDecks.getDecks().get(i).getName(), decks.getDecks().get(i).getName());
 
-            for (int j = 0; j < expectedDeckCollection.getDecks().get(i).getCards().getCards().size(); j++)
+            for (int j = 0; j < expectedDecks.getDecks().get(i).getCards().getCards().size(); j++)
             {
-                assertEquals(expectedDeckCollection.getDecks().get(i).getCards().getCards().get(j).getCardId(),
-                        deckCollection.getDecks().get(i).getCards().getCards().get(j).getCardId());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getCardId(),
+                        decks.getDecks().get(i).getCards().getCards().get(j).getCardId());
 
-                assertEquals(expectedDeckCollection.getDecks().get(i).getCards().getCards().get(j).getAttack(),
-                        deckCollection.getDecks().get(i).getCards().getCards().get(j).getAttack());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getAttack(),
+                        decks.getDecks().get(i).getCards().getCards().get(j).getAttack());
 
-                assertEquals(expectedDeckCollection.getDecks().get(i).getCards().getCards().get(j).getHealth(),
-                        deckCollection.getDecks().get(i).getCards().getCards().get(j).getHealth());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getHealth(),
+                        decks.getDecks().get(i).getCards().getCards().get(j).getHealth());
 
-                assertEquals(expectedDeckCollection.getDecks().get(i).getCards().getCards().get(j).getBlue_mana(),
-                        deckCollection.getDecks().get(i).getCards().getCards().get(j).getBlue_mana());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getBlue_mana(),
+                        decks.getDecks().get(i).getCards().getCards().get(j).getBlue_mana());
 
-                assertEquals(expectedDeckCollection.getDecks().get(i).getCards().getCards().get(j).getDeath_essence(),
-                        deckCollection.getDecks().get(i).getCards().getCards().get(j).getDeath_essence());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getDeath_essence(),
+                        decks.getDecks().get(i).getCards().getCards().get(j).getDeath_essence());
 
-                assertEquals(expectedDeckCollection.getDecks().get(i).getCards().getCards().get(j).getTaunt(),
-                        deckCollection.getDecks().get(i).getCards().getCards().get(j).getTaunt());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getTaunt(),
+                        decks.getDecks().get(i).getCards().getCards().get(j).getTaunt());
 
-                assertEquals(expectedDeckCollection.getDecks().get(i).getCards().getCards().get(j).getName(),
-                        deckCollection.getDecks().get(i).getCards().getCards().get(j).getName());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getName(),
+                        decks.getDecks().get(i).getCards().getCards().get(j).getName());
             }
         }
     }

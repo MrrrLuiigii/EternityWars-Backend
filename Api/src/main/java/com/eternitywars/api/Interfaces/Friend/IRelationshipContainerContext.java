@@ -1,7 +1,7 @@
 package com.eternitywars.api.Interfaces.Friend;
 
 import com.eternitywars.api.Models.Relationship;
-import com.eternitywars.api.Models.RelationshipCollection;
+import com.eternitywars.api.Models.Relationships;
 import com.eternitywars.api.Models.User;
 
 public interface IRelationshipContainerContext
@@ -10,5 +10,5 @@ public interface IRelationshipContainerContext
 
     boolean DeleteRelationship(Relationship relationship);
 
-    RelationshipCollection GetRelationships(User user);
+    Relationships GetRelationships(User user);
 }

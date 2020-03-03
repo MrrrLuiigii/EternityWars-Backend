@@ -4,10 +4,9 @@ import com.eternitywars.api.Database.DatabaseConnection;
 import com.eternitywars.api.Database.IDatabaseConnection;
 import com.eternitywars.api.Database.TestDatabaseConnection;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
-import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.api.Models.Lobby;
-import com.eternitywars.api.Models.LobbyCollection;
+import com.eternitywars.api.Models.Lobbies;
 import com.eternitywars.api.Models.Player;
 
 import java.sql.*;
@@ -38,7 +37,7 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
                 cst.setString(2, lobby.getDescription());
                 cst.setBoolean(3, lobby.getHasPassword());
                 cst.setString(4, lobby.getPassword());
-                cst.setInt(5, lobby.getPlayerOne().getUserId());
+                cst.setInt(5, lobby.getPlayers().get(0).getUser().getUserId());
 
                 try (ResultSet rs = cst.executeQuery())
                 {
@@ -119,11 +118,11 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
                         if (oldLobbyId != rsLobbyId)
                         {
                             lobby = new Lobby(rsLobbyId, name, description, hasPassword, password);
-                            lobby.setPlayerOne(player);
+                          //  lobby.setPlayerOne(player);
                         }
                         else
                         {
-                            lobby.setPlayerTwo(player);
+                          //  lobby.setPlayerTwo(player);
                         }
 
                         oldLobbyId = rsLobbyId;
@@ -139,9 +138,9 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
         return lobby;
     }
 
-    public LobbyCollection GetLobbies()
+    public Lobbies GetLobbies()
     {
-        LobbyCollection lobbyCollection = new LobbyCollection();
+        Lobbies lobbies = new Lobbies();
 
         try (Connection conn = dbc.getDatabaseConnection())
         {
@@ -177,12 +176,12 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
                         if (oldLobbyId != lobbyId)
                         {
                             lobby = new Lobby(lobbyId, name, description, hasPassword, password);
-                            lobbyCollection.addLobby(lobby);
-                            lobby.setPlayerOne(player);
+                            //lobbyCollection.addLobby(lobby);
+                           // lobby.setPlayerOne(player);
                         }
                         else
                         {
-                            lobby.setPlayerTwo(player);
+                          //  lobby.setPlayerTwo(player);
                         }
 
                         oldLobbyId = lobbyId;
@@ -195,6 +194,6 @@ public class LobbyContainerSqlContext implements ILobbyContainerContext
             System.out.println(e);
         }
 
-        return lobbyCollection;
+        return lobbies;
     }
 }
