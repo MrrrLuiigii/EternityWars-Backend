@@ -18,7 +18,7 @@ public class LobbyContainerFactory
         return new LobbyContainerSqlContext(new TestDatabaseConnection());
     }
 
-    public static ILobbyContainerContext LobbyContainerHibernateContext()
+    public static ILobbyContainerContext getLobbyContainerHibernateContext()
     {
         return new LobbyContainerHibernateContext();
     }
