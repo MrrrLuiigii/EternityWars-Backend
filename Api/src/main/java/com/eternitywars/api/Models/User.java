@@ -25,9 +25,6 @@ public class User extends Account implements Serializable
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"))
     private List<Card> cards;
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-//    private List<CardCollection> cardCollections;
-
     public User()
     {
     }
@@ -83,17 +80,6 @@ public class User extends Account implements Serializable
     {
         this.packAmount = packAmount;
     }
-
-//    public List<CardCollection> getCardCollections()
-//    {
-//        return cardCollections;
-//    }
-//
-//    public void setCardCollections(List<CardCollection> cardCollections)
-//    {
-//        this.cardCollections = cardCollections;
-//    }
-
 
     public List<Card> getCards()
     {
