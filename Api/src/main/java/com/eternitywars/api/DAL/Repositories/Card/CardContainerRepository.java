@@ -10,16 +10,15 @@ public class CardContainerRepository implements ICardContainerContext
 {
     private ICardContainerContext cardContainerContext;
 
+    public CardContainerRepository()
+    {
+        this.cardContainerContext = CardContainerFactory.getCardContainerHibernateContext();
+    }
+
     public CardContainerRepository(ICardContainerContext cardContainerContext)
     {
         this.cardContainerContext = cardContainerContext;
     }
-
-    public CardContainerRepository(CardContainerFactory cardContainerFactory)
-    {
-        this.cardContainerContext = cardContainerFactory.getTestCardContainerSqlContext();
-    }
-
 
 
     public Cards GetCards()

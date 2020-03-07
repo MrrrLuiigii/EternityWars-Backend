@@ -8,16 +8,15 @@ public class UserRepository implements IUserContext
 {
     private IUserContext userContext;
 
+    public UserRepository()
+    {
+        this.userContext = UserFactory.getUserHibernateContext();
+    }
+
     public UserRepository(IUserContext userContext)
     {
         this.userContext = userContext;
     }
-
-    public UserRepository(UserFactory userFactory)
-    {
-        this.userContext = userFactory.getTestUserSqlContext();
-    }
-
 
 
     public boolean UpdateUsername(User user)
@@ -35,5 +34,8 @@ public class UserRepository implements IUserContext
         return userContext.UpdatePackAmount(user);
     }
 
-    public boolean UpdateGold(User user){return userContext.UpdateGold(user);}
+    public boolean UpdateGold(User user)
+    {
+        return userContext.UpdateGold(user);
+    }
 }

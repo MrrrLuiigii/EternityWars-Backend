@@ -1,6 +1,5 @@
 package com.eternitywars.api.DAL.Repositories.Deck;
 
-import com.eternitywars.api.DAL.Contexts.Deck.DeckContainerSqlContext;
 import com.eternitywars.api.Factories.Deck.DeckContainerFactory;
 import com.eternitywars.api.Interfaces.Deck.IDeckContainerContext;
 import com.eternitywars.api.Models.Deck;
@@ -8,46 +7,46 @@ import com.eternitywars.api.Models.Decks;
 
 public class DeckContainerRepository implements IDeckContainerContext
 {
-    private DeckContainerSqlContext deckContainerSqlContext;
+    private IDeckContainerContext deckContainerContext;
 
     public DeckContainerRepository()
     {
-        DeckContainerFactory deckContainerFactory = new DeckContainerFactory();
-        this.deckContainerSqlContext = deckContainerFactory.getDeckContainerSqlContext();
+        this.deckContainerContext = DeckContainerFactory.getDeckContainerHibernateContext();
     }
 
-    public DeckContainerRepository(DeckContainerFactory deckContainerFactory)
+    public DeckContainerRepository(IDeckContainerContext deckContainerContext)
     {
-        this.deckContainerSqlContext = deckContainerFactory.getTestDeckContainerSqlContext();
+        this.deckContainerContext = deckContainerContext;
     }
+
 
     public Deck AddDeck(Deck deck)
     {
-        return deckContainerSqlContext.AddDeck(deck);
+        return deckContainerContext.AddDeck(deck);
     }
 
     public boolean DeleteDeck(Deck deck)
     {
-        return deckContainerSqlContext.DeleteDeck(deck);
+        return deckContainerContext.DeleteDeck(deck);
     }
 
     public Decks GetEmptyDecksByUserId(int userId)
     {
-        return deckContainerSqlContext.GetEmptyDecksByUserId(userId);
+        return deckContainerContext.GetEmptyDecksByUserId(userId);
     }
 
     public Deck GetEmptyDeckById(int deckId)
     {
-        return deckContainerSqlContext.GetEmptyDeckById(deckId);
+        return deckContainerContext.GetEmptyDeckById(deckId);
     }
 
     public Decks GetDecksByUserId(int userId)
     {
-        return deckContainerSqlContext.GetDecksByUserId(userId);
+        return deckContainerContext.GetDecksByUserId(userId);
     }
 
     public Deck GetDeckById(int deckId)
     {
-        return deckContainerSqlContext.GetDeckById(deckId);
+        return deckContainerContext.GetDeckById(deckId);
     }
 }

@@ -10,14 +10,14 @@ public class RelationshipRepository implements IRelationshipContext
 
     public RelationshipRepository()
     {
-        RelationshipFactory relationshipFactory = new RelationshipFactory();
-        this.relationshipContext = relationshipFactory.getRelationshipSqlContext();
+        this.relationshipContext = RelationshipFactory.getRelationshipHibernateContext();
     }
 
-    public RelationshipRepository(RelationshipFactory relationshipFactory)
+    public RelationshipRepository(IRelationshipContext relationshipContext)
     {
-        this.relationshipContext = relationshipFactory.getTestRelationshipSqlContext();
+        this.relationshipContext = relationshipContext;
     }
+
 
     public boolean UpdateRelationship(Relationship relationship)
     {

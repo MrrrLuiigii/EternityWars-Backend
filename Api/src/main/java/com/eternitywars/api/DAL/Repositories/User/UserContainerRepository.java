@@ -9,16 +9,15 @@ public class UserContainerRepository implements IUserContainerContext
 {
     private IUserContainerContext userContainerContext;
 
+    public UserContainerRepository()
+    {
+        this.userContainerContext = UserContainerFactory.getUserContainerHibernateContext();
+    }
+
     public UserContainerRepository(IUserContainerContext userContainerContext)
     {
         this.userContainerContext = userContainerContext;
     }
-
-    public UserContainerRepository(UserContainerFactory userContainerFactory)
-    {
-        this.userContainerContext = userContainerFactory.getTestUserContainerSqlContext();
-    }
-
 
 
     public User GetUserById(int userId)
@@ -38,7 +37,7 @@ public class UserContainerRepository implements IUserContainerContext
 
     public Users GetUsers()
     {
-          return userContainerContext.GetUsers();
+        return userContainerContext.GetUsers();
     }
 
     public User AddUser(User user)

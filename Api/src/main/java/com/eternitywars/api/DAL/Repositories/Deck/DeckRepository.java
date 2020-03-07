@@ -1,39 +1,37 @@
 package com.eternitywars.api.DAL.Repositories.Deck;
 
-import com.eternitywars.api.DAL.Contexts.Deck.DeckSqlContext;
 import com.eternitywars.api.Factories.Deck.DeckFactory;
-import com.eternitywars.api.Factories.Friend.RelationshipContainerFactory;
 import com.eternitywars.api.Interfaces.Deck.IDeckContext;
 import com.eternitywars.api.Models.Card;
 import com.eternitywars.api.Models.Deck;
 
 public class DeckRepository implements IDeckContext
 {
-    private DeckSqlContext deckSqlContext;
+    private IDeckContext deckContext;
 
     public DeckRepository()
     {
-        DeckFactory deckFactory = new DeckFactory();
-        this.deckSqlContext = deckFactory.getDeckSqlContext();
+        this.deckContext = DeckFactory.getDeckHibernateContext();
     }
 
-    public DeckRepository(DeckFactory deckFactory)
+    public DeckRepository(IDeckContext deckContext)
     {
-        this.deckSqlContext = deckFactory.getTestDeckSqlContext();
+        this.deckContext = deckContext;
     }
+
 
     public boolean AddCard(Deck deck, Card card)
     {
-        return deckSqlContext.AddCard(deck, card);
+        return deckContext.AddCard(deck, card);
     }
 
     public boolean DeleteCard(Deck deck, Card card)
     {
-        return deckSqlContext.DeleteCard(deck, card);
+        return deckContext.DeleteCard(deck, card);
     }
 
     public boolean UpdateDeckName(Deck deck)
     {
-        return deckSqlContext.UpdateDeckName(deck);
+        return deckContext.UpdateDeckName(deck);
     }
 }

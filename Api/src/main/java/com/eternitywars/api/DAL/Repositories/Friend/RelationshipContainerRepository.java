@@ -12,14 +12,14 @@ public class RelationshipContainerRepository implements IRelationshipContainerCo
 
     public RelationshipContainerRepository()
     {
-        RelationshipContainerFactory relationshipFactory = new RelationshipContainerFactory();
-        this.relationshipContainerContext = relationshipFactory.getRelationshipContainerSqlContext();
+        this.relationshipContainerContext = RelationshipContainerFactory.getRelationshipContainerHibernateContext();
     }
 
-    public RelationshipContainerRepository(RelationshipContainerFactory relationshipFactory)
+    public RelationshipContainerRepository(IRelationshipContainerContext relationshipContainerContext)
     {
-        this.relationshipContainerContext = relationshipFactory.getTestRelationshipContainerSqlContext();
+        this.relationshipContainerContext = relationshipContainerContext;
     }
+
 
     public boolean AddRelationship(Relationship relationship)
     {
@@ -31,7 +31,7 @@ public class RelationshipContainerRepository implements IRelationshipContainerCo
         return relationshipContainerContext.DeleteRelationship(relationship);
     }
 
-    public Relationships GetRelationships(User user )
+    public Relationships GetRelationships(User user)
     {
         return relationshipContainerContext.GetRelationships(user);
     }
