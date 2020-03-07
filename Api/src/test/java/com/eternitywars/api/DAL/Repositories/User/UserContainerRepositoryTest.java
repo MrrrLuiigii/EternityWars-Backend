@@ -1,9 +1,8 @@
 package com.eternitywars.api.DAL.Repositories.User;
 
 import com.eternitywars.api.DAL.Contexts.User.UserContainerHibernateContext;
-import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Models.Enums.AccountStatus;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Users;
 import org.junit.jupiter.api.Test;
 

@@ -1,5 +1,8 @@
 package com.eternitywars.api.Models;
 
+import com.eternitywars.api.Models.Entities.Deck;
+import com.eternitywars.api.Models.Entities.Lobby;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 
 import javax.persistence.*;

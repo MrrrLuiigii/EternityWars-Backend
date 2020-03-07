@@ -1,6 +1,6 @@
 package com.eternitywars.api.Interfaces.Lobby;
 
-import com.eternitywars.api.Models.Lobby;
+import com.eternitywars.api.Models.Entities.Lobby;
 import com.eternitywars.api.Models.Player;
 
 public interface ILobbyContext

@@ -1,4 +1,4 @@
-package com.eternitywars.api.Models;
+package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Enums.FriendStatus;

@@ -1,10 +1,9 @@
-package com.eternitywars.api.Models;
+package com.eternitywars.api.Models.Entities;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.eternitywars.api.Models.Cards;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "deck")
@@ -14,10 +13,11 @@ public class Deck
     @Column(name = "id", unique = true, updatable = false)
     private int deckId;
 
-    @Column(name = "user_id")
+    @ManyToOne()
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
 
 
@@ -75,5 +75,4 @@ public class Deck
     {
         return null;
     }
-
 }

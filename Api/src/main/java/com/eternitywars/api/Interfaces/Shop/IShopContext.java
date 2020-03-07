@@ -1,7 +1,6 @@
 package com.eternitywars.api.Interfaces.Shop;
 
-import com.eternitywars.api.Models.Pack;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 
 public interface IShopContext
 {

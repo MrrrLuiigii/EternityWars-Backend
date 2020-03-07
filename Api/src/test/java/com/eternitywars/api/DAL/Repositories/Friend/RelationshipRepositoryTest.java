@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Repositories.Friend;
 
 import com.eternitywars.api.DAL.Contexts.Friend.RelationshipHibernateContext;
 import com.eternitywars.api.Models.Enums.FriendStatus;
-import com.eternitywars.api.Models.Relationship;
+import com.eternitywars.api.Models.Entities.Relationship;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;

@@ -1,7 +1,7 @@
 package com.eternitywars.api.DAL.Repositories.Lobby;
 
 import com.eternitywars.api.DAL.Contexts.Lobby.LobbyHibernateContext;
-import com.eternitywars.api.Models.Lobby;
+import com.eternitywars.api.Models.Entities.Lobby;
 import org.junit.jupiter.api.Test;
 
 class LobbyRepositoryTest

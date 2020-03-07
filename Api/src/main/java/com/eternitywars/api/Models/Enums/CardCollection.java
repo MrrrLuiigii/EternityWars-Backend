@@ -1,7 +1,7 @@
 package com.eternitywars.api.Models.Enums;
 
-import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.Card;
+import com.eternitywars.api.Models.Entities.User;
 
 import javax.persistence.*;
 

@@ -1,9 +1,9 @@
 package com.eternitywars.api.Resources.Friend;
 
 import com.eternitywars.api.DAL.Repositories.Friend.RelationshipContainerRepository;
-import com.eternitywars.api.Models.Relationship;
+import com.eternitywars.api.Models.Entities.Relationship;
 import com.eternitywars.api.Models.Relationships;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

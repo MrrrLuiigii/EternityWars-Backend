@@ -1,6 +1,6 @@
 package com.eternitywars.api.Interfaces.Deck;
 
-import com.eternitywars.api.Models.Deck;
+import com.eternitywars.api.Models.Entities.Deck;
 import com.eternitywars.api.Models.Decks;
 
 public interface IDeckContainerContext

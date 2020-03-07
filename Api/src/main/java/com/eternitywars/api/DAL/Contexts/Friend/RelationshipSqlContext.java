@@ -5,7 +5,7 @@
 //import com.eternitywars.api.Database.TestDatabaseConnection;
 //import com.eternitywars.api.Interfaces.Friend.IRelationshipContext;
 //import com.eternitywars.api.Models.Enums.FriendStatus;
-//import com.eternitywars.api.Models.Relationship;
+//import com.eternitywars.api.Models.Entities.Relationship;
 //import java.sql.CallableStatement;
 //import java.sql.Connection;
 //

@@ -1,7 +1,7 @@
 package com.eternitywars.api.Resources.Friend;
 
 import com.eternitywars.api.DAL.Repositories.Friend.RelationshipRepository;
-import com.eternitywars.api.Models.Relationship;
+import com.eternitywars.api.Models.Entities.Relationship;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

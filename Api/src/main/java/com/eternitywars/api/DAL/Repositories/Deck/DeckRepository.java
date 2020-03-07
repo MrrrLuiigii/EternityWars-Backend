@@ -2,8 +2,8 @@ package com.eternitywars.api.DAL.Repositories.Deck;
 
 import com.eternitywars.api.Factories.Deck.DeckFactory;
 import com.eternitywars.api.Interfaces.Deck.IDeckContext;
-import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.Deck;
+import com.eternitywars.api.Models.Entities.Card;
+import com.eternitywars.api.Models.Entities.Deck;
 
 public class DeckRepository implements IDeckContext
 {

@@ -1,8 +1,8 @@
 package com.eternitywars.api.Interfaces.Card;
 
-import com.eternitywars.api.Models.Card;
+import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Cards;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 
 public interface ICardContainerContext
 {

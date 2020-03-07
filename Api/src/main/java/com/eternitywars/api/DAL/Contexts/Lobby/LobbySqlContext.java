@@ -4,7 +4,7 @@
 //import com.eternitywars.api.Database.IDatabaseConnection;
 //import com.eternitywars.api.Database.TestDatabaseConnection;
 //import com.eternitywars.api.Interfaces.Lobby.ILobbyContext;
-//import com.eternitywars.api.Models.Lobby;
+//import com.eternitywars.api.Models.Entities.Lobby;
 //import com.eternitywars.api.Models.Player;
 //import java.sql.CallableStatement;
 //import java.sql.Connection;

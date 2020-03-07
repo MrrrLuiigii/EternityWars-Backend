@@ -1,5 +1,7 @@
 package com.eternitywars.api.Models;
 
+import com.eternitywars.api.Models.Entities.Friend;
+
 import java.util.List;
 
 public class Friends

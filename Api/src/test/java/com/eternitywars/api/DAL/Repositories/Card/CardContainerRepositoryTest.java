@@ -1,9 +1,9 @@
 package com.eternitywars.api.DAL.Repositories.Card;
 
 import com.eternitywars.api.DAL.Contexts.Card.CardContainerHibernateContext;
-import com.eternitywars.api.Models.Card;
+import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Cards;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -2,7 +2,7 @@ package com.eternitywars.api.Resources.Lobby;
 
 import com.eternitywars.api.DAL.Repositories.Lobby.LobbyContainerRepository;
 import com.eternitywars.api.Models.Lobbies;
-import com.eternitywars.api.Models.Lobby;
+import com.eternitywars.api.Models.Entities.Lobby;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

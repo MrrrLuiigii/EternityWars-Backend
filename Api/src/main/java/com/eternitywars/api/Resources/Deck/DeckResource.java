@@ -1,8 +1,8 @@
 package com.eternitywars.api.Resources.Deck;
 
 import com.eternitywars.api.DAL.Repositories.Deck.DeckRepository;
-import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.Deck;
+import com.eternitywars.api.Models.Entities.Card;
+import com.eternitywars.api.Models.Entities.Deck;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

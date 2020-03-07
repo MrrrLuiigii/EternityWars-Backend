@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Repositories.User;
 
 import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Interfaces.User.IUserContainerContext;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Users;
 
 public class UserContainerRepository implements IUserContainerContext

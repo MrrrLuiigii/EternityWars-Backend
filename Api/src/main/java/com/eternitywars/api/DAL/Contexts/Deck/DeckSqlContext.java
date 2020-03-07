@@ -4,8 +4,8 @@
 //import com.eternitywars.api.Database.IDatabaseConnection;
 //import com.eternitywars.api.Database.TestDatabaseConnection;
 //import com.eternitywars.api.Interfaces.Deck.IDeckContext;
-//import com.eternitywars.api.Models.Card;
-//import com.eternitywars.api.Models.Deck;
+//import com.eternitywars.api.Models.Entities.Card;
+//import com.eternitywars.api.Models.Entities.Deck;
 //import java.sql.Connection;
 //import java.sql.PreparedStatement;
 //

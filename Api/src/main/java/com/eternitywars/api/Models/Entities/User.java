@@ -1,14 +1,13 @@
-package com.eternitywars.api.Models;
+package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
-
-import javax.persistence.*;
-import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User extends Account implements Serializable
+public class User extends Account
 {
     @Column(name = "email", nullable = false)
     private String email;
@@ -48,7 +47,6 @@ public class User extends Account implements Serializable
         this.email = email;
         this.gold = gold;
         this.packAmount = packAmount;
-
     }
 
     public String getEmail()

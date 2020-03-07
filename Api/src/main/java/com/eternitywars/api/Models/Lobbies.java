@@ -1,5 +1,7 @@
 package com.eternitywars.api.Models;
 
+import com.eternitywars.api.Models.Entities.Lobby;
+
 import java.util.ArrayList;
 import java.util.List;
 

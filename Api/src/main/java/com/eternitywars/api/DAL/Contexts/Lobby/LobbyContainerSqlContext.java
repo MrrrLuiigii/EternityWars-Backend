@@ -5,7 +5,7 @@
 //import com.eternitywars.api.Database.TestDatabaseConnection;
 //import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 //import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
-//import com.eternitywars.api.Models.Lobby;
+//import com.eternitywars.api.Models.Entities.Lobby;
 //import com.eternitywars.api.Models.Lobbies;
 //import com.eternitywars.api.Models.Player;
 //

@@ -1,4 +1,4 @@
-package com.eternitywars.api.Models;
+package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
 
@@ -10,7 +10,7 @@ import java.net.Socket;
 public abstract class Account
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, updatable = false)
     protected int userId;
 

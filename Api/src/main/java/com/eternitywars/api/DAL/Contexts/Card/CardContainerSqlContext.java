@@ -4,9 +4,9 @@
 //import com.eternitywars.api.Database.IDatabaseConnection;
 //import com.eternitywars.api.Database.TestDatabaseConnection;
 //import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
-//import com.eternitywars.api.Models.Card;
+//import com.eternitywars.api.Models.Entities.Card;
 //import com.eternitywars.api.Models.Cards;
-//import com.eternitywars.api.Models.User;
+//import com.eternitywars.api.Models.Entities.User;
 //
 //import java.sql.*;
 //

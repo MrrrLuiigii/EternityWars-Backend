@@ -2,7 +2,7 @@ package com.eternitywars.api.Resources.Deck;
 
 
 import com.eternitywars.api.DAL.Repositories.Deck.DeckContainerRepository;
-import com.eternitywars.api.Models.Deck;
+import com.eternitywars.api.Models.Entities.Deck;
 import com.eternitywars.api.Models.Decks;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,9 +1,9 @@
 package com.eternitywars.api.DAL.Contexts.Friend;
 
 import com.eternitywars.api.Interfaces.Friend.IRelationshipContainerContext;
-import com.eternitywars.api.Models.Relationship;
+import com.eternitywars.api.Models.Entities.Relationship;
 import com.eternitywars.api.Models.Relationships;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 
 public class RelationshipContainerHibernateContext implements IRelationshipContainerContext {
     @Override

@@ -1,4 +1,4 @@
-package com.eternitywars.api.Models;
+package com.eternitywars.api.Models.Entities;
 
 import javax.persistence.*;
 
@@ -11,27 +11,26 @@ public class Card
     @Column(name = "id", unique = true, updatable = false)
     private int cardId;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name", nullable = false, unique = true, length = 64)
     private String name;
 
-    @Column(name = "health")
+    @Column(name = "health", nullable = false)
     private int health;
 
-    @Column(name = "attack")
+    @Column(name = "attack", nullable = false)
     private int attack;
 
-    @Column(name = "blue_mana")
+    @Column(name = "blue_mana", nullable = false)
     private int blue_mana;
 
-    @Column(name = "death_essence")
+    @Column(name = "death_essence", nullable = false)
     private int death_essence;
 
-    @Column(name = "taunt")
+    @Column(name = "taunt", nullable = false)
     private boolean taunt;
 
     public Card()
     {
-
     }
 
     public Card(int cardId)

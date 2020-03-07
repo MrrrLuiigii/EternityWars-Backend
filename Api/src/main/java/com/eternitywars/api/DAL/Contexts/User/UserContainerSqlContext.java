@@ -5,7 +5,7 @@
 //import com.eternitywars.api.Database.TestDatabaseConnection;
 //import com.eternitywars.api.Interfaces.User.IUserContainerContext;
 //import com.eternitywars.api.Models.Enums.AccountStatus;
-//import com.eternitywars.api.Models.User;
+//import com.eternitywars.api.Models.Entities.User;
 //import com.eternitywars.api.Models.Users;
 //
 //import java.sql.*;

@@ -1,6 +1,6 @@
 package com.eternitywars.api.Interfaces.User;
 
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Users;
 
 public interface IUserContainerContext

@@ -2,6 +2,8 @@ package com.eternitywars.api.Resources.Card;
 
 import com.eternitywars.api.DAL.Repositories.Card.CardContainerRepository;
 import com.eternitywars.api.Models.*;
+import com.eternitywars.api.Models.Entities.Card;
+import com.eternitywars.api.Models.Entities.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

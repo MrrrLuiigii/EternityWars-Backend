@@ -1,6 +1,6 @@
 package com.eternitywars.api.Interfaces.Friend;
 
-import com.eternitywars.api.Models.Relationship;
+import com.eternitywars.api.Models.Entities.Relationship;
 
 public interface IRelationshipContext
 {

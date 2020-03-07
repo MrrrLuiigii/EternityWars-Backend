@@ -3,7 +3,7 @@ package com.eternitywars.api.DAL.Repositories.Lobby;
 import com.eternitywars.api.Factories.Lobby.LobbyContainerFactory;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 import com.eternitywars.api.Models.Lobbies;
-import com.eternitywars.api.Models.Lobby;
+import com.eternitywars.api.Models.Entities.Lobby;
 
 public class LobbyContainerRepository implements ILobbyContainerContext
 {

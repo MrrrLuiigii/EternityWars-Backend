@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Repositories.Friend;
 
 import com.eternitywars.api.Factories.Friend.RelationshipFactory;
 import com.eternitywars.api.Interfaces.Friend.IRelationshipContext;
-import com.eternitywars.api.Models.Relationship;
+import com.eternitywars.api.Models.Entities.Relationship;
 
 public class RelationshipRepository implements IRelationshipContext
 {

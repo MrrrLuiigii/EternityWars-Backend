@@ -1,8 +1,8 @@
 package com.eternitywars.api.DAL.Repositories.Friend;
 
 import com.eternitywars.api.DAL.Contexts.Friend.RelationshipContainerHibernateContext;
-import com.eternitywars.api.Models.Relationship;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.Relationship;
+import com.eternitywars.api.Models.Entities.User;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

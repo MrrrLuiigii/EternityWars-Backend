@@ -1,4 +1,6 @@
-package com.eternitywars.api.Models;
+package com.eternitywars.api.Models.Entities;
+
+import com.eternitywars.api.Models.Player;
 
 import javax.persistence.*;
 import java.util.List;
