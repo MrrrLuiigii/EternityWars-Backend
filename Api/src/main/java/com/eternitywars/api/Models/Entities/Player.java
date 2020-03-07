@@ -1,8 +1,5 @@
-package com.eternitywars.api.Models;
+package com.eternitywars.api.Models.Entities;
 
-import com.eternitywars.api.Models.Entities.Deck;
-import com.eternitywars.api.Models.Entities.Lobby;
-import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 
 import javax.persistence.*;
@@ -12,15 +9,16 @@ import javax.persistence.*;
 public class Player
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, updatable = false)
     private int id;
 
     @OneToOne
-    @JoinColumn(name="user_id", nullable=false)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Lobby lobby_id;
+    private Lobby lobby;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "lobby_player_status")
@@ -30,9 +28,12 @@ public class Player
     @JoinColumn(name = "deck_id")
     private Deck deck;
 
-    public Player(){}
 
-    public Player(int userId ,String username, LobbyPlayerStatus lobbyPlayerStatus, int deckId)
+    public Player()
+    {
+    }
+
+    public Player(int userId, String username, LobbyPlayerStatus lobbyPlayerStatus, int deckId)
     {
         this.user.setUserId(userId);
         this.user.setUsername(username);
@@ -62,19 +63,23 @@ public class Player
         this.deck = deck;
     }
 
-    public Lobby getLobby_id() {
-        return lobby_id;
+    public Lobby getLobby()
+    {
+        return lobby;
     }
 
-    public void setLobby_id(Lobby lobby_id) {
-        this.lobby_id = lobby_id;
+    public void setLobby(Lobby lobby_id)
+    {
+        this.lobby = lobby_id;
     }
 
-    public User getUser() {
+    public User getUser()
+    {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(User user)
+    {
         this.user = user;
     }
 }
