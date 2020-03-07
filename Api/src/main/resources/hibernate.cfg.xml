@@ -31,10 +31,8 @@
         <property name="hibernate.dbcp.minIdle">5</property>
         <property name="hibernate.dbcp.maxWaitMillis">-1</property>
 
-        <!-- register entities-->
-        <mapping class="com.eternitywars.api.Models.Entities.User" />
-        <mapping class="com.eternitywars.api.Models.Entities.Card" />
-        <mapping class="com.eternitywars.api.Models.Entities.Deck" />
+        <!-- register entities -->
+        <!-- happens on runtime -->
 
     </session-factory>
 </hibernate-configuration>
