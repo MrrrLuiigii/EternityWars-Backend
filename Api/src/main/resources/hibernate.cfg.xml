@@ -33,5 +33,8 @@
 
         <!-- register entities-->
         <mapping class="com.eternitywars.api.Models.User" />
+        <mapping class="com.eternitywars.api.Models.Card" />
+        <mapping class="com.eternitywars.api.Models.Deck" />
+
     </session-factory>
 </hibernate-configuration>
