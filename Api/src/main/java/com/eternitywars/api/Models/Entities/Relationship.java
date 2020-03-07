@@ -1,100 +1,62 @@
 package com.eternitywars.api.Models.Entities;
 
-import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Enums.FriendStatus;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "friend")
 public class Relationship
 {
-    private int friendOneId;
-    private String friendOneUsername;
-    private AccountStatus friendOneAccountStatus;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, updatable = false)
+    private int id;
 
-    private int friendTwoId;
-    private String friendTwoUsername;
-    private AccountStatus friendTwoAccountStatus;
+    @ManyToOne
+    @JoinColumn(name = "user_one_id", nullable = false)
+    private User friendOne;
 
+    @ManyToOne
+    @JoinColumn(name = "user_two_id", nullable = false)
+    private User friendTwo;
+
+    @Column(name = "status", nullable = false)
     private FriendStatus friendStatus;
 
-    public Relationship(){}
 
-    public Relationship(int friendOneId, int friendTwoId, FriendStatus friendStatus)
+    public Relationship()
     {
-        this.friendOneId = friendOneId;
-        this.friendTwoId = friendTwoId;
-        this.friendStatus = friendStatus;
     }
 
-    public Relationship(int friendOneId, String friendOneUsername, AccountStatus friendOneAccountStatus,
-                        int friendTwoId, String friendTwoUsername, AccountStatus friendTwoAccountStatus,
-                        FriendStatus friendStatus)
+    public int getId()
     {
-        this.friendOneId = friendOneId;
-        this.friendOneUsername = friendOneUsername;
-        this.friendOneAccountStatus = friendOneAccountStatus;
-        this.friendTwoId = friendTwoId;
-        this.friendTwoUsername = friendTwoUsername;
-        this.friendTwoAccountStatus = friendTwoAccountStatus;
-        this.friendStatus = friendStatus;
+        return id;
     }
 
-    public int getFriendOneId()
+    public void setId(int id)
     {
-        return friendOneId;
+        this.id = id;
     }
 
-    public void setFriendOneId(int friendOneId)
+    public User getFriendOne()
     {
-        this.friendOneId = friendOneId;
+        return friendOne;
     }
 
-    public String getFriendOneUsername()
+    public void setFriendOne(User friendOne)
     {
-        return friendOneUsername;
+        this.friendOne = friendOne;
     }
 
-    public void setFriendOneUsername(String friendOneUsername)
+    public User getFriendTwo()
     {
-        this.friendOneUsername = friendOneUsername;
+        return friendTwo;
     }
 
-    public AccountStatus getFriendOneAccountStatus()
+    public void setFriendTwo(User friendTwo)
     {
-        return friendOneAccountStatus;
-    }
-
-    public void setFriendOneAccountStatus(AccountStatus friendOneAccountStatus)
-    {
-        this.friendOneAccountStatus = friendOneAccountStatus;
-    }
-
-    public int getFriendTwoId()
-    {
-        return friendTwoId;
-    }
-
-    public void setFriendTwoId(int friendTwoId)
-    {
-        this.friendTwoId = friendTwoId;
-    }
-
-    public String getFriendTwoUsername()
-    {
-        return friendTwoUsername;
-    }
-
-    public void setFriendTwoUsername(String friendTwoUsername)
-    {
-        this.friendTwoUsername = friendTwoUsername;
-    }
-
-    public AccountStatus getFriendTwoAccountStatus()
-    {
-        return friendTwoAccountStatus;
-    }
-
-    public void setFriendTwoAccountStatus(AccountStatus friendTwoAccountStatus)
-    {
-        this.friendTwoAccountStatus = friendTwoAccountStatus;
+        this.friendTwo = friendTwo;
     }
 
     public FriendStatus getFriendStatus()

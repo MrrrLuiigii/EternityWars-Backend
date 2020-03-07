@@ -18,11 +18,6 @@ public class User extends Account
     @Column(name = "pack_amount")
     private int packAmount;
 
-//    @OneToMany(fetch = FetchType.EAGER)
-//    @JoinTable(name = "card_collection",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "card_id"))
-//    private List<Card> cards;
 
     public User()
     {
@@ -78,14 +73,4 @@ public class User extends Account
     {
         this.packAmount = packAmount;
     }
-
-//    public List<Card> getCards()
-//    {
-//        return cards;
-//    }
-//
-//    public void setCards(List<Card> cards)
-//    {
-//        this.cards = cards;
-//    }
 }

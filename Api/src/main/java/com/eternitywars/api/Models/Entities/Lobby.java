@@ -1,7 +1,5 @@
 package com.eternitywars.api.Models.Entities;
 
-import com.eternitywars.api.Models.Player;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,18 +8,25 @@ import java.util.List;
 public class Lobby
 {
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, updatable = false)
     private int id;
+
     @Column(name = "name", unique = true)
     private String name;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "has_Password")
     private boolean hasPassword;
+
     @Column(name = "password")
     private String password;
+
     @OneToMany(mappedBy = "lobby_id", fetch = FetchType.EAGER)
     private List<Player> players;
+
 
     public Lobby(){}
 

@@ -1,6 +1,7 @@
 package com.eternitywars.api.Models.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "card")
@@ -28,6 +29,7 @@ public class Card
 
     @Column(name = "taunt", nullable = false)
     private boolean taunt;
+
 
     public Card()
     {

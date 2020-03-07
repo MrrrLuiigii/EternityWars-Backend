@@ -4,6 +4,7 @@ package com.eternitywars.api.Models.Entities;
 import com.eternitywars.api.Models.Cards;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "deck")
@@ -21,8 +22,9 @@ public class Deck
     private String name;
 
 
-
-    public Deck(){}
+    public Deck()
+    {
+    }
 
     public Deck(int deckId)
     {
