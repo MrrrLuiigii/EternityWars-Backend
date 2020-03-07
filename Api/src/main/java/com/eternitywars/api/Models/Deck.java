@@ -10,13 +10,16 @@ import javax.persistence.Table;
 @Table(name = "deck")
 public class Deck
 {
-   @Id
-   @Column(name = "id", unique = true)
+    @Id
+    @Column(name = "id", unique = true, updatable = false)
     private int deckId;
+
     @Column(name = "user_id")
-    private int userId;
+    private User user;
+
     @Column(name = "name")
     private String name;
+
 
 
     public Deck(){}
@@ -31,10 +34,10 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public Deck(int deckId, int userId, String name)
+    public Deck(int deckId, User user, String name)
     {
         this.deckId = deckId;
-        this.userId = userId;
+        this.user = user;
         this.name = name;
     }
 
@@ -48,14 +51,14 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public int getUserId()
+    public User getUser()
     {
-        return userId;
+        return user;
     }
 
-    public void setUserId(int userId)
+    public void setUser(User user)
     {
-        this.userId = userId;
+        this.user = user;
     }
 
     public String getName()

@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Card
 {
     @Id
-    @Column(name = "id", unique = true)
+    @GeneratedValue
+    @Column(name = "id", unique = true, updatable = false)
     private int cardId;
 
     @Column(name = "name", unique = true)
