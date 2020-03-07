@@ -1,41 +1,32 @@
 package com.eternitywars.api.DAL.Contexts.User;
 
+import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.User.IUserContainerContext;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
+
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class UserContainerHibernateContext implements IUserContainerContext
 {
-    private static Configuration configuration;
-    private static SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
 
-    public UserContainerHibernateContext()
-    {
-        configuration = new Configuration();
-        configuration.configure("hibernate.cfg.xml");
+    private Session session;
+    private Transaction transaction;
 
-        configuration.addAnnotatedClass(User.class);
-
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-    }
 
     @Override
     public User GetUserById(int userId)
     {
-        Session session = sessionFactory.openSession();
-//        Transaction transaction = session.beginTransaction();
-
         User user;
 
         try
         {
+            session = sessionFactory.openSession();
             user = session.find(User.class, userId);
         } catch (Exception ex)
         {
@@ -51,86 +42,93 @@ public class UserContainerHibernateContext implements IUserContainerContext
     @Override
     public User GetUserByUsername(String username)
     {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        String hql = "SELECT c FROM User c WHERE c.username = :username";
-//        TypedQuery<User> typedQuery = entityManager.createQuery(hql, User.class);
-//        typedQuery.setParameter("username", username);
-//        User user = null;
-//        try
-//        {
-//            user = typedQuery.getSingleResult();
-//
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        } finally
-//        {
-//            entityManager.close();
-//        }
-//
-//        return user;
-        return null;
+        String hql = "SELECT c FROM User c WHERE c.username = :username";
+
+        User user = null;
+
+        try
+        {
+            session = sessionFactory.openSession();
+
+            TypedQuery<User> typedQuery = session.createQuery(hql, User.class);
+            typedQuery.setParameter("username", username);
+
+            user = typedQuery.getSingleResult();
+
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return user;
     }
 
     @Override
     public User GetUserByEmail(String userEmail)
     {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        String hql = "SELECT c FROM User c WHERE c.email = :email";
-//        TypedQuery<User> typedQuery = entityManager.createQuery(hql, User.class);
-//        typedQuery.setParameter("email", userEmail);
-//        User user = null;
-//        try
-//        {
-//            user = typedQuery.getSingleResult();
-//
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        } finally
-//        {
-//            entityManager.close();
-//        }
-//
-//        return user;
+        String hql = "SELECT c FROM User c WHERE c.email = :email";
 
-        return null;
+        User user = null;
+
+        try
+        {
+            session = sessionFactory.openSession();
+
+            TypedQuery<User> typedQuery = session.createQuery(hql, User.class);
+            typedQuery.setParameter("email", userEmail);
+
+            user = typedQuery.getSingleResult();
+
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return user;
     }
 
     @Override
     public Users GetUsers()
     {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        String hql = "FROM User";
-//        TypedQuery<User> typedQuery = entityManager.createQuery(hql, User.class);
-//        List<User> users;
-//        Users userCollection = new Users();
-//        try
-//        {
-//            users = typedQuery.getResultList();
-//            userCollection.setUsers(users);
-//
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        } finally
-//        {
-//            entityManager.close();
-//        }
-//
-//        return userCollection;
+        String hql = "FROM User";
 
-        return null;
+        List<User> users;
+        Users userCollection = new Users();
+
+        try
+        {
+            session = sessionFactory.openSession();
+
+            TypedQuery<User> typedQuery = session.createQuery(hql, User.class);
+
+            users = typedQuery.getResultList();
+            userCollection.setUsers(users);
+
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return userCollection;
     }
 
     @Override
     public User AddUser(User user)
     {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-
         try
         {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
             session.persist(user);
             transaction.commit();
         } catch (Exception ex)
@@ -152,30 +150,25 @@ public class UserContainerHibernateContext implements IUserContainerContext
     @Override
     public boolean DeleteUser(User user)
     {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        EntityTransaction entityTransaction = null;
-//        User returnUser = null;
-//        try
-//        {
-//            entityTransaction = entityManager.getTransaction();
-//            entityTransaction.begin();
-//
-//            returnUser = entityManager.find(User.class, user.getUserId());
-//            entityManager.remove(returnUser);
-//
-//            entityTransaction.commit();
-//        } catch (Exception ex)
-//        {
-//            if (entityTransaction != null)
-//            {
-//                entityTransaction.rollback();
-//            }
-//            ex.printStackTrace();
-//            return false;
-//        } finally
-//        {
-//            entityManager.close();
-//        }
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.remove(user);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+            return false;
+        } finally
+        {
+            session.close();
+        }
 
         return true;
     }

@@ -1,139 +1,130 @@
 package com.eternitywars.api.DAL.Contexts.User;
 
+import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.User.IUserContext;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+public class UserHibernateContext implements IUserContext
+{
+    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
 
-public class UserHibernateContext implements IUserContext {
+    private Session session;
+    private Transaction transaction;
+
+    private User returnUser;
+
     @Override
     public boolean UpdateUsername(User user)
     {
-        return false;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            returnUser = session.find(User.class, user.getUserId());
+            returnUser.setUsername(user.getUsername());
+
+            session.persist(returnUser);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return true;
     }
 
     @Override
     public boolean UpdateAccountStatus(User user)
     {
-        return false;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            returnUser = session.find(User.class, user.getUserId());
+            returnUser.setAccountStatus(user.getAccountStatus());
+
+            session.persist(returnUser);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return true;
     }
 
     @Override
     public boolean UpdatePackAmount(User user)
     {
-        return false;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            returnUser = session.find(User.class, user.getUserId());
+            returnUser.setPackAmount(user.getPackAmount());
+
+            session.persist(returnUser);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return true;
     }
 
     @Override
     public boolean UpdateGold(User user)
     {
-        return false;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            returnUser = session.find(User.class, user.getUserId());
+            returnUser.setGold(user.getGold());
+
+            session.persist(returnUser);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return true;
     }
-//    private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("eternitywars");
-//    @Override
-//    public boolean UpdateUsername(User user) {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        EntityTransaction entityTransaction = null;
-//        User returnUser = null;
-//        try {
-//            entityTransaction = entityManager.getTransaction();
-//            entityTransaction.begin();
-//
-//            returnUser = entityManager.find(User.class, user.getUserId());
-//            returnUser.setUsername(user.getUsername());
-//
-//            entityManager.persist(returnUser);
-//            entityTransaction.commit();
-//        }catch (Exception ex){
-//            if(entityTransaction != null){
-//                entityTransaction.rollback();
-//            }
-//            ex.printStackTrace();
-//        }
-//        finally {
-//            entityManager.close();
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean UpdateAccountStatus(User user) {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        EntityTransaction entityTransaction = null;
-//        User returnUser = null;
-//        try {
-//            entityTransaction = entityManager.getTransaction();
-//            entityTransaction.begin();
-//
-//            returnUser = entityManager.find(User.class, user.getUserId());
-//            returnUser.setAccountStatus(user.getAccountStatus());
-//
-//            entityManager.persist(returnUser);
-//            entityTransaction.commit();
-//        }catch (Exception ex){
-//            if(entityTransaction != null){
-//                entityTransaction.rollback();
-//            }
-//            ex.printStackTrace();
-//        }
-//        finally {
-//            entityManager.close();
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean UpdatePackAmount(User user) {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        EntityTransaction entityTransaction = null;
-//        User returnUser = null;
-//        try {
-//            entityTransaction = entityManager.getTransaction();
-//            entityTransaction.begin();
-//
-//            returnUser = entityManager.find(User.class, user.getUserId());
-//            returnUser.setPackAmount(user.getPackAmount());
-//
-//            entityManager.persist(returnUser);
-//            entityTransaction.commit();
-//        }catch (Exception ex){
-//            if(entityTransaction != null){
-//                entityTransaction.rollback();
-//            }
-//            ex.printStackTrace();
-//        }
-//        finally {
-//            entityManager.close();
-//        }
-//        return true;
-//    }
-//
-//    @Override
-//    public boolean UpdateGold(User user) {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        EntityTransaction entityTransaction = null;
-//        User returnUser = null;
-//        try {
-//            entityTransaction = entityManager.getTransaction();
-//            entityTransaction.begin();
-//
-//            returnUser = entityManager.find(User.class, user.getUserId());
-//            returnUser.setGold(user.getGold());
-//
-//            entityManager.persist(returnUser);
-//            entityTransaction.commit();
-//        }catch (Exception ex){
-//            if(entityTransaction != null){
-//                entityTransaction.rollback();
-//            }
-//            ex.printStackTrace();
-//        }
-//        finally {
-//            entityManager.close();
-//        }
-//        return true;
-//    }
 }
