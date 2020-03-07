@@ -4,15 +4,27 @@ import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
 import com.eternitywars.api.Models.Card;
 import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.User;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
-import java.util.List;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 
 public class CardContainerHibernateContext implements ICardContainerContext
 {
+    private static Configuration configuration;
+    private static SessionFactory sessionFactory;
+
+    public CardContainerHibernateContext()
+    {
+        configuration = new Configuration();
+        configuration.configure("hibernate.cfg.xml");
+
+        configuration.addAnnotatedClass(User.class);
+
+        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+    }
+
     @Override
     public Cards GetCards()
     {
