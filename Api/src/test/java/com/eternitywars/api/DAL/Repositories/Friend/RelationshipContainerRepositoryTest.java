@@ -1,20 +1,20 @@
 package com.eternitywars.api.DAL.Repositories.Friend;
 
-import com.eternitywars.api.DAL.Contexts.Friend.RelationshipContainerSqlContext;
-import com.eternitywars.api.Factories.Friend.RelationshipContainerFactory;
-import com.eternitywars.api.Factories.Friend.RelationshipFactory;
+import com.eternitywars.api.DAL.Contexts.Friend.RelationshipContainerHibernateContext;
 import com.eternitywars.api.Models.Relationship;
 import com.eternitywars.api.Models.User;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RelationshipContainerRepositoryTest {
+class RelationshipContainerRepositoryTest
+{
+    private RelationshipContainerRepository relationshipContainerRepository = new RelationshipContainerRepository(new RelationshipContainerHibernateContext());
 
-    private RelationshipContainerRepository relationshipContainerRepository = new RelationshipContainerRepository(new RelationshipContainerFactory());
 
     @Test
-    void addRelationship() {
+    void addRelationship()
+    {
         Relationship relationship = new Relationship();
         relationship.setFriendOneId(3);
         relationship.setFriendTwoId(4);
@@ -22,7 +22,8 @@ class RelationshipContainerRepositoryTest {
     }
 
     @Test
-    void deleteRelationship() {
+    void deleteRelationship()
+    {
         Relationship relationship = new Relationship();
         relationship.setFriendOneId(3);
         relationship.setFriendTwoId(4);
@@ -30,10 +31,11 @@ class RelationshipContainerRepositoryTest {
     }
 
     @Test
-    void getRelationships() {
+    void getRelationships()
+    {
         User user = new User();
         user.setUserId(5);
         relationshipContainerRepository.GetRelationships(user);
-        assertEquals(1, relationshipContainerRepository.GetRelationships(user).getRelationships().size() );
+        assertEquals(1, relationshipContainerRepository.GetRelationships(user).getRelationships().size());
     }
 }

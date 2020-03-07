@@ -1,23 +1,26 @@
 package com.eternitywars.api.DAL.Repositories.User;
 
-import com.eternitywars.api.Factories.User.UserContainerFactory;
-import com.eternitywars.api.Factories.User.UserFactory;
+import com.eternitywars.api.DAL.Contexts.User.UserContainerHibernateContext;
+import com.eternitywars.api.DAL.Contexts.User.UserHibernateContext;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.User;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class UserRepositoryTest {
+class UserRepositoryTest
+{
 
-    private UserRepository userRepository = new UserRepository(new UserFactory());
-    private UserContainerRepository userContainerRepository = new UserContainerRepository(new UserContainerFactory());
+    private UserRepository userRepository = new UserRepository(new UserHibernateContext());
+    private UserContainerRepository userContainerRepository = new UserContainerRepository(new UserContainerHibernateContext());
+
 
     @Test
-    void updateUsername() {
+    void updateUsername()
+    {
         User user = new User();
         user.setUserId(3);
         user.setUsername("Updated");
@@ -28,7 +31,8 @@ class UserRepositoryTest {
     }
 
     @Test
-    void updateAccountStatus() {
+    void updateAccountStatus()
+    {
         User user = new User();
         user.setUserId(7);
         user.setAccountStatus(AccountStatus.Offline);
@@ -39,7 +43,8 @@ class UserRepositoryTest {
     }
 
     @Test
-    void updatePackAmount() {
+    void updatePackAmount()
+    {
         User user = new User();
         user.setPackAmount(100);
         user.setUserId(4);
@@ -50,7 +55,8 @@ class UserRepositoryTest {
     }
 
     @Test
-    void updateGold() {
+    void updateGold()
+    {
         User user = new User();
         user.setGold(100);
         user.setUserId(4);
@@ -61,7 +67,8 @@ class UserRepositoryTest {
     }
 
     @AfterAll
-    void reset() {
+    void reset()
+    {
         User user = new User();
         user.setUserId(3);
         user.setUsername("toUpdateUser");

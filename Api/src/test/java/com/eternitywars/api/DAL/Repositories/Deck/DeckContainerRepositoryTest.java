@@ -1,26 +1,28 @@
 package com.eternitywars.api.DAL.Repositories.Deck;
 
-import com.eternitywars.api.Factories.Deck.DeckContainerFactory;
-import com.eternitywars.api.Models.Card;
-import com.eternitywars.api.Models.Cards;
-import com.eternitywars.api.Models.Deck;
-import com.eternitywars.api.Models.Decks;
+import com.eternitywars.api.DAL.Contexts.Deck.DeckContainerHibernateContext;
+import com.eternitywars.api.Models.*;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class DeckContainerRepositoryTest {
+class DeckContainerRepositoryTest
+{
+    private DeckContainerRepository deckContainerRepository = new DeckContainerRepository(new DeckContainerHibernateContext());
 
-    private DeckContainerRepository deckContainerRepository = new DeckContainerRepository(new DeckContainerFactory());
 
     private int deckToDeleteId;
 
-    private Decks SetupGetDeckByUserId() {
+    private Decks SetupGetDeckByUserId()
+    {
         Decks userOneDecks = new Decks();
 
         Deck userOneDeckOne = new Deck();
         userOneDeckOne.setDeckId(1);
-        userOneDeckOne.setUserId(1);
+        User user = new User();
+        user.setUserId(1);
+        userOneDeckOne.setUser(user);
         userOneDeckOne.setName("getByUserIdDeckOne");
 
         Cards deckOneCards = new Cards();
@@ -33,11 +35,13 @@ class DeckContainerRepositoryTest {
         card.setDeath_essence(1);
         card.setTaunt(true);
         deckOneCards.AddCard(card);
-       // userOneDeckOne.setCards(deckOneCards);
+        // userOneDeckOne.setCards(deckOneCards);
 
         Deck userOneDeckTwo = new Deck();
         userOneDeckTwo.setDeckId(2);
-        userOneDeckTwo.setUserId(1);
+        user = new User();
+        user.setUserId(1);
+        userOneDeckTwo.setUser(user);
         userOneDeckTwo.setName("getByUserIdDeckTwo");
 
         return userOneDecks;
@@ -47,7 +51,9 @@ class DeckContainerRepositoryTest {
     {
         Deck deck = new Deck();
         deck.setDeckId(1);
-        deck.setUserId(1);
+        User user = new User();
+        user.setUserId(1);
+        deck.setUser(user);
         deck.setName("getByUserIdDeckOne");
 
         Cards deckOneCards = new Cards();
@@ -60,7 +66,7 @@ class DeckContainerRepositoryTest {
         card.setDeath_essence(1);
         card.setTaunt(true);
         deckOneCards.AddCard(card);
-       // deck.setCards(deckOneCards);
+        // deck.setCards(deckOneCards);
 
         return deck;
     }
@@ -69,26 +75,30 @@ class DeckContainerRepositoryTest {
     {
         Deck deck = new Deck();
         deck.setDeckId(3);
-        deck.setUserId(1);
+        User user = new User();
+        user.setUserId(1);
+        deck.setUser(user);
         deck.setName("deckToAddAndDelete");
         return deck;
     }
 
     @Test
-    void addDeck() {
+    void addDeck()
+    {
         Deck expectedDeck = SetupDeckToAddAndDelete();
 
         Deck deck = deckContainerRepository.AddDeck(expectedDeck);
         this.deckToDeleteId = deck.getDeckId();
 
         assertEquals(expectedDeck.getName(), deck.getName());
-        assertEquals(expectedDeck.getUserId(), deck.getUserId());
+        assertEquals(expectedDeck.getUser().getUserId(), deck.getUser().getUserId());
 
         deleteDeck();
     }
 
     @Test
-    void deleteDeck() {
+    void deleteDeck()
+    {
         Deck deck = new Deck();
         deck.setDeckId(deckToDeleteId);
 
@@ -98,7 +108,8 @@ class DeckContainerRepositoryTest {
     }
 
     @Test
-    void getEmptyDecksByUserId() {
+    void getEmptyDecksByUserId()
+    {
         Decks expectedDecks = SetupGetDeckByUserId();
 
         Decks decks = deckContainerRepository.GetEmptyDecksByUserId(1);
@@ -106,24 +117,26 @@ class DeckContainerRepositoryTest {
         for (int i = 0; i < expectedDecks.getDecks().size(); i++)
         {
             assertEquals(expectedDecks.getDecks().get(i).getDeckId(), decks.getDecks().get(i).getDeckId());
-            assertEquals(expectedDecks.getDecks().get(i).getUserId(), decks.getDecks().get(i).getUserId());
+            assertEquals(expectedDecks.getDecks().get(i).getUser().getUserId(), decks.getDecks().get(i).getUser().getUserId());
             assertEquals(expectedDecks.getDecks().get(i).getName(), decks.getDecks().get(i).getName());
         }
     }
 
     @Test
-    void getEmptyDeckById() {
+    void getEmptyDeckById()
+    {
         Deck expectedDeck = SetupGetDeckById();
 
         Deck deck = deckContainerRepository.GetEmptyDeckById(expectedDeck.getDeckId());
 
         assertEquals(expectedDeck.getDeckId(), deck.getDeckId());
-        assertEquals(expectedDeck.getUserId(), deck.getUserId());
+        assertEquals(expectedDeck.getUser().getUserId(), deck.getUser().getUserId());
         assertEquals(expectedDeck.getName(), deck.getName());
     }
 
     @Test
-    void getDecksByUserId() {
+    void getDecksByUserId()
+    {
         Decks expectedDecks = SetupGetDeckByUserId();
 
         Decks decks = deckContainerRepository.GetDecksByUserId(1);
@@ -131,7 +144,7 @@ class DeckContainerRepositoryTest {
         for (int i = 0; i < expectedDecks.getDecks().size(); i++)
         {
             assertEquals(expectedDecks.getDecks().get(i).getDeckId(), decks.getDecks().get(i).getDeckId());
-            assertEquals(expectedDecks.getDecks().get(i).getUserId(), decks.getDecks().get(i).getUserId());
+            assertEquals(expectedDecks.getDecks().get(i).getUser().getUserId(), decks.getDecks().get(i).getUser().getUserId());
             assertEquals(expectedDecks.getDecks().get(i).getName(), decks.getDecks().get(i).getName());
 
             for (int j = 0; j < expectedDecks.getDecks().get(i).getCards().getCards().size(); j++)
@@ -161,13 +174,14 @@ class DeckContainerRepositoryTest {
     }
 
     @Test
-    void getDeckById() {
+    void getDeckById()
+    {
         Deck expectedDeck = SetupGetDeckById();
 
         Deck deck = deckContainerRepository.GetDeckById(expectedDeck.getDeckId());
 
         assertEquals(expectedDeck.getDeckId(), deck.getDeckId());
-        assertEquals(expectedDeck.getUserId(), deck.getUserId());
+        assertEquals(expectedDeck.getUser().getUserId(), deck.getUser().getUserId());
         assertEquals(expectedDeck.getName(), deck.getName());
 
         for (int i = 0; i < expectedDeck.getCards().getCards().size(); i++)

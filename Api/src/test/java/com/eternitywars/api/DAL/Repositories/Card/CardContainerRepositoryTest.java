@@ -1,19 +1,20 @@
 package com.eternitywars.api.DAL.Repositories.Card;
 
-import com.eternitywars.api.Factories.Card.CardContainerFactory;
+import com.eternitywars.api.DAL.Contexts.Card.CardContainerHibernateContext;
 import com.eternitywars.api.Models.Card;
 import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.User;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class CardContainerRepositoryTest {
+class CardContainerRepositoryTest
+{
+    private CardContainerRepository cardContainerRepository = new CardContainerRepository(new CardContainerHibernateContext());
 
 
-    private CardContainerRepository cardContainerRepository = new CardContainerRepository(new CardContainerFactory());
-
-    private Card CardExpectedCard(){
+    private Card CardExpectedCard()
+    {
         Card expectedCard = new Card();
         expectedCard.setCardId(1);
         expectedCard.setAttack(1);
@@ -26,7 +27,8 @@ class CardContainerRepositoryTest {
         return expectedCard;
     }
 
-    private Card CardToAdd(){
+    private Card CardToAdd()
+    {
         Card expectedCard = new Card();
         expectedCard.setCardId(2);
         expectedCard.setAttack(1);
@@ -41,19 +43,22 @@ class CardContainerRepositoryTest {
 
 
     @Test
-    void getCards() {
+    void getCards()
+    {
         Cards cards = cardContainerRepository.GetCards();
         assertEquals(2, cards.getCards().size());
     }
 
     @Test
-    void getCardsByUser() {
+    void getCardsByUser()
+    {
         Cards cards = cardContainerRepository.GetCardsByUser(1);
         assertEquals(2, cards.getCards().size());
     }
 
     @Test
-    void getCardById() {
+    void getCardById()
+    {
         Card expected = CardExpectedCard();
         Card card = cardContainerRepository.GetCardById(1);
 
@@ -66,7 +71,8 @@ class CardContainerRepositoryTest {
     }
 
     @Test
-    void addCard() {
+    void addCard()
+    {
         User user = new User();
         user.setUserId(1);
         Card cardToAdd = CardToAdd();
@@ -74,7 +80,8 @@ class CardContainerRepositoryTest {
     }
 
     @Test
-    void deleteCard() {
+    void deleteCard()
+    {
         User user = new User();
         user.setUserId(1);
         Card cardToAdd = CardToAdd();

@@ -14,7 +14,7 @@ public class UserResource
 {
     private UserRepository userRepository = new UserRepository();
     private UserContainerRepository userContainerRepository = new UserContainerRepository();
-    
+
 
     @PutMapping(value = "/updateUsername", consumes = "application/json", produces = "application/json")
     public boolean UpdateUsername(@RequestBody User user)

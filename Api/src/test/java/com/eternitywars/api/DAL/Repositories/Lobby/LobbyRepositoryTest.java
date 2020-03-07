@@ -1,17 +1,16 @@
 package com.eternitywars.api.DAL.Repositories.Lobby;
 
-import com.eternitywars.api.Factories.Lobby.LobbyContainerFactory;
-import com.eternitywars.api.Factories.Lobby.LobbyFactory;
+import com.eternitywars.api.DAL.Contexts.Lobby.LobbyHibernateContext;
 import com.eternitywars.api.Models.Lobby;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+class LobbyRepositoryTest
+{
+    private LobbyRepository lobbyRepository = new LobbyRepository(new LobbyHibernateContext());
 
-class LobbyRepositoryTest {
 
-    private LobbyRepository lobbyRepository = new LobbyRepository(LobbyFactory.getTestLobbySqlContext());
-
-    private Lobby EmptyLobby() {
+    private Lobby EmptyLobby()
+    {
         Lobby lobby = new Lobby();
         lobby.setName("Lobby");
         lobby.setDescription("desc");
@@ -19,22 +18,26 @@ class LobbyRepositoryTest {
     }
 
     @Test
-    void joinLobby() {
+    void joinLobby()
+    {
         // lobbyRepository.JoinLobby();
     }
 
     @Test
-    void leaveLobby() {
+    void leaveLobby()
+    {
         // lobbyRepository.LeaveLobby();
     }
 
     @Test
-    void updatePlayerStatus() {
+    void updatePlayerStatus()
+    {
         // lobbyRepository.UpdatePlayerStatus();
     }
 
     @Test
-    void updatePlayerDeck() {
+    void updatePlayerDeck()
+    {
         // lobbyRepository.UpdatePlayerDeck();
     }
 }

@@ -1,22 +1,25 @@
 package com.eternitywars.api.DAL.Repositories.Deck;
 
-import com.eternitywars.api.Factories.Deck.DeckFactory;
+import com.eternitywars.api.DAL.Contexts.Deck.DeckHibernateContext;
 import org.junit.jupiter.api.Test;
 
-class DeckRepositoryTest {
-
-    private DeckRepository deckRepository = new DeckRepository(new DeckFactory());
+class DeckRepositoryTest
+{
+    private DeckRepository deckRepository = new DeckRepository(new DeckHibernateContext());
 
 
     @Test
-    void addCard() {
+    void addCard()
+    {
     }
 
     @Test
-    void deleteCard() {
+    void deleteCard()
+    {
     }
 
     @Test
-    void updateDeckName() {
+    void updateDeckName()
+    {
     }
 }

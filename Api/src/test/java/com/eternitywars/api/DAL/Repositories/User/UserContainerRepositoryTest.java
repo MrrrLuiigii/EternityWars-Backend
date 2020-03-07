@@ -1,5 +1,6 @@
 package com.eternitywars.api.DAL.Repositories.User;
 
+import com.eternitywars.api.DAL.Contexts.User.UserContainerHibernateContext;
 import com.eternitywars.api.Factories.User.UserContainerFactory;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.User;
@@ -10,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UserContainerRepositoryTest
 {
-    private UserContainerRepository userContainerRepository = new UserContainerRepository(new UserContainerFactory());
+    private UserContainerRepository userContainerRepository = new UserContainerRepository(new UserContainerHibernateContext());
+
 
     private User SetupExpectedUser()
     {
