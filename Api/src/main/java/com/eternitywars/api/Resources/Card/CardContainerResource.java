@@ -1,7 +1,6 @@
 package com.eternitywars.api.Resources.Card;
 
 import com.eternitywars.api.DAL.Repositories.Card.CardContainerRepository;
-import com.eternitywars.api.Factories.Card.CardContainerFactory;
 import com.eternitywars.api.Models.*;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,18 +8,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api/public/card")
 public class CardContainerResource
 {
-    private CardContainerRepository cardContainerRepository = new CardContainerRepository(CardContainerFactory.getCardContainerHibernateContext());
-
+    private CardContainerRepository cardContainerRepository = new CardContainerRepository();
 
 
     @GetMapping(value = "/getByUserId/{userId}")
-    public Cards GetCardsByUser(@PathVariable("userId")int userId)
+    public Cards GetCardsByUser(@PathVariable("userId") int userId)
     {
         return cardContainerRepository.GetCardsByUser(userId);
     }
 
     @GetMapping(value = "/getById/{cardId}")
-    public Card GetCardsById(@PathVariable("cardId")int cardId)
+    public Card GetCardsById(@PathVariable("cardId") int cardId)
     {
         return cardContainerRepository.GetCardById(cardId);
     }

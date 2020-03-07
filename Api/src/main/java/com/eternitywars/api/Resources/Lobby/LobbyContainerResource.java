@@ -1,17 +1,16 @@
 package com.eternitywars.api.Resources.Lobby;
 
 import com.eternitywars.api.DAL.Repositories.Lobby.LobbyContainerRepository;
-import com.eternitywars.api.Factories.Lobby.LobbyContainerFactory;
-import com.eternitywars.api.Factories.Lobby.LobbyFactory;
-import com.eternitywars.api.Models.Lobby;
 import com.eternitywars.api.Models.Lobbies;
+import com.eternitywars.api.Models.Lobby;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/api/public/lobby")
 public class LobbyContainerResource
 {
-    private LobbyContainerRepository lobbyContainerRepository = new LobbyContainerRepository(LobbyContainerFactory.getLobbyContainerHibernateContext());
+    private LobbyContainerRepository lobbyContainerRepository = new LobbyContainerRepository();
+
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public Lobby AddLobby(@RequestBody Lobby lobby)
@@ -26,7 +25,7 @@ public class LobbyContainerResource
     }
 
     @GetMapping(value = "/getById/{lobbyId}")
-    public Lobby GetLobbyById(@PathVariable("lobbyId")int lobbyId)
+    public Lobby GetLobbyById(@PathVariable("lobbyId") int lobbyId)
     {
         return lobbyContainerRepository.GetLobbyById(lobbyId);
     }

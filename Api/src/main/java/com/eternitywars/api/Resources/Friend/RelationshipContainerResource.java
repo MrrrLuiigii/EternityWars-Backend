@@ -1,7 +1,9 @@
 package com.eternitywars.api.Resources.Friend;
 
 import com.eternitywars.api.DAL.Repositories.Friend.RelationshipContainerRepository;
-import com.eternitywars.api.Models.*;
+import com.eternitywars.api.Models.Relationship;
+import com.eternitywars.api.Models.Relationships;
+import com.eternitywars.api.Models.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class RelationshipContainerResource
 {
     private RelationshipContainerRepository relationshipContainerRepository = new RelationshipContainerRepository();
+
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public boolean AddRelationship(@RequestBody Relationship relationship)
