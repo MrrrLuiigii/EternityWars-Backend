@@ -1,18 +1,17 @@
 package com.eternitywars.api.Factories.Friend;
 
-import com.eternitywars.api.DAL.Contexts.Friend.RelationshipSqlContext;
-import com.eternitywars.api.Database.DatabaseConnection;
-import com.eternitywars.api.Database.TestDatabaseConnection;
+import com.eternitywars.api.DAL.Contexts.Friend.RelationshipHibernateContext;
+import com.eternitywars.api.Interfaces.Friend.IRelationshipContext;
 
 public class RelationshipFactory
 {
-    public RelationshipSqlContext getRelationshipSqlContext()
+    public static IRelationshipContext getRelationshipHibernateContext()
     {
-        return new RelationshipSqlContext(new DatabaseConnection());
+        return new RelationshipHibernateContext();
     }
 
-    public RelationshipSqlContext getTestRelationshipSqlContext()
+    public static IRelationshipContext getTestRelationshipHibernateContext()
     {
-        return new RelationshipSqlContext(new TestDatabaseConnection());
+        return new RelationshipHibernateContext();
     }
 }

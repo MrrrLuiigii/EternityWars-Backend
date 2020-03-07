@@ -1,18 +1,17 @@
 package com.eternitywars.api.Factories.Deck;
 
-import com.eternitywars.api.DAL.Contexts.Deck.DeckSqlContext;
-import com.eternitywars.api.Database.DatabaseConnection;
-import com.eternitywars.api.Database.TestDatabaseConnection;
+import com.eternitywars.api.DAL.Contexts.Deck.DeckHibernateContext;
+import com.eternitywars.api.Interfaces.Deck.IDeckContext;
 
 public class DeckFactory
 {
-    public DeckSqlContext getDeckSqlContext()
+    public static IDeckContext getDeckHibernateContext()
     {
-        return new DeckSqlContext(new DatabaseConnection());
+        return new DeckHibernateContext();
     }
 
-    public DeckSqlContext getTestDeckSqlContext()
+    public static IDeckContext getTestDeckHibernateContext()
     {
-        return new DeckSqlContext(new TestDatabaseConnection());
+        return new DeckHibernateContext();
     }
 }

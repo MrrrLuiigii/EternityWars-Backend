@@ -1,24 +1,16 @@
 package com.eternitywars.api.Factories.User;
 
 import com.eternitywars.api.DAL.Contexts.User.UserHibernateContext;
-import com.eternitywars.api.DAL.Contexts.User.UserSqlContext;
-import com.eternitywars.api.Database.DatabaseConnection;
-import com.eternitywars.api.Database.TestDatabaseConnection;
 import com.eternitywars.api.Interfaces.User.IUserContext;
 
 public class UserFactory
 {
-    public IUserContext getUserSqlContext()
-    {
-        return new UserSqlContext(new DatabaseConnection());
-    }
-
-    public IUserContext getTestUserSqlContext()
-    {
-        return new UserSqlContext(new TestDatabaseConnection());
-    }
-
     public static IUserContext getUserHibernateContext()
+    {
+        return new UserHibernateContext();
+    }
+
+    public static IUserContext getTestUserHibernateContext()
     {
         return new UserHibernateContext();
     }
