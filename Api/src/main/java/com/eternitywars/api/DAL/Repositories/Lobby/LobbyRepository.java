@@ -3,7 +3,7 @@ package com.eternitywars.api.DAL.Repositories.Lobby;
 import com.eternitywars.api.Factories.Lobby.LobbyFactory;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContext;
 import com.eternitywars.api.Models.Entities.Lobby;
-import com.eternitywars.api.Models.Player;
+import com.eternitywars.api.Models.Entities.Player;
 
 public class LobbyRepository implements ILobbyContext
 {

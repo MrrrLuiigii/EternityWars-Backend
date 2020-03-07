@@ -1,7 +1,7 @@
 package com.eternitywars.api.Interfaces.Lobby;
 
 import com.eternitywars.api.Models.Entities.Lobby;
-import com.eternitywars.api.Models.Player;
+import com.eternitywars.api.Models.Entities.Player;
 
 public interface ILobbyContext
 {

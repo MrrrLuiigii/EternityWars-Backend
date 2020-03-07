@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContext;
 import com.eternitywars.api.Models.Entities.Lobby;
-import com.eternitywars.api.Models.Player;
+import com.eternitywars.api.Models.Entities.Player;
 
 public class LobbyHibernateContext implements ILobbyContext {
     @Override
