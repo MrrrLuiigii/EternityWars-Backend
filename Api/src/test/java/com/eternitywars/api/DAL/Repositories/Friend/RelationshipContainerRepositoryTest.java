@@ -16,8 +16,11 @@ class RelationshipContainerRepositoryTest
     void addRelationship()
     {
         Relationship relationship = new Relationship();
-        relationship.setFriendOneId(3);
-        relationship.setFriendTwoId(4);
+        User friend = new User();
+        friend.setUserId(3);
+        relationship.setFriendOne(friend);
+        friend.setUserId(4);
+        relationship.setFriendTwo(friend);
         relationshipContainerRepository.AddRelationship(relationship);
     }
 
@@ -25,8 +28,10 @@ class RelationshipContainerRepositoryTest
     void deleteRelationship()
     {
         Relationship relationship = new Relationship();
-        relationship.setFriendOneId(3);
-        relationship.setFriendTwoId(4);
+        User friend = new User();
+        friend.setUserId(3);
+        relationship.setFriendOne(friend);
+        friend.setUserId(4);
         relationshipContainerRepository.DeleteRelationship(relationship);
     }
 

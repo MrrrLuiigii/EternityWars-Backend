@@ -1,6 +1,7 @@
 package com.eternitywars.api.DAL.Repositories.Friend;
 
 import com.eternitywars.api.DAL.Contexts.Friend.RelationshipHibernateContext;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Enums.FriendStatus;
 import com.eternitywars.api.Models.Entities.Relationship;
 import org.junit.jupiter.api.AfterAll;
@@ -19,8 +20,10 @@ class RelationshipRepositoryTest
     void updateRelationship()
     {
         Relationship relationship = new Relationship();
-        relationship.setFriendOneId(5);
-        relationship.setFriendTwoId(6);
+        User friend = new User();
+        friend.setUserId(5);
+        relationship.setFriendOne(friend);
+        friend.setUserId(6);
         relationship.setFriendStatus(FriendStatus.Accepted);
         assertEquals(true, relationshipRepository.UpdateRelationship(relationship));
     }
@@ -29,8 +32,10 @@ class RelationshipRepositoryTest
     void reset()
     {
         Relationship relationship = new Relationship();
-        relationship.setFriendOneId(5);
-        relationship.setFriendTwoId(6);
+        User friend = new User();
+        friend.setUserId(5);
+        relationship.setFriendOne(friend);
+        friend.setUserId(6);
         relationship.setFriendStatus(FriendStatus.Blocked);
         assertEquals(true, relationshipRepository.UpdateRelationship(relationship));
     }
