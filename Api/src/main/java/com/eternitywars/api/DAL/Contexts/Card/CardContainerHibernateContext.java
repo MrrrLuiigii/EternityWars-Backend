@@ -2,16 +2,15 @@ package com.eternitywars.api.DAL.Contexts.Card;
 
 import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
-import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Cards;
+import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class CardContainerHibernateContext implements ICardContainerContext
 {
@@ -24,25 +23,102 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public Cards GetCards()
     {
-        return null;
+        String hql = "FROM Card";
+
+        List<Card> cards;
+        Cards cardCollection = new Cards();
+
+        try
+        {
+            session = sessionFactory.openSession();
+
+            TypedQuery<Card> typedQuery = session.createQuery(hql, Card.class);
+
+            cards = typedQuery.getResultList();
+            cardCollection.setCards(cards);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return cardCollection;
     }
 
     @Override
     public Cards GetCardsByUser(int userId)
     {
-        return null;
+        String hql = "SELECT c FROM Card c INNER JOIN c.cardId";
+
+        List<Card> cards;
+        Cards cardCollection = new Cards();
+
+        try
+        {
+            session = sessionFactory.openSession();
+            TypedQuery<Card> typedQuery = session.createQuery(hql, Card.class);
+
+            cards = typedQuery.getResultList();
+            cardCollection.setCards(cards);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return cardCollection;
     }
 
     @Override
     public Card GetCardById(int cardId)
     {
-        return null;
+        Card card;
+
+        try
+        {
+            session = sessionFactory.openSession();
+            card = session.find(Card.class, cardId);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return null;
+        } finally
+        {
+            session.close();
+        }
+
+        return card;
     }
 
     @Override
     public boolean AddCard(User user, Card card)
     {
-        return false;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.persist(user);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+
+            ex.printStackTrace();
+            return false;
+        } finally
+        {
+            session.close();
+        }
+
+        return true;
     }
 
     @Override
@@ -50,85 +126,4 @@ public class CardContainerHibernateContext implements ICardContainerContext
     {
         return false;
     }
-//    private static EntityManagerFactory ENTITY_MANAGER_FACTORY = Persistence.createEntityManagerFactory("eternitywars");
-//
-//    @Override
-//    public Cards GetCards()
-//    {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        String hql = "FROM Card";
-//        TypedQuery<Card> typedQuery = entityManager.createQuery(hql, Card.class);
-//        List<Card> cards;
-//        Cards cardCollection = new Cards();
-//        try
-//        {
-//            cards = typedQuery.getResultList();
-//            cardCollection.setCards(cards);
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        } finally
-//        {
-//            entityManager.close();
-//        }
-//
-//        return cardCollection;
-//    }
-//
-//    @Override
-//    public Cards GetCardsByUser(int userId)
-//    {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//        String hql = "SELECT c FROM Card c INNER JOIN c.cardId";
-//        TypedQuery<Card> typedQuery = entityManager.createQuery(hql, Card.class);
-//        List<Card> cards;
-//        Cards cardCollection = new Cards();
-//        try
-//        {
-//            cards = typedQuery.getResultList();
-//            cardCollection.setCards(cards);
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//        } finally
-//        {
-//            entityManager.close();
-//        }
-//
-//        return cardCollection;
-//    }
-//
-//    @Override
-//    public Card GetCardById(int cardId)
-//    {
-//        EntityManager entityManager = ENTITY_MANAGER_FACTORY.createEntityManager();
-//
-//        Card card;
-//
-//        try
-//        {
-//            card = entityManager.find(Card.class, cardId);
-//        } catch (Exception ex)
-//        {
-//            ex.printStackTrace();
-//            return null;
-//        } finally
-//        {
-//            entityManager.close();
-//        }
-//
-//        return card;
-//    }
-//
-//    @Override
-//    public boolean AddCard(User user, Card card)
-//    {
-//        return false;
-//    }
-//
-//    @Override
-//    public boolean DeleteCard(User user, Card card)
-//    {
-//        return false;
-//    }
 }
