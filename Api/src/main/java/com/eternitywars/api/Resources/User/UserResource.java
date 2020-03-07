@@ -1,8 +1,7 @@
 package com.eternitywars.api.Resources.User;
 
-import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.DAL.Repositories.User.UserRepository;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserResource
 {
     private UserRepository userRepository = new UserRepository();
-    private UserContainerRepository userContainerRepository = new UserContainerRepository();
 
 
     @PutMapping(value = "/updateUsername", consumes = "application/json", produces = "application/json")
@@ -37,8 +35,6 @@ public class UserResource
     @PutMapping(value = "/updateGold", consumes = "application/json", produces = "application/json")
     public boolean UpdateGold(@RequestBody User user)
     {
-        User updatedUser = userContainerRepository.GetUserById(user.getUserId());
-        updatedUser.setGold(updatedUser.getGold() + user.getGold());
-        return userRepository.UpdateGold(updatedUser);
+        return userRepository.UpdateGold(user);
     }
 }
