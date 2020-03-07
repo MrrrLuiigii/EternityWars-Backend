@@ -1,7 +1,7 @@
 package com.eternitywars.api.Resources.User;
 
 import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Users;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +16,12 @@ public class UserContainerResource
     public User AddUser(@RequestBody User user)
     {
         return userContainerRepository.AddUser(user);
+    }
+
+    @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+    public boolean DeleteUser(@RequestBody User user)
+    {
+        return userContainerRepository.DeleteUser(user);
     }
 
     @GetMapping(value = "/getById/{userId}")
