@@ -1,29 +1,25 @@
 package com.eternitywars.api.DAL.Contexts.Card;
 
+import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
-import com.eternitywars.api.Models.Card;
+import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Cards;
-import com.eternitywars.api.Models.User;
+import com.eternitywars.api.Models.Entities.User;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class CardContainerHibernateContext implements ICardContainerContext
 {
-    private static Configuration configuration;
-    private static SessionFactory sessionFactory;
+    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
 
-    public CardContainerHibernateContext()
-    {
-        configuration = new Configuration();
-        configuration.configure("hibernate.cfg.xml");
+    private Session session;
+    private Transaction transaction;
 
-        configuration.addAnnotatedClass(User.class);
-
-        ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-    }
 
     @Override
     public Cards GetCards()
