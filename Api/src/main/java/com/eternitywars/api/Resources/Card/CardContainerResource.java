@@ -43,8 +43,8 @@ public class CardContainerResource
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public boolean AddCard(@RequestBody CardAdder cardAdder)
     {
-        User user = new User(cardAdder.getUserid());
-        Card card = new Card(cardAdder.getCardid());
+        User user = cardAdder.getUser();
+        Card card = cardAdder.getCard();
         return cardContainerRepository.AddCard(user, card);
     }
 }

@@ -79,28 +79,35 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public boolean AddCard(User user, Card card)
     {
+        CardCollection cardCollection = new CardCollection();
+        cardCollection.setUser(user);
+        cardCollection.setCard(card);
+
+        boolean status = true;
+
         try
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
-            session.persist(user);
+            session.persist(cardCollection);
             transaction.commit();
         } catch (Exception ex)
         {
             if (transaction != null)
             {
                 transaction.rollback();
+                status = false;
+
             }
 
             ex.printStackTrace();
-            return false;
         } finally
         {
             session.close();
         }
 
-        return true;
+        return status;
     }
 
     @Override

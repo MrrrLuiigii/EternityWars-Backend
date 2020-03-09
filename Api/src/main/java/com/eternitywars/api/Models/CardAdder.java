@@ -1,29 +1,34 @@
 package com.eternitywars.api.Models;
 
+import com.eternitywars.api.Models.Entities.Card;
+import com.eternitywars.api.Models.Entities.User;
+
 public class CardAdder
 {
-    private int userid;
-    private int cardid;
+    private User user;
+    private Card card;
 
-    public CardAdder(){}
-
-    public int getUserid()
+    public CardAdder()
     {
-        return userid;
     }
 
-    public void setUserid(int userid)
+    public User getUser()
     {
-        this.userid = userid;
+        return user;
     }
 
-    public int getCardid()
+    public void setUser(User user)
     {
-        return cardid;
+        this.user = user;
     }
 
-    public void setCardid(int cardid)
+    public Card getCard()
     {
-        this.cardid = cardid;
+        return card;
+    }
+
+    public void setCard(Card card)
+    {
+        this.card = card;
     }
 }
