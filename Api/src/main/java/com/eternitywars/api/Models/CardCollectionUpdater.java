@@ -3,12 +3,12 @@ package com.eternitywars.api.Models;
 import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Entities.User;
 
-public class CardAdder
+public class CardCollectionUpdater
 {
     private User user;
     private Card card;
 
-    public CardAdder()
+    public CardCollectionUpdater()
     {
     }
 

@@ -3,7 +3,6 @@ package com.eternitywars.api.Resources.Card;
 import com.eternitywars.api.DAL.Repositories.Card.CardContainerRepository;
 import com.eternitywars.api.Models.*;
 import com.eternitywars.api.Models.Entities.Card;
-import com.eternitywars.api.Models.Entities.Player;
 import com.eternitywars.api.Models.Entities.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,18 +32,18 @@ public class CardContainerResource
     }
 
     @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public boolean DeleteCard(@RequestBody CardAdder cardAdder)
+    public boolean DeleteCard(@RequestBody CardCollectionUpdater cardCollectionUpdater)
     {
-        User user = cardAdder.getUser();
-        Card card = cardAdder.getCard();
+        User user = cardCollectionUpdater.getUser();
+        Card card = cardCollectionUpdater.getCard();
         return cardContainerRepository.DeleteCard(user, card);
     }
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
-    public boolean AddCard(@RequestBody CardAdder cardAdder)
+    public boolean AddCard(@RequestBody CardCollectionUpdater cardCollectionUpdater)
     {
-        User user = cardAdder.getUser();
-        Card card = cardAdder.getCard();
+        User user = cardCollectionUpdater.getUser();
+        Card card = cardCollectionUpdater.getCard();
         return cardContainerRepository.AddCard(user, card);
     }
 }
