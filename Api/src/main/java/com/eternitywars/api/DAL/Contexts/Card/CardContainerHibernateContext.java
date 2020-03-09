@@ -4,12 +4,14 @@ import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
 import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.Entities.Card;
+import com.eternitywars.api.Models.Entities.CardCollection;
 import com.eternitywars.api.Models.Entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CardContainerHibernateContext implements ICardContainerContext
@@ -50,27 +52,7 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public Cards GetCardsByUser(int userId)
     {
-        String hql = "SELECT c FROM Card c INNER JOIN c.cardId";
-
-        List<Card> cards;
-        Cards cardCollection = new Cards();
-
-        try
-        {
-            session = sessionFactory.openSession();
-            TypedQuery<Card> typedQuery = session.createQuery(hql, Card.class);
-
-            cards = typedQuery.getResultList();
-            cardCollection.setCards(cards);
-        } catch (Exception ex)
-        {
-            ex.printStackTrace();
-        } finally
-        {
-            session.close();
-        }
-
-        return cardCollection;
+        return null;
     }
 
     @Override
