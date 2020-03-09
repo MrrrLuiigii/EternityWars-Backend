@@ -17,12 +17,43 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
 
     @Override
     public Lobby AddLobby(Lobby lobby) {
-        return null;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.persist(lobby);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return lobby;
     }
 
     @Override
     public boolean DeleteLobby(Lobby lobby) {
-        return false;
+        try {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.remove(lobby);
+            transaction.commit();
+        } catch (Exception ex) {
+            return false;
+        } finally {
+            session.close();
+        }
+        return true;
     }
 
     @Override

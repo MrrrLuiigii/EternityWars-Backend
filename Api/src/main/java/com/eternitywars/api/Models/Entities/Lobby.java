@@ -3,7 +3,7 @@ package com.eternitywars.api.Models.Entities;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity
+@Entity()
 @Table(name = "lobby")
 public class Lobby
 {

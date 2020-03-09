@@ -1,11 +1,14 @@
 package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "player")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "lobby", "user"})
+
 public class Player
 {
     @Id
