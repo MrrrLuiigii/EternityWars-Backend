@@ -33,10 +33,10 @@ public class CardContainerResource
     }
 
     @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
-    public boolean DeleteCard(@RequestBody Player player)
+    public boolean DeleteCard(@RequestBody CardAdder cardAdder)
     {
-        User user = new User(player.getUser().getUserId());
-        Card card = player.getDeck().getCards().getCards().get(0);
+        User user = cardAdder.getUser();
+        Card card = cardAdder.getCard();
         return cardContainerRepository.DeleteCard(user, card);
     }
 

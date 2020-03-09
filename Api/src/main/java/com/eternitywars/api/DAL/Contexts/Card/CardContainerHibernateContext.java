@@ -11,7 +11,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CardContainerHibernateContext implements ICardContainerContext
@@ -113,6 +112,41 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public boolean DeleteCard(User user, Card card)
     {
-        return false;
+        CardCollection cardCollection = new CardCollection();
+        cardCollection.setUser(user);
+        cardCollection.setCard(card);
+
+        String hql = "SELECT c FROM CardCollection c WHERE c.user = :user AND c.card = :card";
+
+        boolean status = true;
+
+        try
+        {
+            session = sessionFactory.openSession();
+
+            TypedQuery<CardCollection> typedQuery = session.createQuery(hql, CardCollection.class);
+            typedQuery.setParameter("user", user);
+            typedQuery.setParameter("card", card);
+
+            cardCollection = typedQuery.getSingleResult();
+
+            transaction = session.beginTransaction();
+            session.remove(cardCollection);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+
+            ex.printStackTrace();
+            status = false;
+        } finally
+        {
+            session.close();
+        }
+
+        return status;
     }
 }
