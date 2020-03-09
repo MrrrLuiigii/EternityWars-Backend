@@ -14,11 +14,11 @@ public abstract class Account
     @Column(name = "id", unique = true, updatable = false)
     protected int userId;
 
-    @Column(name = "username")
+    @Column(name = "username", nullable = false)
     protected String username;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "account_status", columnDefinition = "int default 0")
+    @Column(name = "account_status", columnDefinition = "int default 0", nullable = false)
     protected AccountStatus accountStatus;
 
     public Account(){}

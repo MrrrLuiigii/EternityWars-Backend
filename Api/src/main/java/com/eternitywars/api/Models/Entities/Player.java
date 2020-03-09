@@ -17,15 +17,16 @@ public class Player
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
+    @JoinColumn(name = "lobby_id", nullable = false)
     private Lobby lobby;
 
     @Enumerated(EnumType.ORDINAL)
-    @Column(name = "lobby_player_status")
+    @Column(name = "lobby_player_status", nullable = false)
     private LobbyPlayerStatus lobbyPlayerStatus;
 
     @OneToOne()
-    @JoinColumn(name = "deck_id")
+    @JoinColumn(name = "deck_id", nullable = false)
     private Deck deck;
 
 

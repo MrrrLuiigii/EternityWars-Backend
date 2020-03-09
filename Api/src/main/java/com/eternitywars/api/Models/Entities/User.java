@@ -12,10 +12,10 @@ public class User extends Account
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "gold")
+    @Column(name = "gold", nullable = false)
     private int gold;
 
-    @Column(name = "pack_amount")
+    @Column(name = "pack_amount", nullable = false)
     private int packAmount;
 
 

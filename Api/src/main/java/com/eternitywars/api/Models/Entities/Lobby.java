@@ -12,19 +12,19 @@ public class Lobby
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
-    @Column(name = "name", unique = true)
+    @Column(name = "name", unique = true, nullable = false, length = 64)
     private String name;
 
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "has_Password")
+    @Column(name = "has_Password", nullable = false)
     private boolean hasPassword;
 
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "lobby_id", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "lobby", fetch = FetchType.EAGER)
     private List<Player> players;
 
 
