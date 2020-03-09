@@ -1,9 +1,9 @@
 package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -17,6 +17,9 @@ public class User extends Account
 
     @Column(name = "pack_amount", nullable = false)
     private int packAmount;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<CardCollection> cardCollections;
 
 
     public User()
@@ -72,5 +75,15 @@ public class User extends Account
     public void setPackAmount(int packAmount)
     {
         this.packAmount = packAmount;
+    }
+
+    public List<CardCollection> getCardCollections()
+    {
+        return cardCollections;
+    }
+
+    public void setCardCollections(List<CardCollection> cardCollections)
+    {
+        this.cardCollections = cardCollections;
     }
 }

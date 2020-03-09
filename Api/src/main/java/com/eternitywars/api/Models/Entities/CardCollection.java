@@ -1,5 +1,8 @@
 package com.eternitywars.api.Models.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +15,7 @@ public class CardCollection
     private int id;
 
     @ManyToOne()
+    @JsonIgnore()
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 

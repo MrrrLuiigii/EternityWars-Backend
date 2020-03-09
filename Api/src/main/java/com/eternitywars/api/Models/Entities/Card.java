@@ -1,5 +1,7 @@
 package com.eternitywars.api.Models.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -29,6 +31,10 @@ public class Card
 
     @Column(name = "taunt", nullable = false)
     private boolean taunt;
+
+    @JsonIgnore()
+    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
+    private List<CardCollection> cardCollection;
 
 
     public Card()
@@ -108,5 +114,15 @@ public class Card
     public void setTaunt(boolean taunt)
     {
         this.taunt = taunt;
+    }
+
+    public List<CardCollection> getCardCollection()
+    {
+        return cardCollection;
+    }
+
+    public void setCardCollection(List<CardCollection> cardCollection)
+    {
+        this.cardCollection = cardCollection;
     }
 }
