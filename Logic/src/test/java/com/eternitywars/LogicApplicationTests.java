@@ -62,14 +62,14 @@ class LogicApplicationTests {
 	void EndTurn() throws IOException
 	{
 		game.setPlayerTurn(1);
-		game = gameLogic.EndTurn(game);
+		game = gameLogic.EndTurn(null);
 	}
 
 	@Test
 	void EndTurnplayerturn2() throws IOException
 	{
 		game.setPlayerTurn(2);
-		game = gameLogic.EndTurn(game);
+		game = gameLogic.EndTurn(null);
 	}
 
 	@Test
@@ -77,7 +77,7 @@ class LogicApplicationTests {
 	{
 		game.getConnectedPlayers().get(0).getHero().setMaxMana(10);
 		game.getConnectedPlayers().get(0).getHero().setMaxDeathessence(10);
-		game = gameLogic.EndTurn(game);
+		game = gameLogic.EndTurn(null);
 		assertEquals(game.getConnectedPlayers().get(0).getHero().getMaxMana(), 10);
 		assertEquals(game.getConnectedPlayers().get(0).getHero().getMaxDeathessence(), 10);
 	}
@@ -89,7 +89,7 @@ class LogicApplicationTests {
 		{
 			game.getConnectedPlayers().get(1).getCardsInHand().add(new Card());
 		}
-		game = gameLogic.EndTurn(game);
+		game = gameLogic.EndTurn(null);
 	}
 
 	@Test
@@ -118,7 +118,7 @@ class LogicApplicationTests {
 	@Test
 	void AttackCardFail() throws IOException {
 
-		game = gameLogic.AttackCard(game, 0 , 0);
+		game = gameLogic.AttackCard(null);
 	}
 
 	@Test
@@ -131,7 +131,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(0).getBoardRows().getCardSlotList().get(0).setCard(testcard);
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(0).setCard(testcard2);
 		game.setPlayerTurn(1);
-		game = gameLogic.AttackCard(game, 0 , 0);
+		game = gameLogic.AttackCard(null);
 
 		assertEquals(9, game.getConnectedPlayers().get(0).getBoardRow().getCardSlotList().get(0).getCard().getHealth());
 	}
@@ -146,7 +146,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(0).getBoardRows().getCardSlotList().get(0).setCard(testcard);
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(0).setCard(testcard2);
 		game.setPlayerTurn(1);
-		game = gameLogic.AttackCard(game, 0 , 0);
+		game = gameLogic.AttackCard(null);
 
 		assertEquals(9, game.getConnectedPlayers().get(0).getBoardRow().getCardSlotList().get(0).getCard().getHealth());
 	}
@@ -163,7 +163,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(0).setCard(testcard2);
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(1).setCard(testcard3);
 		game.setPlayerTurn(1);
-		game = gameLogic.AttackCard(game, 0 , 1);
+		game = gameLogic.AttackCard(null);
 
 		assertEquals(10, game.getConnectedPlayers().get(0).getBoardRow().getCardSlotList().get(0).getCard().getHealth());
 	}
@@ -180,7 +180,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(0).setCard(testcard2);
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(1).setCard(testcard3);
 		game.setPlayerTurn(1);
-		game = gameLogic.AttackCard(game, 0 , 1);
+		game = gameLogic.AttackCard(null);
 
 		assertEquals(10, game.getConnectedPlayers().get(0).getBoardRow().getCardSlotList().get(0).getCard().getHealth());
 	}
@@ -188,7 +188,7 @@ class LogicApplicationTests {
 	@Test
 	void AttackHeroNoTurn() throws IOException {
 		game.setPlayerTurn(0);
-		game = gameLogic.AttackHero(game, 0 , "example");
+		game = gameLogic.AttackHero(null);
 	}
 
 	@Test
@@ -201,7 +201,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(0).getBoardRows().getCardSlotList().get(0).setCard(testcard);
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(0).setCard(testcard2);
 		game.setPlayerTurn(1);
-		game = gameLogic.AttackHero(game, 0 , "example");
+		game = gameLogic.AttackHero(null);
 	}
 
 	@Test
@@ -214,7 +214,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(0).getBoardRows().getCardSlotList().get(0).setCard(testcard);
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(0).setCard(testcard2);
 		game.setPlayerTurn(1);
-		game = gameLogic.AttackHero(game, 0 , "example");
+		game = gameLogic.AttackHero(null);
 	}
 
 	@Test
@@ -227,7 +227,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(0).getBoardRows().getCardSlotList().get(0).setCard(testcard);
 		game.getConnectedPlayers().get(1).getBoardRows().getCardSlotList().get(0).setCard(testcard2);
 		game.setPlayerTurn(1);
-		game = gameLogic.AttackHero(game, 0 , "example");
+		game = gameLogic.AttackHero(null);
 	}
 
 	@Test
@@ -243,7 +243,7 @@ class LogicApplicationTests {
 	@Test
 	void PLayCardNoTurn() throws IOException {
 		game.setPlayerTurn(0);
-		game = gameLogic.PlayCard(game, 0 , 1);
+		game = gameLogic.PlayCard(null);
 	}
 
 	@Test
@@ -253,7 +253,7 @@ class LogicApplicationTests {
 		game.getConnectedPlayers().get(0).getHero().setMana(4);
 		game.getConnectedPlayers().get(0).getHero().setDeathessence(4);
 		game.getConnectedPlayers().get(0).getCardsInHand().add(testcard);
-		game = gameLogic.PlayCard(game, 0 , 1);
+		game = gameLogic.PlayCard(null);
 		assertEquals(0, game.getConnectedPlayers().get(0).getHero().getMana());
 	}
 
@@ -263,7 +263,7 @@ class LogicApplicationTests {
 		game.setPlayerTurn(1);
 		game.getConnectedPlayers().get(0).getHero().setMana(0);
 		game.getConnectedPlayers().get(0).getCardsInHand().add(testcard);
-		game = gameLogic.PlayCard(game, 0 , 1);
+		game = gameLogic.PlayCard(null);
 
 	}
 
@@ -273,7 +273,7 @@ class LogicApplicationTests {
 		game.setPlayerTurn(1);
 		game.getConnectedPlayers().get(0).getHero().setMana(4);
 		game.getConnectedPlayers().get(0).getCardsInHand().add(testcard);
-		game = gameLogic.PlayCard(game, 0 , 1);
+		game = gameLogic.PlayCard(null);
 
 	}
 }
