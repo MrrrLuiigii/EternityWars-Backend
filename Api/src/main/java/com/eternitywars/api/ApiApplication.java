@@ -31,6 +31,7 @@ public class ApiApplication
         configuration.addAnnotatedClass(Relationship.class);
         configuration.addAnnotatedClass(Lobby.class);
         configuration.addAnnotatedClass(Player.class);
+        configuration.addAnnotatedClass(Relationship.class);
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         return configuration.buildSessionFactory(serviceRegistry);
