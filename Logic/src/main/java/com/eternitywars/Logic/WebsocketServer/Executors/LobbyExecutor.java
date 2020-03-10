@@ -59,57 +59,57 @@ public class LobbyExecutor implements IExecutor
 
         String token = message.getString("Token");
 
-        switch (message.getString("Action"))
-        {
-            case "JOINLOBBY":
-                lobby = lobbyLogic.JoinLobby(lobbyObject, player,  token);
-                returnMessage = new WsReturnMessage();
-                returnMessage.setContent(lobby);
-                returnMessage.setAction("JOINLOBBY");
-                session.getRemote().sendString(gson.toJson(returnMessage));
-
-                RespondLobby(lobby);
-                RespondLobbyCollection(message);
-                break;
-            case "LEAVELOBBY":
-                lobby = lobbyLogic.LeaveLobby(lobbyObject, player,  token);
-                RespondLobbyCollection(message);
-                RespondLobby(lobby);
-                break;
-            case "PLAYERREADY":
-                lobby = lobbyLogic.PlayerReady(lobbyObject, player, token);
-                RespondLobby(lobby);
-                break;
-            case "PLAYERNOTREADY":
-                lobby = lobbyLogic.PlayerNotReady(lobbyObject, player);
-                RespondLobby(lobby);
-                break;
-            case "SETDECK":
-                lobby = lobbyLogic.SetDeck(lobbyObject, player, token);
-                RespondLobby(lobby);
-                break;
-            case "ADDLOBBY":
-                lobby = lobbyContainerLogic.AddLobby(lobbyObject, token);
-                
-                returnMessage = new WsReturnMessage();
-                returnMessage.setContent(lobby);
-                returnMessage.setAction("JOINLOBBY");
-                session.getRemote().sendString(gson.toJson(returnMessage));
-
-                RespondLobbyCollection(message);
-                break;
-            case "GETLOBBYBYID":
-                lobby = lobbyContainerLogic.GetLobbyById(lobbyObject, token);
-                session.getRemote().sendString(new JSONObject(lobby).toString());
-                break;
-            case "GETLOBBIES":
-                RespondLobbyCollection(message);
-                break;
-            case "DELETELOBBY":
-                LobbyCollection lobbyCollection = lobbyContainerLogic.DeleteLobby(lobbyObject, token);
-                RespondLobbyCollection(message);
-                break;
-        }
+//        switch (message.getString("Action"))
+//        {
+//            case "JOINLOBBY":
+//                lobby = lobbyLogic.JoinLobby(lobbyObject, player,  token);
+//                returnMessage = new WsReturnMessage();
+//                returnMessage.setContent(lobby);
+//                returnMessage.setAction("JOINLOBBY");
+//                session.getRemote().sendString(gson.toJson(returnMessage));
+//
+//                RespondLobby(lobby);
+//                RespondLobbyCollection(message);
+//                break;
+//            case "LEAVELOBBY":
+//                lobby = lobbyLogic.LeaveLobby(lobbyObject, player,  token);
+//                RespondLobbyCollection(message);
+//                RespondLobby(lobby);
+//                break;
+//            case "PLAYERREADY":
+//                lobby = lobbyLogic.PlayerReady(lobbyObject, player, token);
+//                RespondLobby(lobby);
+//                break;
+//            case "PLAYERNOTREADY":
+//                lobby = lobbyLogic.PlayerNotReady(lobbyObject, player);
+//                RespondLobby(lobby);
+//                break;
+//            case "SETDECK":
+//                lobby = lobbyLogic.SetDeck(lobbyObject, player, token);
+//                RespondLobby(lobby);
+//                break;
+//            case "ADDLOBBY":
+//                lobby = lobbyContainerLogic.AddLobby(lobbyObject, token);
+//
+//                returnMessage = new WsReturnMessage();
+//                returnMessage.setContent(lobby);
+//                returnMessage.setAction("JOINLOBBY");
+//                session.getRemote().sendString(gson.toJson(returnMessage));
+//
+//                RespondLobbyCollection(message);
+//                break;
+//            case "GETLOBBYBYID":
+//                lobby = lobbyContainerLogic.GetLobbyById(lobbyObject, token);
+//                session.getRemote().sendString(new JSONObject(lobby).toString());
+//                break;
+//            case "GETLOBBIES":
+//                RespondLobbyCollection(message);
+//                break;
+//            case "DELETELOBBY":
+//                LobbyCollection lobbyCollection = lobbyContainerLogic.DeleteLobby(lobbyObject, token);
+//                RespondLobbyCollection(message);
+//                break;
+//        }
     }
 
     private void RespondLobby(Lobby lobby) throws IOException {

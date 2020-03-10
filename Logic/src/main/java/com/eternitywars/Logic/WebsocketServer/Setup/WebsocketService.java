@@ -24,10 +24,17 @@ public class WebsocketService {
 
     public void sendmessage(Session session, String message) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
     {
-        JSONObject jsonObject = new JSONObject(message);
-        Class ReflectionClass = Class.forName("com.eternitywars.Logic." + jsonObject.getString("class"));
-        Method method = ReflectionClass.getMethod(jsonObject.getString("method"), JSONObject.class);
-        method.invoke(ReflectionClass.getDeclaredConstructor().newInstance(), jsonObject);
+        try
+        {
+            JSONObject jsonObject = new JSONObject(message);
+            Class ReflectionClass = Class.forName("com.eternitywars.Logic." + jsonObject.getString("Subject"));
+            Method method = ReflectionClass.getMethod(jsonObject.getString("Action"), JSONObject.class);
+            method.invoke(ReflectionClass.getDeclaredConstructor().newInstance(), jsonObject);
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 
     @PostConstruct
