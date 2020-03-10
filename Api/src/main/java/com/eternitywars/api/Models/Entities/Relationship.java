@@ -13,11 +13,11 @@ public class Relationship
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_one_id", nullable = false)
     private User friendOne;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_two_id", nullable = false)
     private User friendTwo;
 

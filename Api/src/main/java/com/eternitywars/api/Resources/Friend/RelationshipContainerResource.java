@@ -26,7 +26,7 @@ public class RelationshipContainerResource
         return relationshipContainerRepository.AddRelationship(relationship);
     }
 
-    @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public boolean DeleteRelationship(@RequestBody Relationship relationship)
     {
         return relationshipContainerRepository.DeleteRelationship(relationship);
