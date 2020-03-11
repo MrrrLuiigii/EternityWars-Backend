@@ -2,6 +2,7 @@ package com.eternitywars.api.Resources.User;
 
 import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.Models.Entities.User;
+import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Users;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ public class UserContainerResource
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public User AddUser(@RequestBody User user)
     {
+        user.setAccountStatus(AccountStatus.Online);
         return userContainerRepository.AddUser(user);
     }
 
