@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "user")
 public class User extends Account
 {
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", unique = true, nullable = false, length = 64)
     private String email;
 
     @Column(name = "gold", nullable = false)

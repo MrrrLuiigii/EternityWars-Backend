@@ -14,10 +14,9 @@ public abstract class Account
     @Column(name = "id", unique = true, updatable = false)
     protected int userId;
 
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", unique = true, nullable = false, length = 64)
     protected String username;
 
-    @Enumerated(EnumType.ORDINAL)
     @Column(name = "account_status", columnDefinition = "int default 0", nullable = false)
     protected AccountStatus accountStatus;
 
