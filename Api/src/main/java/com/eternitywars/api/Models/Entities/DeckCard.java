@@ -11,11 +11,11 @@ public class DeckCard
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "deck_id", nullable = false, referencedColumnName = "id")
     private Deck deck;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "card_id", nullable = false, referencedColumnName = "id")
     private Card card;
 

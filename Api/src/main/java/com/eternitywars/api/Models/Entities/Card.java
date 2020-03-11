@@ -32,7 +32,7 @@ public class Card
     @Column(name = "taunt", nullable = false)
     private boolean taunt;
 
-    @JsonIgnore()
+    @JsonIgnore
     @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
     private List<CardCollection> cardCollection;
 

@@ -20,14 +20,14 @@ public class Player
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "lobby_id", nullable = false, referencedColumnName = "id")
     private Lobby lobby;
 
     @Column(name = "lobby_player_status", columnDefinition = "int default 0", nullable = false)
     private LobbyPlayerStatus lobbyPlayerStatus;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "deck_id", nullable = false, referencedColumnName = "id")
     private Deck deck;
 

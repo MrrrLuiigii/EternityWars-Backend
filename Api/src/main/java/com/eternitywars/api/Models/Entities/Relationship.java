@@ -13,11 +13,11 @@ public class Relationship
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_one_id", nullable = false, referencedColumnName = "id")
     private User friendOne;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_two_id", nullable = false, referencedColumnName = "id")
     private User friendTwo;
 

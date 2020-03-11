@@ -14,12 +14,12 @@ public class CardCollection
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
-    @ManyToOne()
-    @JsonIgnore()
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "card_id", nullable = false, referencedColumnName = "id")
     private Card card;
 

@@ -14,7 +14,7 @@ public class Deck
     @Column(name = "id", unique = true, updatable = false)
     private int deckId;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
     private User user;
 
