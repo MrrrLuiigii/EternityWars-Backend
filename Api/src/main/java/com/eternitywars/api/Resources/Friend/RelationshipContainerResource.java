@@ -21,7 +21,6 @@ public class RelationshipContainerResource
     {
         User friendTwo = userContainerRepository.GetUserByUsername(relationship.getFriendTwo().getUsername());
         relationship.setFriendTwo(friendTwo);
-        relationship.setFriendStatus(FriendStatus.Pending);
 
         return relationshipContainerRepository.AddRelationship(relationship);
     }
