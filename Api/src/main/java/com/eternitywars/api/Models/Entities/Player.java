@@ -24,8 +24,7 @@ public class Player
     @JoinColumn(name = "lobby_id", nullable = false, referencedColumnName = "id")
     private Lobby lobby;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(name = "lobby_player_status", nullable = false)
+    @Column(name = "lobby_player_status", columnDefinition = "int default 0", nullable = false)
     private LobbyPlayerStatus lobbyPlayerStatus;
 
     @OneToOne()
