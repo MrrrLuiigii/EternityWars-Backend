@@ -17,11 +17,11 @@ public class Player
     private int id;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
     @ManyToOne()
-    @JoinColumn(name = "lobby_id", nullable = false)
+    @JoinColumn(name = "lobby_id", nullable = false, referencedColumnName = "id")
     private Lobby lobby;
 
     @Enumerated(EnumType.ORDINAL)
@@ -29,7 +29,7 @@ public class Player
     private LobbyPlayerStatus lobbyPlayerStatus;
 
     @OneToOne()
-    @JoinColumn(name = "deck_id", nullable = false)
+    @JoinColumn(name = "deck_id", nullable = false, referencedColumnName = "id")
     private Deck deck;
 
 

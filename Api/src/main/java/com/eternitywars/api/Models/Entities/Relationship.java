@@ -14,11 +14,11 @@ public class Relationship
     private int id;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_one_id", nullable = false)
+    @JoinColumn(name = "user_one_id", nullable = false, referencedColumnName = "id")
     private User friendOne;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_two_id", nullable = false)
+    @JoinColumn(name = "user_two_id", nullable = false, referencedColumnName = "id")
     private User friendTwo;
 
     @Column(name = "status", nullable = false)

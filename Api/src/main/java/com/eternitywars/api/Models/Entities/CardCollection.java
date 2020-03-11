@@ -16,11 +16,11 @@ public class CardCollection
 
     @ManyToOne()
     @JsonIgnore()
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
     @ManyToOne()
-    @JoinColumn(name = "card_id", nullable = false)
+    @JoinColumn(name = "card_id", nullable = false, referencedColumnName = "id")
     private Card card;
 
 

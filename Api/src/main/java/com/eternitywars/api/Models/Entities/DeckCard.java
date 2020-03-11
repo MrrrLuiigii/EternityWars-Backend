@@ -12,11 +12,11 @@ public class DeckCard
     private int id;
 
     @ManyToOne()
-    @JoinColumn(name = "deck_id", nullable = false)
+    @JoinColumn(name = "deck_id", nullable = false, referencedColumnName = "id")
     private Deck deck;
 
     @ManyToOne()
-    @JoinColumn(name = "card_id", nullable = false)
+    @JoinColumn(name = "card_id", nullable = false, referencedColumnName = "id")
     private Card card;
 
 
