@@ -2,11 +2,16 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 
 import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
+import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Lobbies;
 import com.eternitywars.api.Models.Entities.Lobby;
+import com.eternitywars.api.Models.Users;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class LobbyContainerHibernateContext implements ILobbyContainerContext {
 
@@ -75,6 +80,28 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
 
     @Override
     public Lobbies GetLobbies() {
-        return null;
+        String hql = "FROM Lobby";
+
+        List<Lobby> lobbies;
+        Lobbies lobbiesCollection = new Lobbies();
+
+        try
+        {
+            session = sessionFactory.openSession();
+
+            TypedQuery<Lobby> typedQuery = session.createQuery(hql, Lobby.class);
+
+            lobbies = typedQuery.getResultList();
+            lobbiesCollection.setLobbies(lobbies);
+
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return lobbiesCollection;
     }
 }
