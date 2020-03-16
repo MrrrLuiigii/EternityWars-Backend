@@ -21,7 +21,7 @@ public class RelationshipHibernateContext implements IRelationshipContext
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            session.persist(relationship);
+            session.merge(relationship);
             transaction.commit();
         } catch (Exception ex)
         {
