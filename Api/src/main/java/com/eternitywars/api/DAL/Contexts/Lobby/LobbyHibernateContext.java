@@ -8,7 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class LobbyHibernateContext implements ILobbyContext {
+public class LobbyHibernateContext implements ILobbyContext
+{
 
     private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
 
@@ -16,8 +17,10 @@ public class LobbyHibernateContext implements ILobbyContext {
     private Transaction transaction;
 
     @Override
-    public boolean JoinLobby(Lobby lobby, Player player){
-        try {
+    public boolean JoinLobby(Lobby lobby, Player player)
+    {
+        try
+        {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
@@ -25,55 +28,70 @@ public class LobbyHibernateContext implements ILobbyContext {
             session.persist(lobby);
 
             transaction.commit();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
             return false;
-        } finally {
+        } finally
+        {
             session.close();
         }
         return true;
     }
 
     @Override
-    public boolean LeaveLobby(Lobby lobby, Player player) {
-        try {
+    public boolean LeaveLobby(Lobby lobby, Player player)
+    {
+        try
+        {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
-           int index = FindUserId(lobby, player);
-           lobby.getPlayers().remove(index);
+            int index = FindUserId(lobby, player);
+            lobby.getPlayers().remove(index);
 
             session.persist(lobby);
             transaction.commit();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
             return false;
-        } finally {
+        } finally
+        {
             session.close();
         }
         return true;
     }
 
     @Override
-    public boolean UpdatePlayerStatus(Lobby lobby, Player player) {
-        try {
+    public boolean UpdatePlayerStatus(Lobby lobby, Player player)
+    {
+        try
+        {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
-           int index = FindUserId(lobby, player);
-           lobby.getPlayers().set(index, player);
+            int index = FindUserId(lobby, player);
+            lobby.getPlayers().set(index, player);
 
-            session.persist(lobby);
+            session.merge(lobby);
             transaction.commit();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
             return false;
-        } finally {
+        } finally
+        {
             session.close();
         }
         return true;
     }
 
     @Override
-    public Lobby UpdatePlayerDeck(Lobby lobby, Player player) {
-        try {
+    public Lobby UpdatePlayerDeck(Lobby lobby, Player player)
+    {
+        try
+        {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
@@ -82,22 +100,30 @@ public class LobbyHibernateContext implements ILobbyContext {
 
             session.persist(lobby);
             transaction.commit();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
             return lobby;
-        } finally {
+        } finally
+        {
             session.close();
         }
         return lobby;
     }
 
-    private int FindUserId(Lobby lobby, Player player){
-        if(lobby.getPlayers().get(0) != null){
-            if(lobby.getPlayers().get(0).getUser().getUserId() == player.getUser().getUserId()){
+    private int FindUserId(Lobby lobby, Player player)
+    {
+        if (lobby.getPlayers().get(0) != null)
+        {
+            if (lobby.getPlayers().get(0).getUser().getUserId() == player.getUser().getUserId())
+            {
                 return 0;
             }
         }
-        if(lobby.getPlayers().get(1) != null){
-            if(lobby.getPlayers().get(1).getUser().getUserId() == player.getUser().getUserId()){
+        if (lobby.getPlayers().get(1) != null)
+        {
+            if (lobby.getPlayers().get(1).getUser().getUserId() == player.getUser().getUserId())
+            {
                 return 1;
             }
         }
