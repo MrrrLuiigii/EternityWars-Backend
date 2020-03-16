@@ -3,6 +3,7 @@ package com.eternitywars.Logic.Chat;
 import com.eternitywars.Logic.utils.APIRequest;
 import com.eternitywars.Models.Chat;
 import com.eternitywars.Models.ChatCollection;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import org.springframework.http.HttpMethod;
 

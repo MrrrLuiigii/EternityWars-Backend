@@ -1,4 +1,6 @@
-package com.eternitywars.Models;
+package com.eternitywars.api.Models.Entities;
+
+import com.eternitywars.api.Models.Entities.User;
 
 public class Message
 {
