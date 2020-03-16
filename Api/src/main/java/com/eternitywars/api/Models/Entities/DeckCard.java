@@ -1,5 +1,7 @@
 package com.eternitywars.api.Models.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,7 @@ public class DeckCard
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "deck_id", nullable = false, referencedColumnName = "id")
     private Deck deck;

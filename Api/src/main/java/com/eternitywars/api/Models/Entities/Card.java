@@ -36,6 +36,9 @@ public class Card
     @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
     private List<CardCollection> cardCollection;
 
+//    @JsonIgnore
+//    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
+//    private List<DeckCard> deckCards;
 
     public Card()
     {
@@ -125,4 +128,14 @@ public class Card
     {
         this.cardCollection = cardCollection;
     }
+
+//    public List<DeckCard> getDeckCards()
+//    {
+//        return deckCards;
+//    }
+//
+//    public void setDeckCards(List<DeckCard> deckCards)
+//    {
+//        this.deckCards = deckCards;
+//    }
 }

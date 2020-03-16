@@ -14,8 +14,8 @@ public class CardCollection
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
-    @ManyToOne
     @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 

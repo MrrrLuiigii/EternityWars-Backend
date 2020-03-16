@@ -21,6 +21,8 @@ public class Deck
     @Column(name = "name", nullable = false)
     private String name;
 
+//    @OneToMany(mappedBy = "deck", fetch = FetchType.EAGER)
+//    private List<DeckCard> deckCards;
 
     public Deck()
     {
@@ -77,4 +79,14 @@ public class Deck
     {
         return null;
     }
+
+//    public List<DeckCard> getDeckCards()
+//    {
+//        return deckCards;
+//    }
+//
+//    public void setDeckCards(List<DeckCard> deckCards)
+//    {
+//        this.deckCards = deckCards;
+//    }
 }
