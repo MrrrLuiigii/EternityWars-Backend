@@ -35,7 +35,6 @@ public class LobbyResource
     @PutMapping(value = "/updateStatus", consumes = "application/json", produces = "application/json")
     public boolean UpdatePlayerStatus(@RequestBody Lobby lobby)
     {
-
         return lobbyRepository.UpdatePlayerStatus(lobby, lobby.getPlayers().get(0));
     }
 }

@@ -24,7 +24,8 @@ public class Lobby
     @Column(name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "lobby", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "player", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "lobby_id"))
     private List<Player> players;
 
 
