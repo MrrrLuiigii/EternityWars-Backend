@@ -23,4 +23,8 @@ public class Lobbies
     {
         this.lobbies.add(lobby);
     }
+
+        public void setLobbies(List<Lobby> lobbies) {
+        this.lobbies = lobbies;
+    }
 }
