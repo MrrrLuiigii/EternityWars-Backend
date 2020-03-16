@@ -57,12 +57,12 @@ public class RelationshipContainerHibernateContext implements IRelationshipConta
                 "WHERE (r.friendOne = :friendOne AND r.friendTwo = :friendTwo) " +
                 "OR (r.friendOne = :friendTwo AND r.friendTwo = :friendOne)";
 
-
         boolean status = true;
 
         try
         {
             session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
 
             TypedQuery<Relationship> typedQuery = session.createQuery(hql, Relationship.class);
             typedQuery.setParameter("friendOne", relationship.getFriendOne());
@@ -70,7 +70,6 @@ public class RelationshipContainerHibernateContext implements IRelationshipConta
 
             relationship = typedQuery.getSingleResult();
 
-            transaction = session.beginTransaction();
             session.remove(relationship);
             transaction.commit();
         } catch (Exception ex)
