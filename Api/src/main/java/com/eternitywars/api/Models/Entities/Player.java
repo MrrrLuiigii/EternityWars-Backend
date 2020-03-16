@@ -7,8 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "player")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "lobby", "user"})
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "lobby"})
 public class Player
 {
     @Id
@@ -28,20 +27,12 @@ public class Player
     private LobbyPlayerStatus lobbyPlayerStatus;
 
     @OneToOne
-    @JoinColumn(name = "deck_id", nullable = false, referencedColumnName = "id")
+    @JoinColumn(name = "deck_id", referencedColumnName = "id")
     private Deck deck;
 
 
     public Player()
     {
-    }
-
-    public Player(int userId, String username, LobbyPlayerStatus lobbyPlayerStatus, int deckId)
-    {
-        this.user.setUserId(userId);
-        this.user.setUsername(username);
-        this.lobbyPlayerStatus = lobbyPlayerStatus;
-        this.deck = new Deck(deckId);
     }
 
     // Getters & Setters
