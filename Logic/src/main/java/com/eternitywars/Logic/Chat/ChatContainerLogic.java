@@ -35,8 +35,4 @@ public class ChatContainerLogic
         Chat chat = (Chat) APIRequest.CreateRequest("http://localhost:8083/api/private/chat/createchat", jsonObject.toString(), Chat.class, HttpMethod.POST);
         return chat;
     }
-
-
-
-
 }
