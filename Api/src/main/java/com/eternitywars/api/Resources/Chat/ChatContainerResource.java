@@ -2,8 +2,7 @@ package com.eternitywars.api.Resources.Chat;
 
 import com.eternitywars.api.DAL.Repositories.Chat.ChatContainerRepository;
 import com.eternitywars.api.Models.Entities.Chat;
-import com.eternitywars.api.Models.Entities.ChatCollection;
-import com.eternitywars.api.Models.Entities.Deck;
+import com.eternitywars.api.Models.ChatCollection;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

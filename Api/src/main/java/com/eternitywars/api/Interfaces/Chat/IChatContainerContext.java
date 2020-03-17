@@ -1,8 +1,7 @@
 package com.eternitywars.api.Interfaces.Chat;
 
 import com.eternitywars.api.Models.Entities.Chat;
-import com.eternitywars.api.Models.Entities.ChatCollection;
-import com.eternitywars.api.Models.Entities.User;
+import com.eternitywars.api.Models.ChatCollection;
 
 public interface IChatContainerContext
 {

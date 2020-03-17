@@ -3,7 +3,7 @@ package com.eternitywars.api.DAL.Repositories.Chat;
 import com.eternitywars.api.Factories.Chat.ChatContainerFactory;
 import com.eternitywars.api.Interfaces.Chat.IChatContainerContext;
 import com.eternitywars.api.Models.Entities.Chat;
-import com.eternitywars.api.Models.Entities.ChatCollection;
+import com.eternitywars.api.Models.ChatCollection;
 
 public class ChatContainerRepository implements IChatContainerContext
 {

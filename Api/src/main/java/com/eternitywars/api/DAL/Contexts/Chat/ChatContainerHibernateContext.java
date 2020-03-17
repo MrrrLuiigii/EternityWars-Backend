@@ -2,7 +2,7 @@ package com.eternitywars.api.DAL.Contexts.Chat;
 
 import com.eternitywars.api.Interfaces.Chat.IChatContainerContext;
 import com.eternitywars.api.Models.Entities.Chat;
-import com.eternitywars.api.Models.Entities.ChatCollection;
+import com.eternitywars.api.Models.ChatCollection;
 
 public class ChatContainerHibernateContext implements IChatContainerContext {
     @Override

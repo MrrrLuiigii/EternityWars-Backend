@@ -1,6 +1,8 @@
-package com.eternitywars.api.Models.Entities;
+package com.eternitywars.api.Models;
 
-import com.sun.tools.javac.util.List;
+import com.eternitywars.api.Models.Entities.Chat;
+
+import java.util.List;
 
 public class ChatCollection
 {
