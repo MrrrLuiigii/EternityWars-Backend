@@ -1,11 +1,25 @@
 package com.eternitywars.api.Models.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "chat")
 public class Chat
 {
+    @Id
+    @GeneratedValue
+    @Column(name = "id", unique = true, updatable = false)
     private int chatId;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<User> users;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "message", fetch = FetchType.EAGER)
     private List<Message> messages;
 
     public Chat()

@@ -32,6 +32,11 @@ public class ApiApplication
         configuration.addAnnotatedClass(Lobby.class);
         configuration.addAnnotatedClass(Player.class);
         configuration.addAnnotatedClass(Relationship.class);
+        configuration.addAnnotatedClass(ChatMessage.class);
+        configuration.addAnnotatedClass(ChatUser.class);
+        configuration.addAnnotatedClass(Message.class);
+        configuration.addAnnotatedClass(Chat.class);
+
 
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         return configuration.buildSessionFactory(serviceRegistry);
