@@ -16,17 +16,17 @@ public class Chat
 
     @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<User> users;
+    private List<ChatUser> users;
 
     @JsonIgnore
     @OneToMany(mappedBy = "message", fetch = FetchType.EAGER)
-    private List<Message> messages;
+    private List<ChatMessage> messages;
 
     public Chat()
     {
     }
 
-    public Chat(int chatId, List<User> users, List<Message> messages)
+    public Chat(int chatId, List<ChatUser> users, List<ChatMessage> messages)
     {
         this.chatId = chatId;
         this.users = users;
@@ -43,22 +43,22 @@ public class Chat
         this.chatId = chatId;
     }
 
-    public List<User> getUsers()
+    public List<ChatUser> getUsers()
     {
         return users;
     }
 
-    public void setUsers(List<User> users)
+    public void setUsers(List<ChatUser> users)
     {
         this.users = users;
     }
 
-    public List<Message> getMessages()
+    public List<ChatMessage> getMessages()
     {
         return messages;
     }
 
-    public void setMessages(List<Message> messages)
+    public void setMessages(List<ChatMessage> messages)
     {
         this.messages = messages;
     }

@@ -21,6 +21,9 @@ public class User extends Account
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<CardCollection> cardCollections;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<ChatUser> chats;
+
 
     public User()
     {
@@ -85,5 +88,15 @@ public class User extends Account
     public void setCardCollections(List<CardCollection> cardCollections)
     {
         this.cardCollections = cardCollections;
+    }
+
+    public List<ChatUser> getChats()
+    {
+        return chats;
+    }
+
+    public void setChats(List<ChatUser> chats)
+    {
+        this.chats = chats;
     }
 }

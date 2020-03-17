@@ -1,8 +1,7 @@
 package com.eternitywars.api.Models.Entities;
 
-import com.eternitywars.api.Models.Entities.User;
-
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "message")
@@ -20,27 +19,46 @@ public class Message
     @Column(name = "body", nullable = false, unique = true, length = 64)
     private String body;
 
-    public User getSender() {
-        return sender;
-    }
+    @OneToMany(mappedBy = "message", fetch = FetchType.EAGER)
+    private List<ChatMessage> chatMessages;
 
-    public void setSender(User sender) {
-        this.sender = sender;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public int getMessage_id() {
+    public int getMessageId()
+    {
         return messageId;
     }
 
-    public void setMessage_id(int message_id) {
-        this.messageId = message_id;
+    public void setMessageId(int messageId)
+    {
+        this.messageId = messageId;
+    }
+
+    public User getSender()
+    {
+        return sender;
+    }
+
+    public void setSender(User sender)
+    {
+        this.sender = sender;
+    }
+
+    public String getBody()
+    {
+        return body;
+    }
+
+    public void setBody(String body)
+    {
+        this.body = body;
+    }
+
+    public List<ChatMessage> getChatMessages()
+    {
+        return chatMessages;
+    }
+
+    public void setChatMessages(List<ChatMessage> chatMessages)
+    {
+        this.chatMessages = chatMessages;
     }
 }
