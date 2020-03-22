@@ -16,15 +16,17 @@ public class LobbyHibernateContext implements ILobbyContext
     private Transaction transaction;
 
     @Override
-    public boolean JoinLobby(Lobby lobby, Player player)
+    public boolean JoinLobby(Lobby lobby)
     {
         try
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
-            lobby.getPlayers().add(player);
-            session.persist(lobby);
+            Lobby getLobby = session.find(Lobby.class, lobby.getId());
+//            lobby.getPlayers().get(0).setLobby(getLobby);
+//            lobby.getPlayers().get(1).setLobby(getLobby);
+            session.merge(lobby);
 
             transaction.commit();
         } catch (Exception ex)

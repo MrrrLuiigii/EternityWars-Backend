@@ -1,5 +1,8 @@
 package com.eternitywars.api.Models.Entities;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -25,7 +28,8 @@ public class Lobby
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "player", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "lobby_id"))
+    @JoinTable(name = "player", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "lobby_id", unique = false))
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Player> players;
 
 
