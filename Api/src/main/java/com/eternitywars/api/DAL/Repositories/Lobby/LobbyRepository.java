@@ -20,9 +20,9 @@ public class LobbyRepository implements ILobbyContext
     }
 
 
-    public boolean JoinLobby(Lobby lobby, Player player)
+    public boolean JoinLobby(Lobby lobby)
     {
-        return lobbyContext.JoinLobby(lobby, player);
+        return lobbyContext.JoinLobby(lobby);
     }
 
     public boolean LeaveLobby(Lobby lobby, Player player)
