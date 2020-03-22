@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UserContainerHibernateContext implements IUserContainerContext
 {
-    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
+    private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;

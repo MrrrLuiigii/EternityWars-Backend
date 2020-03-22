@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 
 public class UserHibernateContext implements IUserContext
 {
-    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
+    private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;

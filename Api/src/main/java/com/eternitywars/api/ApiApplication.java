@@ -18,7 +18,9 @@ public class ApiApplication
         SpringApplication.run(ApiApplication.class, args);
     }
 
-    public static SessionFactory getSessionFactory()
+    public static SessionFactory sessionFactory = getSessionFactory();
+
+    private static SessionFactory getSessionFactory()
     {
         Configuration configuration = new Configuration();
         configuration.configure("hibernate.cfg.xml");

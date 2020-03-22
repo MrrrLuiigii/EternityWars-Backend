@@ -9,7 +9,7 @@ import org.hibernate.Transaction;
 
 public class RelationshipHibernateContext implements IRelationshipContext
 {
-    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
+    private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;

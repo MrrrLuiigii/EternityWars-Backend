@@ -12,7 +12,7 @@ import java.util.List;
 
 public class LobbyContainerHibernateContext implements ILobbyContainerContext {
 
-    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
+    private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;

@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class DeckContainerHibernateContext implements IDeckContainerContext
 {
-    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
+    private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;

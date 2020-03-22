@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CardContainerHibernateContext implements ICardContainerContext
 {
-    private static SessionFactory sessionFactory = ApiApplication.getSessionFactory();
+    private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;
