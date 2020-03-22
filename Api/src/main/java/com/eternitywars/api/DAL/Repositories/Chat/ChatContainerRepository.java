@@ -4,6 +4,7 @@ import com.eternitywars.api.Factories.Chat.ChatContainerFactory;
 import com.eternitywars.api.Interfaces.Chat.IChatContainerContext;
 import com.eternitywars.api.Models.Entities.Chat;
 import com.eternitywars.api.Models.ChatCollection;
+import com.eternitywars.api.Models.Entities.User;
 
 public class ChatContainerRepository implements IChatContainerContext
 {
@@ -14,10 +15,9 @@ public class ChatContainerRepository implements IChatContainerContext
         this.chatContainerContext = ChatContainerFactory.getChatHibernateContext();
     }
 
+
     @Override
-    public ChatCollection GetAllChats() {
-        return chatContainerContext.GetAllChats();
-    }
+    public ChatCollection GetChatsByUser(User user) { return chatContainerContext.GetChatsByUser(user); }
 
     @Override
     public Chat GetChatById(int chatId) {
@@ -25,8 +25,8 @@ public class ChatContainerRepository implements IChatContainerContext
     }
 
     @Override
-    public boolean DeleteChat(int chatId) {
-        return chatContainerContext.DeleteChat(chatId);
+    public boolean DeleteChat(Chat chat) {
+        return chatContainerContext.DeleteChat(chat);
     }
 
     @Override
