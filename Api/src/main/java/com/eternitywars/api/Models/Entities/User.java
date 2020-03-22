@@ -1,6 +1,8 @@
 package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,10 +20,12 @@ public class User extends Account
     @Column(name = "pack_amount", nullable = false)
     private int packAmount;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CardCollection> cardCollections;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ChatUser> chats;
 
 

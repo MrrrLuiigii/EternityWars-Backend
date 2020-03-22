@@ -1,6 +1,8 @@
 package com.eternitywars.api.Models.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -15,11 +17,13 @@ public class Chat
     private int chatId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ChatUser> users;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "message", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "message")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ChatMessage> messages;
 
     public Chat()
