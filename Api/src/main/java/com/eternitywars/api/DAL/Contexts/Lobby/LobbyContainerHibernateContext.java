@@ -62,18 +62,19 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     @Override
     public Lobby GetLobbyById(int lobbyId) {
 
-        Lobby returnlobby;
+        Lobby lobby;
 
         try {
             session = sessionFactory.openSession();
-            returnlobby = session.find(Lobby.class, lobbyId);
+            lobby = session.find(Lobby.class, lobbyId);
+            lobby.getPlayers();
         } catch (Exception ex) {
             return null;
         } finally {
             session.close();
         }
 
-        return returnlobby;
+        return lobby;
     }
 
     @Override
