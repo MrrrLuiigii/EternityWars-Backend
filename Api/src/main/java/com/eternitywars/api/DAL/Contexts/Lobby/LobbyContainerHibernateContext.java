@@ -24,18 +24,7 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-
-//            Player player = lobby.getPlayers().get(0);
-//            lobby.getPlayers().clear();
-//
-//            int lobbyId = (int)session.save(lobby);
-//            Lobby getLobby = session.find(Lobby.class, lobbyId);
-//
-//            getLobby.getPlayers().clear();
-//            player.setLobby(getLobby);
-//            getLobby.getPlayers().add(player);
-//
-//            session.merge(getLobby);
+            lobby.getPlayers().get(0).setLobby(lobby);
             session.persist(lobby);
             transaction.commit();
         } catch (Exception ex)
