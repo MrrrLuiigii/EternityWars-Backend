@@ -28,7 +28,7 @@ public class Lobby
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "player", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "lobby_id", unique = false))
+    @JoinTable(name = "player", joinColumns = @JoinColumn(name = "lobby_id"), inverseJoinColumns = @JoinColumn(name = "id"))
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Player> players;
 
