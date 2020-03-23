@@ -71,7 +71,7 @@ public class UserContainerHibernateContext implements IUserContainerContext
     {
         String hql = "SELECT c FROM User c WHERE c.email = :email";
 
-        User user = null;
+        User user = new User();
 
         try
         {

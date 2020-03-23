@@ -1,6 +1,7 @@
 package com.eternitywars.Models;
 
-import com.sun.tools.javac.util.List;
+
+import java.util.List;
 
 public class ChatCollection
 {

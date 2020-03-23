@@ -1,10 +1,13 @@
 package com.eternitywars.Logic.WebsocketServer.Setup;
 
+import com.eternitywars.Logic.WebsocketServer.Models.WsReturnMessage;
+import com.google.gson.Gson;
 import org.eclipse.jetty.websocket.api.Session;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -22,12 +25,14 @@ public class WebsocketService {
         listenerSessions.add(session);
     }
 
-    public void sendmessage(Session session, String message) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
-    {
+    public void sendmessage(Session session, String message) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, IOException {
         JSONObject jsonObject = new JSONObject(message);
         Class ReflectionClass = Class.forName("com.eternitywars.Logic." + jsonObject.getString("Subject"));
         Method method = ReflectionClass.getMethod(jsonObject.getString("Action"), JSONObject.class);
-        method.invoke(ReflectionClass.getDeclaredConstructor().newInstance(), jsonObject);
+        Object object = method.invoke(ReflectionClass.getDeclaredConstructor().newInstance(), jsonObject);
+        WsReturnMessage wsReturnMessage = new WsReturnMessage(object, jsonObject.getString("Action"));
+        Gson g = new Gson();
+        session.getRemote().sendString(g.toJson(wsReturnMessage));
     }
 
     @PostConstruct

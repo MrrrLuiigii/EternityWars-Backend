@@ -62,10 +62,10 @@ public class UserContainerLogic
 
         HttpEntity<String> request = new HttpEntity<>(headers);
 
-        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/private/user/getByEmail/{email}", HttpMethod.GET, request , User.class, email);
+        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/public/user/getByEmail/{email}", HttpMethod.GET, request , User.class, email);
+
 
         return response.getBody();
-
     }
 
     public User GetUserById(User user)
