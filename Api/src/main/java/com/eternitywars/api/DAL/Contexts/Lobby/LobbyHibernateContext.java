@@ -24,9 +24,12 @@ public class LobbyHibernateContext implements ILobbyContext
             transaction = session.beginTransaction();
 
             Lobby getLobby = session.find(Lobby.class, lobby.getId());
-//            lobby.getPlayers().get(0).setLobby(getLobby);
-//            lobby.getPlayers().get(1).setLobby(getLobby);
-            session.merge(lobby);
+
+            Player player = lobby.getPlayers().get(1);
+            getLobby.getPlayers().add(player);
+            player.setLobby(getLobby);
+
+            session.merge(getLobby);
 
             transaction.commit();
         } catch (Exception ex)

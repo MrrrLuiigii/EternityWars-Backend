@@ -3,7 +3,6 @@ package com.eternitywars.api.Models.Entities;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class User extends Account
 
     @OneToMany(mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CardCollection> cardCollections;
+    private List<CardCollection> cardCollection;
 
     @OneToMany(mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -84,14 +83,14 @@ public class User extends Account
         this.packAmount = packAmount;
     }
 
-    public List<CardCollection> getCardCollections()
+    public List<CardCollection> getCardCollection()
     {
-        return cardCollections;
+        return cardCollection;
     }
 
-    public void setCardCollections(List<CardCollection> cardCollections)
+    public void setCardCollection(List<CardCollection> cardCollection)
     {
-        this.cardCollections = cardCollections;
+        this.cardCollection = cardCollection;
     }
 
     public List<ChatUser> getChats()

@@ -19,9 +19,9 @@ public class Player
     @JoinColumn(name = "user_id", nullable = false, referencedColumnName = "id")
     private User user;
 
-//    @ManyToOne
-//    @JoinColumn(name = "lobby_id", nullable = false, referencedColumnName = "id")
-//    private Lobby lobby;
+    @ManyToOne
+    @JoinColumn(name = "lobby_id", nullable = false, referencedColumnName = "id")
+    private Lobby lobby;
 
     @Column(name = "lobby_player_status", columnDefinition = "int default 0", nullable = false)
     private LobbyPlayerStatus lobbyPlayerStatus;
@@ -68,15 +68,15 @@ public class Player
         this.deck = deck;
     }
 
-//    public Lobby getLobby()
-//    {
-//        return lobby;
-//    }
-//
-//    public void setLobby(Lobby lobby_id)
-//    {
-//        this.lobby = lobby_id;
-//    }
+    public Lobby getLobby()
+    {
+        return lobby;
+    }
+
+    public void setLobby(Lobby lobby_id)
+    {
+        this.lobby = lobby_id;
+    }
 
     public User getUser()
     {

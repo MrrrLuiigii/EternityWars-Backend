@@ -24,18 +24,7 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-
-//            Player player = lobby.getPlayers().get(0);
-//            lobby.getPlayers().clear();
-//
-//            int lobbyId = (int)session.save(lobby);
-//            Lobby getLobby = session.find(Lobby.class, lobbyId);
-//
-//            getLobby.getPlayers().clear();
-//            player.setLobby(getLobby);
-//            getLobby.getPlayers().add(player);
-//
-//            session.merge(getLobby);
+            lobby.getPlayers().get(0).setLobby(lobby);
             session.persist(lobby);
             transaction.commit();
         } catch (Exception ex)
@@ -73,18 +62,19 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     @Override
     public Lobby GetLobbyById(int lobbyId) {
 
-        Lobby returnlobby;
+        Lobby lobby;
 
         try {
             session = sessionFactory.openSession();
-            returnlobby = session.find(Lobby.class, lobbyId);
+            lobby = session.find(Lobby.class, lobbyId);
+            lobby.getPlayers();
         } catch (Exception ex) {
             return null;
         } finally {
             session.close();
         }
 
-        return returnlobby;
+        return lobby;
     }
 
     @Override

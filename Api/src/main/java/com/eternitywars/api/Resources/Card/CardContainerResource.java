@@ -31,7 +31,7 @@ public class CardContainerResource
         return cardContainerRepository.GetCards();
     }
 
-    @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public boolean DeleteCard(@RequestBody CardCollectionUpdater cardCollectionUpdater)
     {
         User user = cardCollectionUpdater.getUser();
