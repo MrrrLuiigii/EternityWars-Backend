@@ -51,7 +51,28 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public Cards GetCardsByUser(int userId)
     {
-        return null;
+        User user;
+
+        try
+        {
+            session = sessionFactory.openSession();
+            user = session.find(User.class, userId);
+        } catch (Exception ex)
+        {
+            return null;
+        } finally
+        {
+            session.close();
+        }
+
+        Cards cards = new Cards();
+
+        for (CardCollection cc : user.getCardCollection())
+        {
+            cards.getCards().add(cc.getCard());
+        }
+
+        return cards;
     }
 
     @Override
