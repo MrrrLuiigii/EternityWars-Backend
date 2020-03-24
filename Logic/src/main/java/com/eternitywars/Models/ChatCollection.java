@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ChatCollection
 {
-    List<Chat> chats;
+    private List<Chat> chats;
 
     public ChatCollection()
     {

@@ -1,9 +1,6 @@
 package com.eternitywars.api.Models.Entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "card")
@@ -32,13 +29,6 @@ public class Card
     @Column(name = "taunt", nullable = false)
     private boolean taunt;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
-    private List<CardCollection> cardCollection;
-
-//    @JsonIgnore
-//    @OneToMany(mappedBy = "card", fetch = FetchType.EAGER)
-//    private List<DeckCard> deckCards;
 
     public Card()
     {
@@ -118,24 +108,4 @@ public class Card
     {
         this.taunt = taunt;
     }
-
-    public List<CardCollection> getCardCollection()
-    {
-        return cardCollection;
-    }
-
-    public void setCardCollection(List<CardCollection> cardCollection)
-    {
-        this.cardCollection = cardCollection;
-    }
-
-//    public List<DeckCard> getDeckCards()
-//    {
-//        return deckCards;
-//    }
-//
-//    public void setDeckCards(List<DeckCard> deckCards)
-//    {
-//        this.deckCards = deckCards;
-//    }
 }

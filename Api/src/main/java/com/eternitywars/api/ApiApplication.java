@@ -28,14 +28,10 @@ public class ApiApplication
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Card.class);
         configuration.addAnnotatedClass(Deck.class);
-        configuration.addAnnotatedClass(CardCollection.class);
-        configuration.addAnnotatedClass(DeckCard.class);
         configuration.addAnnotatedClass(Relationship.class);
         configuration.addAnnotatedClass(Lobby.class);
         configuration.addAnnotatedClass(Player.class);
         configuration.addAnnotatedClass(Relationship.class);
-        configuration.addAnnotatedClass(ChatMessage.class);
-        configuration.addAnnotatedClass(ChatUser.class);
         configuration.addAnnotatedClass(Message.class);
         configuration.addAnnotatedClass(Chat.class);
 

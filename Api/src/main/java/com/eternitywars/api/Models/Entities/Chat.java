@@ -1,6 +1,7 @@
 package com.eternitywars.api.Models.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.JoinColumnOrFormula;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -17,20 +18,23 @@ public class Chat
     private int chatId;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany
+    @JoinTable(name = "chat_user", joinColumns = @JoinColumn(name = "chat_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ChatUser> users;
+    private List<User> users;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "message")
+    @OneToMany
+    @JoinTable(name = "chat_message", joinColumns = @JoinColumn(name = "chat_id"), inverseJoinColumns = @JoinColumn(name = "message_id"))
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ChatMessage> messages;
+    private List<Message> messages;
+
 
     public Chat()
     {
     }
 
-    public Chat(int chatId, List<ChatUser> users, List<ChatMessage> messages)
+    public Chat(int chatId, List<User> users, List<Message> messages)
     {
         this.chatId = chatId;
         this.users = users;
@@ -47,22 +51,22 @@ public class Chat
         this.chatId = chatId;
     }
 
-    public List<ChatUser> getUsers()
+    public List<User> getUsers()
     {
         return users;
     }
 
-    public void setUsers(List<ChatUser> users)
+    public void setUsers(List<User> users)
     {
         this.users = users;
     }
 
-    public List<ChatMessage> getMessages()
+    public List<Message> getMessages()
     {
         return messages;
     }
 
-    public void setMessages(List<ChatMessage> messages)
+    public void setMessages(List<Message> messages)
     {
         this.messages = messages;
     }

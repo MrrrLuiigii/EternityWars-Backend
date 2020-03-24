@@ -5,9 +5,9 @@ import java.util.List;
 
 public class Chat
 {
-    int chatId;
-    List<User> users;
-    List<Message> messages;
+    private int chatId;
+    private List<User> users;
+    private List<Message> messages;
 
     public Chat()
     {
