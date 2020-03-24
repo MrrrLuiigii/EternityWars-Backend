@@ -19,13 +19,14 @@ public class User extends Account
     @Column(name = "pack_amount", nullable = false)
     private int packAmount;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany
+    @JoinTable(name = "user_card", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CardCollection> cardCollection;
+    private List<Card> cardCollection;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "users")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ChatUser> chats;
+    private List<Chat> chats;
 
 
     public User()
@@ -83,22 +84,22 @@ public class User extends Account
         this.packAmount = packAmount;
     }
 
-    public List<CardCollection> getCardCollection()
+    public List<Card> getCardCollection()
     {
         return cardCollection;
     }
 
-    public void setCardCollection(List<CardCollection> cardCollection)
+    public void setCardCollection(List<Card> cardCollection)
     {
         this.cardCollection = cardCollection;
     }
 
-    public List<ChatUser> getChats()
+    public List<Chat> getChats()
     {
         return chats;
     }
 
-    public void setChats(List<ChatUser> chats)
+    public void setChats(List<Chat> chats)
     {
         this.chats = chats;
     }

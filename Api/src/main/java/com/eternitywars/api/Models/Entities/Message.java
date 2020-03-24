@@ -1,7 +1,6 @@
 package com.eternitywars.api.Models.Entities;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "message")
@@ -10,7 +9,7 @@ public class Message
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, updatable = false)
-    private int messageId;
+    private int id;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -19,17 +18,17 @@ public class Message
     @Column(name = "body", nullable = false, unique = true, length = 64)
     private String body;
 
-    @OneToMany(mappedBy = "message", fetch = FetchType.EAGER)
-    private List<ChatMessage> chatMessages;
+    @ManyToOne
+    private Chat chat;
 
-    public int getMessageId()
+    public int getId()
     {
-        return messageId;
+        return id;
     }
 
-    public void setMessageId(int messageId)
+    public void setId(int messageId)
     {
-        this.messageId = messageId;
+        this.id = messageId;
     }
 
     public User getSender()
@@ -52,13 +51,13 @@ public class Message
         this.body = body;
     }
 
-    public List<ChatMessage> getChatMessages()
+    public Chat getChat()
     {
-        return chatMessages;
+        return chat;
     }
 
-    public void setChatMessages(List<ChatMessage> chatMessages)
+    public void setChat(Chat chat)
     {
-        this.chatMessages = chatMessages;
+        this.chat = chat;
     }
 }

@@ -1,10 +1,11 @@
 package com.eternitywars.Models;
 
-import com.sun.tools.javac.util.List;
+
+import java.util.List;
 
 public class ChatCollection
 {
-    List<Chat> chats;
+    private List<Chat> chats;
 
     public ChatCollection()
     {

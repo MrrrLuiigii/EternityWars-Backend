@@ -4,7 +4,6 @@ import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Card.ICardContainerContext;
 import com.eternitywars.api.Models.Cards;
 import com.eternitywars.api.Models.Entities.Card;
-import com.eternitywars.api.Models.Entities.CardCollection;
 import com.eternitywars.api.Models.Entities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -51,28 +50,29 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public Cards GetCardsByUser(int userId)
     {
-        User user;
-
-        try
-        {
-            session = sessionFactory.openSession();
-            user = session.find(User.class, userId);
-        } catch (Exception ex)
-        {
-            return null;
-        } finally
-        {
-            session.close();
-        }
-
-        Cards cards = new Cards();
-
-        for (CardCollection cc : user.getCardCollection())
-        {
-            cards.getCards().add(cc.getCard());
-        }
-
-        return cards;
+//        User user;
+//
+//        try
+//        {
+//            session = sessionFactory.openSession();
+//            user = session.find(User.class, userId);
+//        } catch (Exception ex)
+//        {
+//            return null;
+//        } finally
+//        {
+//            session.close();
+//        }
+//
+//        Cards cards = new Cards();
+//
+//        for (CardCollection cc : user.getCardCollection())
+//        {
+//            cards.getCards().add(cc.getCard());
+//        }
+//
+//        return cards;
+        return null;
     }
 
     @Override
@@ -99,75 +99,77 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public boolean AddCard(User user, Card card)
     {
-        CardCollection cardCollection = new CardCollection();
-        cardCollection.setUser(user);
-        cardCollection.setCard(card);
-
-        boolean status = true;
-
-        try
-        {
-            session = sessionFactory.openSession();
-            transaction = session.beginTransaction();
-
-            session.persist(cardCollection);
-            transaction.commit();
-        } catch (Exception ex)
-        {
-            if (transaction != null)
-            {
-                transaction.rollback();
-                status = false;
-
-            }
-
-            ex.printStackTrace();
-        } finally
-        {
-            session.close();
-        }
-
-        return status;
+//        CardCollection cardCollection = new CardCollection();
+//        cardCollection.setUser(user);
+//        cardCollection.setCard(card);
+//
+//        boolean status = true;
+//
+//        try
+//        {
+//            session = sessionFactory.openSession();
+//            transaction = session.beginTransaction();
+//
+//            session.persist(cardCollection);
+//            transaction.commit();
+//        } catch (Exception ex)
+//        {
+//            if (transaction != null)
+//            {
+//                transaction.rollback();
+//                status = false;
+//
+//            }
+//
+//            ex.printStackTrace();
+//        } finally
+//        {
+//            session.close();
+//        }
+//
+//        return status;
+        return false;
     }
 
     @Override
     public boolean DeleteCard(User user, Card card)
     {
-        CardCollection cardCollection = new CardCollection();
-        cardCollection.setUser(user);
-        cardCollection.setCard(card);
-
-        String hql = "SELECT c FROM CardCollection c WHERE c.user = :user AND c.card = :card";
-
-        boolean status = true;
-
-        try
-        {
-            session = sessionFactory.openSession();
-
-            TypedQuery<CardCollection> typedQuery = session.createQuery(hql, CardCollection.class);
-            typedQuery.setParameter("user", user);
-            typedQuery.setParameter("card", card);
-
-            cardCollection = typedQuery.getSingleResult();
-
-            transaction = session.beginTransaction();
-            session.remove(cardCollection);
-            transaction.commit();
-        } catch (Exception ex)
-        {
-            if (transaction != null)
-            {
-                transaction.rollback();
-            }
-
-            ex.printStackTrace();
-            status = false;
-        } finally
-        {
-            session.close();
-        }
-
-        return status;
+//        CardCollection cardCollection = new CardCollection();
+//        cardCollection.setUser(user);
+//        cardCollection.setCard(card);
+//
+//        String hql = "SELECT c FROM CardCollection c WHERE c.user = :user AND c.card = :card";
+//
+//        boolean status = true;
+//
+//        try
+//        {
+//            session = sessionFactory.openSession();
+//
+//            TypedQuery<CardCollection> typedQuery = session.createQuery(hql, CardCollection.class);
+//            typedQuery.setParameter("user", user);
+//            typedQuery.setParameter("card", card);
+//
+//            cardCollection = typedQuery.getSingleResult();
+//
+//            transaction = session.beginTransaction();
+//            session.remove(cardCollection);
+//            transaction.commit();
+//        } catch (Exception ex)
+//        {
+//            if (transaction != null)
+//            {
+//                transaction.rollback();
+//            }
+//
+//            ex.printStackTrace();
+//            status = false;
+//        } finally
+//        {
+//            session.close();
+//        }
+//
+//        return status;
+        return false;
     }
 }
