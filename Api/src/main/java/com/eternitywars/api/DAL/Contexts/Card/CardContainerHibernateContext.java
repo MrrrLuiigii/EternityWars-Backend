@@ -129,42 +129,39 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public boolean DeleteCard(User user, Card card)
     {
-//        CardCollection cardCollection = new CardCollection();
-//        cardCollection.setUser(user);
-//        cardCollection.setCard(card);
-//
-//        String hql = "SELECT c FROM CardCollection c WHERE c.user = :user AND c.card = :card";
-//
-//        boolean status = true;
-//
-//        try
-//        {
-//            session = sessionFactory.openSession();
-//
-//            TypedQuery<CardCollection> typedQuery = session.createQuery(hql, CardCollection.class);
-//            typedQuery.setParameter("user", user);
-//            typedQuery.setParameter("card", card);
-//
-//            cardCollection = typedQuery.getSingleResult();
-//
-//            transaction = session.beginTransaction();
-//            session.remove(cardCollection);
-//            transaction.commit();
-//        } catch (Exception ex)
-//        {
-//            if (transaction != null)
-//            {
-//                transaction.rollback();
-//            }
-//
-//            ex.printStackTrace();
-//            status = false;
-//        } finally
-//        {
-//            session.close();
-//        }
-//
-//        return status;
-        return false;
+        boolean status = true;
+
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            User getUser = session.find(User.class, user.getUserId());
+
+            for (Card c : getUser.getCardCollection())
+            {
+                if (c.getCardId() == card.getCardId())
+                {
+                    getUser.getCardCollection().remove(c);
+                }
+            }
+
+            session.merge(getUser);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+                status = false;
+
+            }
+
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return status;
     }
 }
