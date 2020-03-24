@@ -8,6 +8,8 @@ public class MessageHandler
     {
         Gson g = new Gson();
         object = g.fromJson(message, object.getClass());
+
         return object;
+
     }
 }
