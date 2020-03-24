@@ -26,5 +26,4 @@ public class WebSocketJetty {
     public void onMessage(Session session, String text) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, IOException {
         ServiceBean.getService().sendmessage(session, text);
     }
-
 }

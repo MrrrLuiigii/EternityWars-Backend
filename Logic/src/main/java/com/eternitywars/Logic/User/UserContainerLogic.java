@@ -1,9 +1,13 @@
 package com.eternitywars.Logic.User;
 
+import com.eternitywars.Models.Account;
 import com.eternitywars.Models.Enums.AccountStatus;
 import com.eternitywars.Models.MessageHandler;
 import com.eternitywars.Models.User;
 import com.eternitywars.Models.UserCollection;
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -11,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
 public class UserContainerLogic
 {
     private RestTemplate restTemplate = new RestTemplate();
-
+    private Gson gson;
 
     public UserCollection GetUsers(String token)
     {
@@ -25,7 +29,9 @@ public class UserContainerLogic
 
     public User AddUser(JSONObject jsonObject)
     {
-        User user = (User)MessageHandler.HandleMessage(jsonObject.getString("Content"), User.class);
+        //Object object = jsonObject.getJSONObject("Content");
+        User user = new User();
+        user.setUsername("Pieter");
         String token = (String)MessageHandler.HandleMessage(jsonObject.getString("token"), String.class);
         if(CheckUserTaken(GetUsers(token), user))
         {
