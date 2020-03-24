@@ -50,29 +50,28 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public Cards GetCardsByUser(int userId)
     {
-//        User user;
-//
-//        try
-//        {
-//            session = sessionFactory.openSession();
-//            user = session.find(User.class, userId);
-//        } catch (Exception ex)
-//        {
-//            return null;
-//        } finally
-//        {
-//            session.close();
-//        }
-//
-//        Cards cards = new Cards();
-//
-//        for (CardCollection cc : user.getCardCollection())
-//        {
-//            cards.getCards().add(cc.getCard());
-//        }
-//
-//        return cards;
-        return null;
+        User user;
+
+        try
+        {
+            session = sessionFactory.openSession();
+            user = session.find(User.class, userId);
+        } catch (Exception ex)
+        {
+            return null;
+        } finally
+        {
+            session.close();
+        }
+
+        Cards cards = new Cards();
+
+        for (Card c : user.getCardCollection())
+        {
+            cards.AddCard(c);
+        }
+
+        return cards;
     }
 
     @Override
@@ -99,36 +98,32 @@ public class CardContainerHibernateContext implements ICardContainerContext
     @Override
     public boolean AddCard(User user, Card card)
     {
-//        CardCollection cardCollection = new CardCollection();
-//        cardCollection.setUser(user);
-//        cardCollection.setCard(card);
-//
-//        boolean status = true;
-//
-//        try
-//        {
-//            session = sessionFactory.openSession();
-//            transaction = session.beginTransaction();
-//
-//            session.persist(cardCollection);
-//            transaction.commit();
-//        } catch (Exception ex)
-//        {
-//            if (transaction != null)
-//            {
-//                transaction.rollback();
-//                status = false;
-//
-//            }
-//
-//            ex.printStackTrace();
-//        } finally
-//        {
-//            session.close();
-//        }
-//
-//        return status;
-        return false;
+        boolean status = true;
+
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            User getUser = session.find(User.class, user.getUserId());
+            getUser.getCardCollection().add(card);
+            session.merge(getUser);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+                status = false;
+
+            }
+
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return status;
     }
 
     @Override
