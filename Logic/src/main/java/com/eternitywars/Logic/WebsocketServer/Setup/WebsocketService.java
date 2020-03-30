@@ -1,6 +1,7 @@
 package com.eternitywars.Logic.WebsocketServer.Setup;
 
 import com.eternitywars.Logic.WebsocketServer.Models.WsReturnMessage;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsRegister;
 import com.eternitywars.Models.MessageHandler;
 import com.google.gson.Gson;
 import org.eclipse.jetty.websocket.api.Session;
@@ -30,10 +31,7 @@ public class WebsocketService {
         JSONObject jsonObject = new JSONObject(message);
         Class ReflectionClass = Class.forName("com.eternitywars.Logic." + jsonObject.getString("Subject"));
 
-        //getting ws model.
-        Object wsModel = Class.forName("com.eternitywars.Logic.WebsocketServer.WsModels." + jsonObject.getString("wsModelName")).getDeclaredConstructor().newInstance();
-        Object wsObject = MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsModel);
-
+        Object wsObject = HandleWebsocketModel(session, jsonObject);
 
         //reflection
         Method method = ReflectionClass.getMethod(jsonObject.getString("Action"), wsObject.getClass());
@@ -55,6 +53,19 @@ public class WebsocketService {
 
         Thread thread = new Thread(runnable);
         thread.start();
+    }
+
+    private Object HandleWebsocketModel(Session session,  JSONObject jsonObject) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+
+        //getting ws model.
+        Object wsModel = Class.forName("com.eternitywars.Logic.WebsocketServer.WsModels." + jsonObject.getString("wsModelName")).getDeclaredConstructor().newInstance();
+        if(jsonObject.getString("wsModelName").equals("WsRegister"))
+        {
+            WsRegister wsRegister = (WsRegister)wsModel;
+            wsRegister.getParameter().setSession(session);
+            return MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsRegister);
+        }
+        return MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsModel);
     }
 
 }
