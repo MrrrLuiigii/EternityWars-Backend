@@ -58,7 +58,8 @@ public class UserContainerResource
             UserViewmodel uvm = new UserViewmodel(
                     u.getUserId(),
                     u.getUsername(),
-                    u.getEmail()
+                    u.getEmail(),
+                    u.getAccountStatus()
             );
 
             usersViewmodel.getUsers().add(uvm);

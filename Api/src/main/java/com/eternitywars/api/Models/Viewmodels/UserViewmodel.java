@@ -1,16 +1,20 @@
 package com.eternitywars.api.Models.Viewmodels;
 
+import com.eternitywars.api.Models.Enums.AccountStatus;
+
 public class UserViewmodel
 {
     private int id;
     private String username;
     private String email;
+    private AccountStatus status;
 
-    public UserViewmodel(int id, String username, String email)
+    public UserViewmodel(int id, String username, String email, AccountStatus status)
     {
         this.id = id;
         this.username = username;
         this.email = email;
+        this.status = status;
     }
 
     public int getId()
@@ -41,5 +45,15 @@ public class UserViewmodel
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public AccountStatus getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(AccountStatus status)
+    {
+        this.status = status;
     }
 }
