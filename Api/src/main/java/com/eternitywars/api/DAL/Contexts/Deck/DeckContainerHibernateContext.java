@@ -34,18 +34,6 @@ public class DeckContainerHibernateContext implements IDeckContainerContext
     }
 
     @Override
-    public Decks GetEmptyDecksByUserId(int userId)
-    {
-        return null;
-    }
-
-    @Override
-    public Deck GetEmptyDeckById(int deckId)
-    {
-        return null;
-    }
-
-    @Override
     public Decks GetDecksByUserId(int userId)
     {
         return null;
