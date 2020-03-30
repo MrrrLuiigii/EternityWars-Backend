@@ -67,5 +67,4 @@ public class WebsocketService {
         }
         return MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsModel);
     }
-
 }

@@ -3,9 +3,8 @@ package com.eternitywars.Logic.WebsocketServer.Executors;
 import com.eternitywars.Logic.Friend.FriendContainerLogic;
 import com.eternitywars.Logic.Friend.FriendLogic;
 import com.eternitywars.Logic.WebsocketServer.Models.WsReturnMessage;
-import com.eternitywars.Models.FriendCollection;
 import com.eternitywars.Models.User;
-import com.eternitywars.Models.UserCollection;
+import com.eternitywars.Models.Users;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.eclipse.jetty.websocket.api.Session;
@@ -18,7 +17,7 @@ public class FriendExecutor implements IExecutor
     private FriendLogic friendLogic = new FriendLogic();
     private FriendContainerLogic friendContainerLogic = new FriendContainerLogic();
 
-    private UserCollection userCollection = new UserCollection();
+    private Users users = new Users();
 
     private JSONObject message;
     private Session session;
@@ -93,7 +92,7 @@ public class FriendExecutor implements IExecutor
         //returnMessage.setContent(friendCollection);
         session.getRemote().sendString(gson.toJson(returnMessage));
 
-        for(User u : userCollection.getUsers())
+        for(User u : users.getUsers())
         {
             if (u.getUsername().equals(friendName))
             {
