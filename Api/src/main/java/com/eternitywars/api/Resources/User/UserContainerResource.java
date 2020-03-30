@@ -4,6 +4,8 @@ import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Users;
+import com.eternitywars.api.Models.Viewmodels.UserViewmodel;
+import com.eternitywars.api.Models.Viewmodels.UsersViewmodel;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -45,8 +47,23 @@ public class UserContainerResource
     }
 
     @GetMapping(value = "/get")
-    public Users GetUsers()
+    public UsersViewmodel GetUsers()
     {
-        return userContainerRepository.GetUsers();
+        Users users = userContainerRepository.GetUsers();
+
+        UsersViewmodel usersViewmodel = new UsersViewmodel();
+
+        for (User u : users.getUsers())
+        {
+            UserViewmodel uvm = new UserViewmodel(
+                    u.getUserId(),
+                    u.getUsername(),
+                    u.getEmail()
+            );
+
+            usersViewmodel.getUserViewmodels().add(uvm);
+        }
+
+        return usersViewmodel;
     }
 }

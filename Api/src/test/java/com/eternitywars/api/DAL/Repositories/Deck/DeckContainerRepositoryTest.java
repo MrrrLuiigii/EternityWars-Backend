@@ -123,28 +123,28 @@ class DeckContainerRepositoryTest
             assertEquals(expectedDecks.getDecks().get(i).getUser().getUserId(), decks.getDecks().get(i).getUser().getUserId());
             assertEquals(expectedDecks.getDecks().get(i).getName(), decks.getDecks().get(i).getName());
 
-            for (int j = 0; j < expectedDecks.getDecks().get(i).getCards().getCards().size(); j++)
+            for (int j = 0; j < expectedDecks.getDecks().get(i).getCards().size(); j++)
             {
-                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getCardId(),
-                        decks.getDecks().get(i).getCards().getCards().get(j).getCardId());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().get(j).getCardId(),
+                        decks.getDecks().get(i).getCards().get(j).getCardId());
 
-                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getAttack(),
-                        decks.getDecks().get(i).getCards().getCards().get(j).getAttack());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().get(j).getAttack(),
+                        decks.getDecks().get(i).getCards().get(j).getAttack());
 
-                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getHealth(),
-                        decks.getDecks().get(i).getCards().getCards().get(j).getHealth());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().get(j).getHealth(),
+                        decks.getDecks().get(i).getCards().get(j).getHealth());
 
-                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getBlue_mana(),
-                        decks.getDecks().get(i).getCards().getCards().get(j).getBlue_mana());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().get(j).getBlue_mana(),
+                        decks.getDecks().get(i).getCards().get(j).getBlue_mana());
 
-                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getDeath_essence(),
-                        decks.getDecks().get(i).getCards().getCards().get(j).getDeath_essence());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().get(j).getDeath_essence(),
+                        decks.getDecks().get(i).getCards().get(j).getDeath_essence());
 
-                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getTaunt(),
-                        decks.getDecks().get(i).getCards().getCards().get(j).getTaunt());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().get(j).getTaunt(),
+                        decks.getDecks().get(i).getCards().get(j).getTaunt());
 
-                assertEquals(expectedDecks.getDecks().get(i).getCards().getCards().get(j).getName(),
-                        decks.getDecks().get(i).getCards().getCards().get(j).getName());
+                assertEquals(expectedDecks.getDecks().get(i).getCards().get(j).getName(),
+                        decks.getDecks().get(i).getCards().get(j).getName());
             }
         }
     }
@@ -160,15 +160,15 @@ class DeckContainerRepositoryTest
         assertEquals(expectedDeck.getUser().getUserId(), deck.getUser().getUserId());
         assertEquals(expectedDeck.getName(), deck.getName());
 
-        for (int i = 0; i < expectedDeck.getCards().getCards().size(); i++)
+        for (int i = 0; i < expectedDeck.getCards().size(); i++)
         {
-            assertEquals(expectedDeck.getCards().getCards().get(i).getCardId(), deck.getCards().getCards().get(i).getCardId());
-            assertEquals(expectedDeck.getCards().getCards().get(i).getName(), deck.getCards().getCards().get(i).getName());
-            assertEquals(expectedDeck.getCards().getCards().get(i).getAttack(), deck.getCards().getCards().get(i).getAttack());
-            assertEquals(expectedDeck.getCards().getCards().get(i).getHealth(), deck.getCards().getCards().get(i).getHealth());
-            assertEquals(expectedDeck.getCards().getCards().get(i).getBlue_mana(), deck.getCards().getCards().get(i).getBlue_mana());
-            assertEquals(expectedDeck.getCards().getCards().get(i).getDeath_essence(), deck.getCards().getCards().get(i).getDeath_essence());
-            assertEquals(expectedDeck.getCards().getCards().get(i).getTaunt(), deck.getCards().getCards().get(i).getTaunt());
+            assertEquals(expectedDeck.getCards().get(i).getCardId(), deck.getCards().get(i).getCardId());
+            assertEquals(expectedDeck.getCards().get(i).getName(), deck.getCards().get(i).getName());
+            assertEquals(expectedDeck.getCards().get(i).getAttack(), deck.getCards().get(i).getAttack());
+            assertEquals(expectedDeck.getCards().get(i).getHealth(), deck.getCards().get(i).getHealth());
+            assertEquals(expectedDeck.getCards().get(i).getBlue_mana(), deck.getCards().get(i).getBlue_mana());
+            assertEquals(expectedDeck.getCards().get(i).getDeath_essence(), deck.getCards().get(i).getDeath_essence());
+            assertEquals(expectedDeck.getCards().get(i).getTaunt(), deck.getCards().get(i).getTaunt());
         }
     }
 }

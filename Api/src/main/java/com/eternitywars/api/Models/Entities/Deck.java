@@ -3,6 +3,8 @@ package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Cards;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.util.List;
@@ -25,6 +27,7 @@ public class Deck
 
     @ManyToMany
     @JoinTable(name = "deck_card", joinColumns = @JoinColumn(name = "deck_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Card> cards;
 
     public Deck()
@@ -47,6 +50,7 @@ public class Deck
         this.user = user;
         this.name = name;
     }
+
 
     public int getDeckId()
     {
@@ -78,9 +82,9 @@ public class Deck
         this.name = name;
     }
 
-    public Cards getCards()
+    public List<Card> getCards()
     {
-        return null;
+        return cards;
     }
 
     public void setCards(List<Card> cards)
