@@ -28,7 +28,7 @@ public class Player
 
     @OneToOne
     @JoinColumn(name = "deck_id", referencedColumnName = "id")
-    private Deck deck;
+    private Deck selectedDeck;
 
 
     public Player()
@@ -58,14 +58,14 @@ public class Player
         this.lobbyPlayerStatus = lobbyPlayerStatus;
     }
 
-    public Deck getDeck()
+    public Deck getSelectedDeck()
     {
-        return deck;
+        return selectedDeck;
     }
 
-    public void setDeck(Deck deck)
+    public void setSelectedDeck(Deck deck)
     {
-        this.deck = deck;
+        this.selectedDeck = deck;
     }
 
     public Lobby getLobby()
