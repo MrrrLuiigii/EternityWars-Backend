@@ -1,5 +1,6 @@
 package com.eternitywars.api.Models.Viewmodels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UsersViewmodel
@@ -8,6 +9,7 @@ public class UsersViewmodel
 
     public UsersViewmodel()
     {
+        userViewmodels = new ArrayList<>();
     }
 
     public List<UserViewmodel> getUserViewmodels()
