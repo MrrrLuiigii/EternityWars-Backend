@@ -20,14 +20,14 @@ public class DeckRepository implements IDeckContext
     }
 
 
-    public boolean AddCard(Deck deck, Card card)
+    public boolean AddCard(Deck deck)
     {
-        return deckContext.AddCard(deck, card);
+        return deckContext.AddCard(deck);
     }
 
-    public boolean DeleteCard(Deck deck, Card card)
+    public boolean DeleteCard(Deck deck)
     {
-        return deckContext.DeleteCard(deck, card);
+        return deckContext.DeleteCard(deck);
     }
 
     public boolean UpdateDeckName(Deck deck)
