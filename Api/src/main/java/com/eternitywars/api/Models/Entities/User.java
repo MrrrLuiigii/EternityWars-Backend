@@ -28,6 +28,10 @@ public class User extends Account
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Chat> chats;
 
+    @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<Deck> decks;
+
 
     public User()
     {
@@ -102,5 +106,15 @@ public class User extends Account
     public void setChats(List<Chat> chats)
     {
         this.chats = chats;
+    }
+
+    public List<Deck> getDecks()
+    {
+        return decks;
+    }
+
+    public void setDecks(List<Deck> decks)
+    {
+        this.decks = decks;
     }
 }
