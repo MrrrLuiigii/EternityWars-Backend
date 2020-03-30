@@ -2,12 +2,12 @@ package com.eternitywars.api.Resources.Deck;
 
 
 import com.eternitywars.api.DAL.Repositories.Deck.DeckContainerRepository;
-import com.eternitywars.api.Models.Entities.Deck;
 import com.eternitywars.api.Models.Decks;
+import com.eternitywars.api.Models.Entities.Deck;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/private/deck")
+@RequestMapping(value = "/api/public/deck")
 public class DeckContainerResource
 {
     private DeckContainerRepository deckContainerRepository = new DeckContainerRepository();
