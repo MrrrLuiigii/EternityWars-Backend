@@ -111,33 +111,6 @@ class DeckContainerRepositoryTest
     }
 
     @Test
-    void getEmptyDecksByUserId()
-    {
-        Decks expectedDecks = SetupGetDeckByUserId();
-
-        Decks decks = deckContainerRepository.GetEmptyDecksByUserId(1);
-
-        for (int i = 0; i < expectedDecks.getDecks().size(); i++)
-        {
-            assertEquals(expectedDecks.getDecks().get(i).getDeckId(), decks.getDecks().get(i).getDeckId());
-            assertEquals(expectedDecks.getDecks().get(i).getUser().getUserId(), decks.getDecks().get(i).getUser().getUserId());
-            assertEquals(expectedDecks.getDecks().get(i).getName(), decks.getDecks().get(i).getName());
-        }
-    }
-
-    @Test
-    void getEmptyDeckById()
-    {
-        Deck expectedDeck = SetupGetDeckById();
-
-        Deck deck = deckContainerRepository.GetEmptyDeckById(expectedDeck.getDeckId());
-
-        assertEquals(expectedDeck.getDeckId(), deck.getDeckId());
-        assertEquals(expectedDeck.getUser().getUserId(), deck.getUser().getUserId());
-        assertEquals(expectedDeck.getName(), deck.getName());
-    }
-
-    @Test
     void getDecksByUserId()
     {
         Decks expectedDecks = SetupGetDeckByUserId();
