@@ -2,14 +2,10 @@ package com.eternitywars.Logic.User;
 
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsAddUser;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsGetByEmail;
-import com.eternitywars.Models.Account;
 import com.eternitywars.Models.Enums.AccountStatus;
-import com.eternitywars.Models.MessageHandler;
 import com.eternitywars.Models.User;
-import com.eternitywars.Models.UserCollection;
-import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.eternitywars.Models.Users;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -19,12 +15,12 @@ public class UserContainerLogic
     private RestTemplate restTemplate = new RestTemplate();
     private Gson gson;
 
-    public UserCollection GetUsers(String token)
+    public Users GetUsers(String token)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<String> request = new HttpEntity<>(headers);
-        ResponseEntity<UserCollection> response = restTemplate.exchange("http://localhost:8083/api/public/user/get" , HttpMethod.GET, request, UserCollection.class);
+        ResponseEntity<Users> response = restTemplate.exchange("http://localhost:8083/api/public/user/get" , HttpMethod.GET, request, Users.class);
 
         return response.getBody();
     }
@@ -48,13 +44,13 @@ public class UserContainerLogic
         return null;
     }
 
-    private UserCollection GetUserCollectionFromAPI(String token)
+    private Users GetUserCollectionFromAPI(String token)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<String> request = new HttpEntity<>(headers);
 
-        return restTemplate.postForObject("http://localhost:8083/api/private/user/get", request, UserCollection.class);
+        return restTemplate.postForObject("http://localhost:8083/api/private/user/get", request, Users.class);
     }
 
     public User GetUserByEmail(WsGetByEmail wsGetByEmail)
@@ -117,9 +113,9 @@ public class UserContainerLogic
 
 
 
-    private boolean CheckUserTaken(UserCollection userCollection, User user)
+    private boolean CheckUserTaken(Users users, User user)
     {
-        for (User u : userCollection.getUsers())
+        for (User u : users.getUsers())
         {
             if (u.getUsername().equals(user.getUsername()) || u.getEmail().equals(user.getEmail()))
             {
