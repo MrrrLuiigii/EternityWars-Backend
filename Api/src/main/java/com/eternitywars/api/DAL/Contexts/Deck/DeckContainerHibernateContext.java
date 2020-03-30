@@ -3,6 +3,7 @@ package com.eternitywars.api.DAL.Contexts.Deck;
 import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Deck.IDeckContainerContext;
 import com.eternitywars.api.Models.Decks;
+import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Entities.Deck;
 import com.eternitywars.api.Models.Entities.User;
 import org.hibernate.Session;
@@ -59,6 +60,21 @@ public class DeckContainerHibernateContext implements IDeckContainerContext
     @Override
     public Deck GetDeckById(int deckId)
     {
-        return null;
+        Deck deck;
+
+        try
+        {
+            session = sessionFactory.openSession();
+            deck = session.find(Deck.class, deckId);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return null;
+        } finally
+        {
+            session.close();
+        }
+
+        return deck;
     }
 }
