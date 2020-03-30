@@ -18,7 +18,7 @@ public class Chat
     private int chatId;
 
     @JsonIgnore
-    @OneToMany
+    @ManyToMany
     @JoinTable(name = "chat_user", joinColumns = @JoinColumn(name = "chat_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<User> users;
