@@ -18,14 +18,14 @@ public class DeckResource
     @PostMapping(value = "/addCard", consumes = "application/json", produces = "application/json")
     public boolean AddCard(@RequestBody Deck deck)
     {
-        Card card = deck.getCards().getCards().get(0);
+        Card card = deck.getCards().get(0);
         return deckRepository.AddCard(deck, card);
     }
 
     @PostMapping(value = "/deleteCard", consumes = "application/json", produces = "application/json")
     public boolean DeleteCard(@RequestBody Deck deck)
     {
-        Card card = deck.getCards().getCards().get(0);
+        Card card = deck.getCards().get(0);
         return deckRepository.DeleteCard(deck, card);
     }
 

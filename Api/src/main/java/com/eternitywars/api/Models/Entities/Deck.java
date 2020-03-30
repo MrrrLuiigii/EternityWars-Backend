@@ -82,9 +82,9 @@ public class Deck
         this.name = name;
     }
 
-    public Cards getCards()
+    public List<Card> getCards()
     {
-        return null;
+        return cards;
     }
 
     public void setCards(List<Card> cards)
