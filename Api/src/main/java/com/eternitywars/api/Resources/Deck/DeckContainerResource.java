@@ -25,18 +25,6 @@ public class DeckContainerResource
         return deckContainerRepository.DeleteDeck(deck);
     }
 
-    @GetMapping(value = "/getEmptyByUserId/{userId}")
-    public Decks GetEmptyDecksByUserId(@PathVariable("userId") int userId)
-    {
-        return deckContainerRepository.GetEmptyDecksByUserId(userId);
-    }
-
-    @GetMapping(value = "/getEmptyByDeckId/{deckId}")
-    public Deck GetEmptyDeckById(@PathVariable("deckId") int deckId)
-    {
-        return deckContainerRepository.GetEmptyDeckById(deckId);
-    }
-
     @GetMapping(value = "/getByUserId/{userId}")
     public Decks GetDecksByUserId(@PathVariable("userId") int userId)
     {
