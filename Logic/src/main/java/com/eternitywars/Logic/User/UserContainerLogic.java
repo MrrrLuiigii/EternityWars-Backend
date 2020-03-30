@@ -5,6 +5,8 @@ import com.eternitywars.Logic.WebsocketServer.WsModels.WsGetByEmail;
 import com.eternitywars.Models.Enums.AccountStatus;
 import com.eternitywars.Models.User;
 import com.eternitywars.Models.Users;
+import com.eternitywars.Models.Viewmodels.UserViewmodel;
+import com.eternitywars.Models.Viewmodels.UsersViewmodel;
 import com.google.gson.Gson;
 import org.json.JSONObject;
 import org.springframework.http.*;
@@ -15,12 +17,12 @@ public class UserContainerLogic
     private RestTemplate restTemplate = new RestTemplate();
     private Gson gson;
 
-    public Users GetUsers(String token)
+    public UsersViewmodel GetUsers(String token)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
         HttpEntity<String> request = new HttpEntity<>(headers);
-        ResponseEntity<Users> response = restTemplate.exchange("http://localhost:8083/api/public/user/get" , HttpMethod.GET, request, Users.class);
+        ResponseEntity<UsersViewmodel> response = restTemplate.exchange("http://localhost:8083/api/public/user/get" , HttpMethod.GET, request, UsersViewmodel.class);
 
         return response.getBody();
     }
@@ -113,9 +115,9 @@ public class UserContainerLogic
 
 
 
-    private boolean CheckUserTaken(Users users, User user)
+    private boolean CheckUserTaken(UsersViewmodel users, User user)
     {
-        for (User u : users.getUsers())
+        for (UserViewmodel u : users.getUsers())
         {
             if (u.getUsername().equals(user.getUsername()) || u.getEmail().equals(user.getEmail()))
             {
