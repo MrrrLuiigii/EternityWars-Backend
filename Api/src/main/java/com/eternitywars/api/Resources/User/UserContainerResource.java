@@ -61,7 +61,7 @@ public class UserContainerResource
                     u.getEmail()
             );
 
-            usersViewmodel.getUserViewmodels().add(uvm);
+            usersViewmodel.getUsers().add(uvm);
         }
 
         return usersViewmodel;

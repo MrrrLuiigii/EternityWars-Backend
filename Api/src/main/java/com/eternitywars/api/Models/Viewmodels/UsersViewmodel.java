@@ -5,20 +5,20 @@ import java.util.List;
 
 public class UsersViewmodel
 {
-    private List<UserViewmodel> userViewmodels;
+    private List<UserViewmodel> users;
 
     public UsersViewmodel()
     {
-        userViewmodels = new ArrayList<>();
+        users = new ArrayList<>();
     }
 
-    public List<UserViewmodel> getUserViewmodels()
+    public List<UserViewmodel> getUsers()
     {
-        return userViewmodels;
+        return users;
     }
 
-    public void setUserViewmodels(List<UserViewmodel> userViewmodels)
+    public void setUsers(List<UserViewmodel> users)
     {
-        this.userViewmodels = userViewmodels;
+        this.users = users;
     }
 }
