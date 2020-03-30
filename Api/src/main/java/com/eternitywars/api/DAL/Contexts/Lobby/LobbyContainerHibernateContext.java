@@ -2,24 +2,25 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 
 import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
-import com.eternitywars.api.Models.Entities.Player;
-import com.eternitywars.api.Models.Lobbies;
 import com.eternitywars.api.Models.Entities.Lobby;
+import com.eternitywars.api.Models.Lobbies;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+
 import javax.persistence.TypedQuery;
 import java.util.List;
 
-public class LobbyContainerHibernateContext implements ILobbyContainerContext {
-
+public class LobbyContainerHibernateContext implements ILobbyContainerContext
+{
     private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;
 
     @Override
-    public Lobby AddLobby(Lobby lobby) {
+    public Lobby AddLobby(Lobby lobby)
+    {
         try
         {
             session = sessionFactory.openSession();
@@ -44,33 +45,40 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     }
 
     @Override
-    public boolean DeleteLobby(Lobby lobby) {
-        try {
+    public boolean DeleteLobby(Lobby lobby)
+    {
+        try
+        {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
             session.remove(lobby);
             transaction.commit();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             return false;
-        } finally {
+        } finally
+        {
             session.close();
         }
         return true;
     }
 
     @Override
-    public Lobby GetLobbyById(int lobbyId) {
-
+    public Lobby GetLobbyById(int lobbyId)
+    {
         Lobby lobby;
 
-        try {
+        try
+        {
             session = sessionFactory.openSession();
             lobby = session.find(Lobby.class, lobbyId);
             lobby.getPlayers();
-        } catch (Exception ex) {
+        } catch (Exception ex)
+        {
             return null;
-        } finally {
+        } finally
+        {
             session.close();
         }
 
@@ -78,7 +86,8 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext {
     }
 
     @Override
-    public Lobbies GetLobbies() {
+    public Lobbies GetLobbies()
+    {
         String hql = "FROM Lobby";
 
         List<Lobby> lobbies;
