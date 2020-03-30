@@ -29,6 +29,7 @@ public class User extends Account
     private List<Chat> chats;
 
     @OneToMany(mappedBy = "user")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Deck> decks;
 
 
