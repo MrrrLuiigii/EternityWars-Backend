@@ -1,7 +1,6 @@
 package com.eternitywars.api.Models.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.JoinColumnOrFormula;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 

@@ -3,6 +3,7 @@ package com.eternitywars.api.Models.Entities;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -20,11 +21,11 @@ public class User extends Account
     private int packAmount;
 
     @ManyToMany
-    @JoinTable(name = "user_card", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
+    @JoinTable(name = "user_card", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "card_id"))
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Card> cardCollection;
 
-    @OneToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<Chat> chats;
 
