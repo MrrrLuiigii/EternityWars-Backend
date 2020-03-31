@@ -39,6 +39,7 @@ public class CardContainerHibernateContext implements ICardContainerContext
         } catch (Exception ex)
         {
             ex.printStackTrace();
+            return null;
         } finally
         {
             session.close();
@@ -58,6 +59,7 @@ public class CardContainerHibernateContext implements ICardContainerContext
             user = session.find(User.class, userId);
         } catch (Exception ex)
         {
+            ex.printStackTrace();
             return null;
         } finally
         {
@@ -113,10 +115,9 @@ public class CardContainerHibernateContext implements ICardContainerContext
             if (transaction != null)
             {
                 transaction.rollback();
-                status = false;
-
             }
 
+            status = false;
             ex.printStackTrace();
         } finally
         {
@@ -152,10 +153,9 @@ public class CardContainerHibernateContext implements ICardContainerContext
             if (transaction != null)
             {
                 transaction.rollback();
-                status = false;
-
             }
 
+            status = false;
             ex.printStackTrace();
         } finally
         {
