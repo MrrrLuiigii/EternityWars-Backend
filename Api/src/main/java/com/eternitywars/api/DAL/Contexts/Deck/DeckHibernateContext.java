@@ -63,9 +63,11 @@ public class DeckHibernateContext implements IDeckContext
             {
                 if (c.getCardId() == card.getCardId())
                 {
-                    getDeck.getCards().remove(c);
+                    card = c;
                 }
             }
+
+            getDeck.getCards().remove(card);
 
             session.merge(getDeck);
             transaction.commit();

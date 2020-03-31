@@ -142,9 +142,11 @@ public class CardContainerHibernateContext implements ICardContainerContext
             {
                 if (c.getCardId() == card.getCardId())
                 {
-                    getUser.getCardCollection().remove(c);
+                    card = c;
                 }
             }
+
+            getUser.getCardCollection().remove(card);
 
             session.merge(getUser);
             transaction.commit();
