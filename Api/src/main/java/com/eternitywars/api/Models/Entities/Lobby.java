@@ -15,7 +15,7 @@ public class Lobby
     @Column(name = "id", unique = true, updatable = false)
     private int id;
 
-    @Column(name = "name", unique = true, nullable = false, length = 64)
+    @Column(name = "name", nullable = false, length = 64)
     private String name;
 
     @Column(name = "description", nullable = false)
