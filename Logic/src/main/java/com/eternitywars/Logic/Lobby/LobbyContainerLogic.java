@@ -1,5 +1,6 @@
 package com.eternitywars.Logic.Lobby;
 
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsLobbyModel;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.Models.Lobby;
@@ -16,19 +17,17 @@ public class LobbyContainerLogic
 
 
 
-    public Lobby AddLobby(JSONObject jsonObject)
+    public Lobby AddLobby(WsLobbyModel wsLobbyModel)
     {
-        String token = jsonObject.getString("token");
-        Lobby lobby = (Lobby) MessageHandler.HandleMessage(jsonObject.getString("content"), Lobby.class);
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(token);
+        headers.setBearerAuth(wsLobbyModel.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        lobby.getPlayerOne().setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
-        JSONObject json = new JSONObject(lobby);
+        wsLobbyModel.getParameter().getPlayerOne().setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
+        JSONObject json = new JSONObject(wsLobbyModel.getParameter());
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         //send lobby object with the user that wants to join
-        return restTemplate.postForObject("http://localhost:8083/api/private/lobby/add", request, Lobby.class);
+        return restTemplate.postForObject("http://localhost:8083/api/public/lobby/add", request, Lobby.class);
     }
 
     public Lobby GetLobbyById(Lobby lobby, String token)
