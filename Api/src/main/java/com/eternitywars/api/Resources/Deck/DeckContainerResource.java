@@ -19,7 +19,7 @@ public class DeckContainerResource
         return deckContainerRepository.AddDeck(deck);
     }
 
-    @PostMapping(value = "/delete", consumes = "application/json", produces = "application/json")
+    @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
     public boolean DeleteDeck(@RequestBody Deck deck)
     {
         return deckContainerRepository.DeleteDeck(deck);
