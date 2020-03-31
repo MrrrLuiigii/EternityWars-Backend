@@ -21,4 +21,5 @@ public class CardCollection
     {
         this.cards = cards;
     }
+
 }
