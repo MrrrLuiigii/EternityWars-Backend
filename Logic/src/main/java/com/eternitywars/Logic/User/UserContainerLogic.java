@@ -74,7 +74,7 @@ public class UserContainerLogic
         return response.getBody();
     }
 
-    public User GetUserById(User user)
+    public SingleUserViewmodel GetUserById(User user)
     {
 
         //String token = json.getString("Token");
@@ -86,32 +86,8 @@ public class UserContainerLogic
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(output.toString(), headers);
 
-        ResponseEntity<String> response = restTemplate.exchange("localhost:8083/api/private/user/getByEmail/", HttpMethod.GET, request, String.class);
-        JSONObject api_output = new JSONObject(response.getBody());
-
-        user.setUserId(api_output.getInt("userId"));
-        user.setEmail(api_output.getString("email"));
-        user.setGold(api_output.getInt("gold"));
-        user.setPackAmount(api_output.getInt("packAmount"));
-        user.setUsername(api_output.getString("username"));
-
-        if(api_output.getString("accountStatus").equals("online"))
-        {
-            user.setAccountStatus(AccountStatus.Online);
-        }
-        else if(api_output.getString("accountStatus").equals("offline"))
-        {
-            user.setAccountStatus(AccountStatus.Offline);
-        }
-        else if(api_output.getString("accountStatus").equals("inGame"))
-        {
-            user.setAccountStatus(AccountStatus.InGame);
-        }
-        else if(api_output.getString("accountStatus").equals("inLobby"))
-        {
-            user.setAccountStatus(AccountStatus.InLobby);
-        }
-        return user;
+        ResponseEntity<SingleUserViewmodel> response = restTemplate.exchange("localhost:8083/api/private/user/getByEmail/", HttpMethod.GET, request, SingleUserViewmodel.class);
+        return response.getBody();
     }
 
 
@@ -128,7 +104,7 @@ public class UserContainerLogic
         return true;
     }
 
-    public User getUserByUsername(String friendname, String token) {
+    public SingleUserViewmodel getUserByUsername(String friendname, String token) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);
@@ -136,7 +112,7 @@ public class UserContainerLogic
 
         HttpEntity<String> request = new HttpEntity<>(headers);
 
-        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/private/user/getByUsername/{friendname}", HttpMethod.GET, request , User.class, friendname);
+        ResponseEntity<SingleUserViewmodel> response = restTemplate.exchange("http://localhost:8083/api/private/user/getByUsername/{friendname}", HttpMethod.GET, request , SingleUserViewmodel.class, friendname);
 
         return response.getBody();
 

@@ -3,6 +3,7 @@ package com.eternitywars.Logic.Friend;
 import com.eternitywars.Logic.User.UserContainerLogic;
 import com.eternitywars.Models.*;
 import com.eternitywars.Models.Enums.FriendStatus;
+import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -22,12 +23,12 @@ public class FriendContainerLogic
 
         //Get the friend with it's username
         UserContainerLogic userContainerLogic = new UserContainerLogic();
-        User friend = userContainerLogic.getUserByUsername(jsonObject.getString("friendname"), token);
+        SingleUserViewmodel friend = userContainerLogic.getUserByUsername(jsonObject.getString("friendname"), token);
 
         //Create a relationship with friend, user and status
         Relationship relationship = new Relationship();
         relationship.setFriendOneId(jsonObject.getJSONObject("Content").getInt("userId"));
-        relationship.setFriendTwoId(friend.getUserId());
+        relationship.setFriendTwoId(friend.getId());
         relationship.setFriendStatus(FriendStatus.Pending);
 
         String url = "http://localhost:8083/api/private/friend/add";
