@@ -72,7 +72,8 @@ public class UserContainerResource
         return usersViewmodel;
     }
 
-    private SingleUserViewmodel FillSingleUserViewmodel(User user) {
+    private SingleUserViewmodel FillSingleUserViewmodel(User user)
+    {
         return new SingleUserViewmodel(
                 user.getUserId(),
                 user.getUsername(),
