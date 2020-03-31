@@ -3,9 +3,9 @@ package com.eternitywars.api.Models.Entities;
 
 import com.eternitywars.api.Models.Cards;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -14,6 +14,7 @@ import java.util.List;
 public class Deck
 {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, updatable = false)
     private int deckId;
 
@@ -62,11 +63,13 @@ public class Deck
         this.deckId = deckId;
     }
 
+    @JsonIgnore
     public User getUser()
     {
         return user;
     }
 
+    @JsonProperty
     public void setUser(User user)
     {
         this.user = user;

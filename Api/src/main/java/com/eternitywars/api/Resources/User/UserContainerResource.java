@@ -4,6 +4,7 @@ import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Users;
+import com.eternitywars.api.Models.Viewmodels.SingleUserViewmodel;
 import com.eternitywars.api.Models.Viewmodels.UserViewmodel;
 import com.eternitywars.api.Models.Viewmodels.UsersViewmodel;
 import org.springframework.web.bind.annotation.*;
@@ -29,21 +30,24 @@ public class UserContainerResource
     }
 
     @GetMapping(value = "/getById/{userId}")
-    public User GetUserById(@PathVariable("userId") int userId)
+    public SingleUserViewmodel GetUserById(@PathVariable("userId") int userId)
     {
-        return userContainerRepository.GetUserById(userId);
+        User user = userContainerRepository.GetUserById(userId);
+        return FillSingleUserViewmodel(user);
     }
 
     @GetMapping(value = "/getByEmail/{email}")
-    public User GetUserByEmail(@PathVariable("email") String email)
+    public SingleUserViewmodel GetUserByEmail(@PathVariable("email") String email)
     {
-        return userContainerRepository.GetUserByEmail(email);
+        User user = userContainerRepository.GetUserByEmail(email);
+        return FillSingleUserViewmodel(user);
     }
 
     @GetMapping(value = "/getByUsername/{username}")
-    public User GetUserByUsername(@PathVariable("username") String username)
+    public SingleUserViewmodel GetUserByUsername(@PathVariable("username") String username)
     {
-        return userContainerRepository.GetUserByUsername(username);
+        User user = userContainerRepository.GetUserByUsername(username);
+        return FillSingleUserViewmodel(user);
     }
 
     @GetMapping(value = "/get")
@@ -66,5 +70,16 @@ public class UserContainerResource
         }
 
         return usersViewmodel;
+    }
+
+    private SingleUserViewmodel FillSingleUserViewmodel(User user) {
+        return new SingleUserViewmodel(
+                user.getUserId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getAccountStatus(),
+                user.getGold(),
+                user.getPackAmount()
+        );
     }
 }

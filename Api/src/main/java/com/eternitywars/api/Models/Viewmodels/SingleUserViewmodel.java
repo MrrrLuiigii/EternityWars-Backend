@@ -2,23 +2,27 @@ package com.eternitywars.api.Models.Viewmodels;
 
 import com.eternitywars.api.Models.Enums.AccountStatus;
 
-public class UserViewmodel
+public class SingleUserViewmodel
 {
     private int id;
     private String username;
     private String email;
     private AccountStatus status;
+    private int gold;
+    private int packAmount;
 
-    public UserViewmodel()
+    public SingleUserViewmodel()
     {
     }
 
-    public UserViewmodel(int id, String username, String email, AccountStatus status)
+    public SingleUserViewmodel(int id, String username, String email, AccountStatus status, int gold, int packAmount)
     {
         this.id = id;
         this.username = username;
         this.email = email;
         this.status = status;
+        this.gold = gold;
+        this.packAmount = packAmount;
     }
 
     public int getId()
@@ -59,5 +63,25 @@ public class UserViewmodel
     public void setStatus(AccountStatus status)
     {
         this.status = status;
+    }
+
+    public int getGold()
+    {
+        return gold;
+    }
+
+    public void setGold(int gold)
+    {
+        this.gold = gold;
+    }
+
+    public int getPackAmount()
+    {
+        return packAmount;
+    }
+
+    public void setPackAmount(int packAmount)
+    {
+        this.packAmount = packAmount;
     }
 }

@@ -21,13 +21,55 @@ public class DeckContainerHibernateContext implements IDeckContainerContext
     @Override
     public Deck AddDeck(Deck deck)
     {
-        return null;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+            User user = session.find(User.class, deck.getUser().getUserId());
+            deck.setUser(user);
+            user.getDecks().add(deck);
+            session.persist(deck);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+
+            ex.printStackTrace();
+        } finally
+        {
+            session.close();
+        }
+
+        return deck;
     }
 
     @Override
     public boolean DeleteDeck(Deck deck)
     {
-        return false;
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
+
+            session.remove(deck);
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+            ex.printStackTrace();
+            return false;
+        } finally
+        {
+            session.close();
+        }
+
+        return true;
     }
 
     @Override
