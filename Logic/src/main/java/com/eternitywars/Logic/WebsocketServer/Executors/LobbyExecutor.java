@@ -4,6 +4,7 @@ import com.eternitywars.Logic.Lobby.LobbyContainerLogic;
 import com.eternitywars.Logic.Lobby.LobbyLogic;
 import com.eternitywars.Logic.WebsocketServer.Collection.UserCollection;
 import com.eternitywars.Logic.WebsocketServer.Models.WsReturnMessage;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
 import com.eternitywars.Models.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -142,7 +143,12 @@ public class LobbyExecutor implements IExecutor
         Gson gson = gs.create();
 
         String token = jsonObject.getString("Token");
-        lobbyCollection = lobbyContainerLogic.GetLobbies(token);
+
+
+        WsUserToken wsUserToken = new WsUserToken();
+        wsUserToken.setToken(token);
+
+        lobbyCollection = lobbyContainerLogic.GetLobbies(wsUserToken);
 
         //update all register sessions
         for (User user : UserCollection.getConnectedUsers())

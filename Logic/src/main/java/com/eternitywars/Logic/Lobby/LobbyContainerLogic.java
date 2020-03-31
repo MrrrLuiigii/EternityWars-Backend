@@ -1,5 +1,6 @@
 package com.eternitywars.Logic.Lobby;
 
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.Models.Lobby;
 import com.eternitywars.Models.LobbyCollection;
@@ -41,13 +42,13 @@ public class LobbyContainerLogic
         return response.getBody();
     }
 
-    public LobbyCollection GetLobbies(String token)
+    public LobbyCollection GetLobbies(WsUserToken wsUserToken)
     {
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(token);
+        headers.setBearerAuth(wsUserToken.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(headers);
-        ResponseEntity<LobbyCollection> response = restTemplate.exchange("http://localhost:8083/api/private/lobby/get", HttpMethod.GET, request, LobbyCollection.class);
+        ResponseEntity<LobbyCollection> response = restTemplate.exchange("http://localhost:8083/api/public/lobby/get", HttpMethod.GET, request, LobbyCollection.class);
         return response.getBody();
     }
 
@@ -59,6 +60,8 @@ public class LobbyContainerLogic
         JSONObject json = new JSONObject(lobby);
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         restTemplate.postForObject("http://localhost:8083/api/private/lobby/delete", request, boolean.class);
-        return  GetLobbies(token);
+        WsUserToken wsUserToken = new WsUserToken();
+        wsUserToken.setToken(token);
+        return  GetLobbies(wsUserToken);
     }
 }
