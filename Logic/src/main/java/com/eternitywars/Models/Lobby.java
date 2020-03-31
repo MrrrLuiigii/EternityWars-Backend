@@ -12,8 +12,7 @@ public class Lobby
     private String description;
     private boolean hasPassword;
     private String password;
-    private Player playerOne;
-    private Player playerTwo;
+    private List<Player> players;
 
     public Lobby(){}
 
@@ -76,24 +75,16 @@ public class Lobby
         this.password = password;
     }
 
-    public Player getPlayerOne()
-    {
-        return playerOne;
+    public boolean isHasPassword() {
+        return hasPassword;
     }
 
-    public void setPlayerOne(Player playerOne)
-    {
-        this.playerOne = playerOne;
+    public List<Player> getPlayers() {
+        return players;
     }
 
-    public Player getPlayerTwo()
-    {
-        return playerTwo;
-    }
-
-    public void setPlayerTwo(Player playerTwo)
-    {
-        this.playerTwo = playerTwo;
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 
     public void setStatus(LobbyStatus full) {

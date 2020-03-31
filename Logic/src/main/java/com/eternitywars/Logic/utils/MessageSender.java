@@ -17,13 +17,13 @@ public class MessageSender {
         returnMessage.setContent(lobby);
 
         for (User u : UserCollection.getConnectedUsers()){
-            if(lobby.getPlayerOne() != null){
-                if(u.getUserId() == lobby.getPlayerOne().getUserId()){
+            if(lobby.getPlayers().get(0) != null){
+                if(u.getUserId() == lobby.getPlayers().get(0).getUserId()){
                     u.getSession().getRemote().sendString(MessageConverter.FromObjectToString(returnMessage));
                 }
             }
-            if(lobby.getPlayerTwo() != null){
-                if(u.getUserId() == lobby.getPlayerTwo().getUserId()){
+            if(lobby.getPlayers().get(1) != null){
+                if(u.getUserId() == lobby.getPlayers().get(1).getUserId()){
                     u.getSession().getRemote().sendString(MessageConverter.FromObjectToString(returnMessage));
                 }
             }

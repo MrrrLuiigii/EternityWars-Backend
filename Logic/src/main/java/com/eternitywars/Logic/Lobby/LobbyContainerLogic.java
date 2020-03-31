@@ -23,7 +23,7 @@ public class LobbyContainerLogic
         headers.setBearerAuth(wsLobbyModel.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        wsLobbyModel.getParameter().getPlayerOne().setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
+        wsLobbyModel.getParameter().getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         JSONObject json = new JSONObject(wsLobbyModel.getParameter());
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         //send lobby object with the user that wants to join
