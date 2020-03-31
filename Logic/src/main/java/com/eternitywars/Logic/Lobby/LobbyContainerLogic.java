@@ -1,5 +1,7 @@
 package com.eternitywars.Logic.Lobby;
 
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsLobbyModel;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.Models.Lobby;
 import com.eternitywars.Models.LobbyCollection;
@@ -15,19 +17,17 @@ public class LobbyContainerLogic
 
 
 
-    public Lobby AddLobby(JSONObject jsonObject)
+    public Lobby AddLobby(WsLobbyModel wsLobbyModel)
     {
-        String token = jsonObject.getString("token");
-        Lobby lobby = (Lobby) MessageHandler.HandleMessage(jsonObject.getString("content"), Lobby.class);
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(token);
+        headers.setBearerAuth(wsLobbyModel.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        lobby.getPlayerOne().setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
-        JSONObject json = new JSONObject(lobby);
+        wsLobbyModel.getParameter().getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
+        JSONObject json = new JSONObject(wsLobbyModel.getParameter());
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         //send lobby object with the user that wants to join
-        return restTemplate.postForObject("http://localhost:8083/api/private/lobby/add", request, Lobby.class);
+        return restTemplate.postForObject("http://localhost:8083/api/public/lobby/add", request, Lobby.class);
     }
 
     public Lobby GetLobbyById(Lobby lobby, String token)
@@ -41,13 +41,13 @@ public class LobbyContainerLogic
         return response.getBody();
     }
 
-    public LobbyCollection GetLobbies(String token)
+    public LobbyCollection GetLobbies(WsUserToken wsUserToken)
     {
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(token);
+        headers.setBearerAuth(wsUserToken.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(headers);
-        ResponseEntity<LobbyCollection> response = restTemplate.exchange("http://localhost:8083/api/private/lobby/get", HttpMethod.GET, request, LobbyCollection.class);
+        ResponseEntity<LobbyCollection> response = restTemplate.exchange("http://localhost:8083/api/public/lobby/get", HttpMethod.GET, request, LobbyCollection.class);
         return response.getBody();
     }
 
@@ -59,6 +59,8 @@ public class LobbyContainerLogic
         JSONObject json = new JSONObject(lobby);
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         restTemplate.postForObject("http://localhost:8083/api/private/lobby/delete", request, boolean.class);
-        return  GetLobbies(token);
+        WsUserToken wsUserToken = new WsUserToken();
+        wsUserToken.setToken(token);
+        return  GetLobbies(wsUserToken);
     }
 }

@@ -24,7 +24,7 @@ public class LobbyLogic
     {
         Lobby lobby1 = lobbyContainerLogic.GetLobbyById(lobby, token);
 
-       if(lobby1.getPlayerOne() != null && lobby1.getPlayerTwo() == null)
+       if(lobby1.getPlayers().get(0) != null && lobby1.getPlayers().get(1) == null)
        {
            lobby1.setStatus(LobbyStatus.Full);
            HttpHeaders headers = new HttpHeaders();
@@ -34,7 +34,7 @@ public class LobbyLogic
 //           sendlobby.setId(lobby.getId());
 //           player.setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
 //           sendlobby.setPlayerOne(player);
-           lobby.setPlayerTwo(player);
+           lobby.getPlayers().set(1, player);
 
            JSONObject json = new JSONObject(lobby);
 
@@ -42,7 +42,7 @@ public class LobbyLogic
            //send lobby object with the user that wants to join
            if(restTemplate.postForObject("http://localhost:8083/api/private/lobby/join", request , boolean.class))
            {
-               lobby.getPlayerTwo().setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
+               lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
                lobby.setStatus(LobbyStatus.Full);
            }
        }
@@ -51,23 +51,23 @@ public class LobbyLogic
 
     public Lobby LeaveLobby(Lobby lobby, Player player, String token)
     {
-        if(lobby.getPlayerTwo() != null)
+        if(lobby.getPlayers().get(1) != null)
         {
-            if(lobby.getPlayerTwo().getUserId() != 0)
+            if(lobby.getPlayers().get(1).getUserId() != 0)
             {
                 HttpHeaders headers = new HttpHeaders();
                 headers.setBearerAuth(token);
                 headers.setContentType(MediaType.APPLICATION_JSON);
                 Lobby sendlobby = new Lobby();
                 sendlobby.setId(lobby.getId());
-                lobby.setPlayerOne(player);
+                lobby.getPlayers().set(0, player);
 
                 JSONObject json = new JSONObject(lobby);
 
                 HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
                 if(restTemplate.postForObject("http://localhost:8083/api/private/lobby/leave", request , boolean.class))
                 {
-                    lobby.setPlayerTwo(null);
+                    lobby.getPlayers().set(1, null);
                     return lobby;
                 }
             }
@@ -78,21 +78,21 @@ public class LobbyLogic
 
     public Lobby PlayerReady(Lobby lobby, Player player, String token)
     {
-       if(lobby.getPlayerOne().getUserId() == player.getUserId())
+       if(lobby.getPlayers().get(0).getUserId() == player.getUserId())
        {
-           lobby.getPlayerOne().setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
+           lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
        }
-       else if(lobby.getPlayerTwo().getUserId() == player.getUserId())
+       else if(lobby.getPlayers().get(1).getUserId() == player.getUserId())
        {
-           lobby.getPlayerTwo().setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
+           lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
        }
-       if(lobby.getPlayerOne() != null && lobby.getPlayerTwo() != null)
+       if(lobby.getPlayers().get(0) != null && lobby.getPlayers().get(1) != null)
        {
-           if(lobby.getPlayerOne().getLobbyPlayerStatus() == LobbyPlayerStatus.Ready && lobby.getPlayerTwo().getLobbyPlayerStatus() == LobbyPlayerStatus.Ready)
+           if(lobby.getPlayers().get(0).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready && lobby.getPlayers().get(1).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready)
            {
                DeckBuilderContainerLogic deckBuilderContainerLogic = new DeckBuilderContainerLogic();
-               lobby.getPlayerOne().setDeck(deckBuilderContainerLogic.GetDeckById(lobby.getPlayerOne().getDeck().getDeckId(), token));
-               lobby.getPlayerTwo().setDeck(deckBuilderContainerLogic.GetDeckById(lobby.getPlayerTwo().getDeck().getDeckId(), token));
+               lobby.getPlayers().get(0).setDeck(deckBuilderContainerLogic.GetDeckById(lobby.getPlayers().get(0).getDeck().getDeckId(), token));
+               lobby.getPlayers().get(1).setDeck(deckBuilderContainerLogic.GetDeckById(lobby.getPlayers().get(1).getDeck().getDeckId(), token));
                gameLogic.LaunchGame(lobby);
                lobbyContainerLogic.DeleteLobby(lobby, token);
 
@@ -103,13 +103,13 @@ public class LobbyLogic
 
     public Lobby PlayerNotReady(Lobby lobby, Player player)
     {
-        if(lobby.getPlayerOne().getUserId() == player.getUserId())
+        if(lobby.getPlayers().get(0).getUserId() == player.getUserId())
         {
-            lobby.getPlayerOne().setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
+            lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         }
-        else if(lobby.getPlayerTwo().getUserId() == player.getUserId())
+        else if(lobby.getPlayers().get(1).getUserId() == player.getUserId())
         {
-            lobby.getPlayerTwo().setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
+            lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         }
         return lobby;
     }
@@ -132,13 +132,13 @@ public class LobbyLogic
 //
 //        HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
 //        Lobby lobby1 = restTemplate.postForObject("http://localhost:8083/api/private/lobby/updateDeck", request , Lobby.class);
-        if(lobby.getPlayerOne().getUserId() == player.getUserId())
+        if(lobby.getPlayers().get(0).getUserId() == player.getUserId())
         {
-            lobby.getPlayerOne().setDeck(player.getDeck());
+            lobby.getPlayers().get(0).setDeck(player.getDeck());
         }
-        else if(lobby.getPlayerTwo().getUserId() == player.getUserId())
+        else if(lobby.getPlayers().get(1).getUserId() == player.getUserId())
         {
-            lobby.getPlayerTwo().setDeck(player.getDeck());
+            lobby.getPlayers().get(1).setDeck(player.getDeck());
         }
         return  lobby;
     }
