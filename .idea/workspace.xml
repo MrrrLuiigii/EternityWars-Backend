@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8a7ee59d-974d-4434-9770-4fcb039a1fc5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Logic/WebsocketServer/WsModels/WsAddUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Logic/WebsocketServer/WsModels/WsGetByEmail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Logic/User/UserContainerLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Logic/User/UserContainerLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Logic/WebsocketServer/Setup/WebsocketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Logic/WebsocketServer/Setup/WebsocketService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Models/MessageHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Logic/src/main/java/com/eternitywars/Models/MessageHandler.java" afterDir="false" />
-    </list>
+    <list default="true" id="8a7ee59d-974d-4434-9770-4fcb039a1fc5" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +66,7 @@
       <workItem from="1584349764519" duration="4452000" />
       <workItem from="1584441446044" duration="754000" />
       <workItem from="1585051045776" duration="1326000" />
+      <workItem from="1585058473771" duration="95000" />
     </task>
     <servers />
   </component>

@@ -21,4 +21,8 @@ public class UsersViewmodel
     {
         this.users = users;
     }
+
+    public UsersViewmodel(List<UserViewmodel> users) {
+        this.users = users;
+    }
 }
