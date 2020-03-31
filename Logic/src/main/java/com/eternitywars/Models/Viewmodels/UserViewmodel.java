@@ -10,6 +10,9 @@ public class UserViewmodel
     private String email;
     private AccountStatus status;
 
+    public UserViewmodel() {
+    }
+
     public UserViewmodel(int id, String username, String email, AccountStatus status)
     {
         this.id = id;

@@ -5,6 +5,7 @@ import com.eternitywars.Logic.WebsocketServer.WsModels.WsGetByEmail;
 import com.eternitywars.Models.Enums.AccountStatus;
 import com.eternitywars.Models.User;
 import com.eternitywars.Models.Users;
+import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 import com.eternitywars.Models.Viewmodels.UserViewmodel;
 import com.eternitywars.Models.Viewmodels.UsersViewmodel;
 import com.google.gson.Gson;
@@ -55,7 +56,7 @@ public class UserContainerLogic
         return restTemplate.postForObject("http://localhost:8083/api/private/user/get", request, Users.class);
     }
 
-    public User GetUserByEmail(WsGetByEmail wsGetByEmail)
+    public SingleUserViewmodel GetUserByEmail(WsGetByEmail wsGetByEmail)
     {
         String email = wsGetByEmail.getParameter();
         String token = wsGetByEmail.getToken();
@@ -67,7 +68,7 @@ public class UserContainerLogic
 
         HttpEntity<String> request = new HttpEntity<>(headers);
 
-        ResponseEntity<User> response = restTemplate.exchange("http://localhost:8083/api/public/user/getByEmail/{email}", HttpMethod.GET, request , User.class, email);
+        ResponseEntity<SingleUserViewmodel> response = restTemplate.exchange("http://localhost:8083/api/public/user/getByEmail/{email}", HttpMethod.GET, request , SingleUserViewmodel.class, email);
 
 
         return response.getBody();
