@@ -61,9 +61,10 @@ public class WebsocketService {
         Object wsModel = Class.forName("com.eternitywars.Logic.WebsocketServer.WsModels." + jsonObject.getString("wsModelName")).getDeclaredConstructor().newInstance();
         if(jsonObject.getString("wsModelName").equals("WsRegister"))
         {
-            WsRegister wsRegister = (WsRegister)wsModel;
+            Object object = MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsModel);
+            WsRegister wsRegister =  (WsRegister)object;
             wsRegister.getParameter().setSession(session);
-            return MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsRegister);
+            return wsRegister;
         }
         return MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsModel);
     }
