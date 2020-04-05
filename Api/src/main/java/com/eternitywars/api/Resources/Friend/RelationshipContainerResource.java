@@ -4,8 +4,10 @@ import com.eternitywars.api.DAL.Repositories.Friend.RelationshipContainerReposit
 import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.Models.Entities.Relationship;
 import com.eternitywars.api.Models.Entities.User;
-import com.eternitywars.api.Models.Enums.FriendStatus;
 import com.eternitywars.api.Models.Relationships;
+import com.eternitywars.api.Models.Viewmodels.Friend.FriendViewmodel;
+import com.eternitywars.api.Models.Viewmodels.Friend.RelationshipViewmodel;
+import com.eternitywars.api.Models.Viewmodels.Friend.RelationshipsViewmodel;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,7 +23,6 @@ public class RelationshipContainerResource
     {
         User friendTwo = userContainerRepository.GetUserByUsername(relationship.getFriendTwo().getUsername());
         relationship.setFriendTwo(friendTwo);
-
         return relationshipContainerRepository.AddRelationship(relationship);
     }
 
@@ -32,9 +33,36 @@ public class RelationshipContainerResource
     }
 
     @GetMapping(value = "/get/{userId}")
-    public Relationships GetRelationshipByUserId(@PathVariable("userId") int userId)
+    public RelationshipsViewmodel GetRelationshipByUserId(@PathVariable("userId") int userId)
     {
         User user = new User(userId);
-        return relationshipContainerRepository.GetRelationships(user);
+        Relationships getRelationships = relationshipContainerRepository.GetRelationships(user);
+
+        RelationshipsViewmodel relationships = new RelationshipsViewmodel();
+
+        for (Relationship r : getRelationships.getRelationships())
+        {
+            FriendViewmodel friendOne = new FriendViewmodel(
+                    r.getFriendOne().getUserId(),
+                    r.getFriendOne().getUsername(),
+                    r.getFriendOne().getAccountStatus()
+            );
+
+            FriendViewmodel friendTwo = new FriendViewmodel(
+                    r.getFriendTwo().getUserId(),
+                    r.getFriendTwo().getUsername(),
+                    r.getFriendTwo().getAccountStatus()
+            );
+
+            RelationshipViewmodel relationship = new RelationshipViewmodel(
+                    friendOne,
+                    friendTwo,
+                    r.getFriendStatus()
+            );
+
+            relationships.getRelationships().add(relationship);
+        }
+
+        return relationships;
     }
 }
