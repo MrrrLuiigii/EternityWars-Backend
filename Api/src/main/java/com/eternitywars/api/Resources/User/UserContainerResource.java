@@ -4,9 +4,9 @@ import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import com.eternitywars.api.Models.Users;
-import com.eternitywars.api.Models.Viewmodels.SingleUserViewmodel;
-import com.eternitywars.api.Models.Viewmodels.UserViewmodel;
-import com.eternitywars.api.Models.Viewmodels.UsersViewmodel;
+import com.eternitywars.api.Models.Viewmodels.User.SingleUserViewmodel;
+import com.eternitywars.api.Models.Viewmodels.User.UserViewmodel;
+import com.eternitywars.api.Models.Viewmodels.User.UsersViewmodel;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

@@ -1,4 +1,4 @@
-package com.eternitywars.api.Models.Viewmodels;
+package com.eternitywars.api.Models.Viewmodels.User;
 
 import java.util.ArrayList;
 import java.util.List;
