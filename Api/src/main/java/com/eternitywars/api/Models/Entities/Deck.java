@@ -45,11 +45,6 @@ public class Deck
         this.name = name;
     }
 
-    public Deck(Cards cards, int deckId)
-    {
-        this.deckId = deckId;
-    }
-
     public Deck(int deckId, User user, String name)
     {
         this.deckId = deckId;
