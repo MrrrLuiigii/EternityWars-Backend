@@ -1,35 +1,36 @@
-package com.eternitywars.Models;
+package com.eternitywars.Models.DTO;
 
-import java.util.ArrayList;
+import com.eternitywars.Models.Card;
+import com.eternitywars.Models.User;
+
 import java.util.List;
 
-public class Deck
-{
+public class DeckDTO {
+
     private int deckId;
-    private int userId;
+
+    private User user;
+
     private String name;
-    private CardCollection cards;
 
-    public Deck(){
+    private List<Card> cards;
+
+    public DeckDTO()
+    {
     }
 
-    public Deck(int deckId)
+    public DeckDTO(int deckId)
     {
         this.deckId = deckId;
     }
 
-    public Deck(CardCollection cards, int deckId)
+    public DeckDTO(int deckId, User user, String name)
     {
         this.deckId = deckId;
-        this.cards = cards;
-    }
-
-    public Deck(int deckId, int userId, String name)
-    {
-        this.deckId = deckId;
-        this.userId = userId;
+        this.user = user;
         this.name = name;
     }
+
 
     public int getDeckId()
     {
@@ -41,14 +42,14 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public int getUserId()
+    public User getUser()
     {
-        return userId;
+        return user;
     }
 
-    public void setUserId(int userId)
+    public void setUser(User user)
     {
-        this.userId = userId;
+        this.user = user;
     }
 
     public String getName()
@@ -61,12 +62,12 @@ public class Deck
         this.name = name;
     }
 
-    public CardCollection getCards()
+    public List<Card> getCards()
     {
         return cards;
     }
 
-    public void setCards(CardCollection cards)
+    public void setCards(List<Card> cards)
     {
         this.cards = cards;
     }

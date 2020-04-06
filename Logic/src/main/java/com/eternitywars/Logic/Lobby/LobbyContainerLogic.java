@@ -9,6 +9,7 @@ import com.eternitywars.Models.Lobby;
 import com.eternitywars.Models.LobbyCollection;
 import com.eternitywars.Models.Player;
 import com.eternitywars.Models.User;
+import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -19,7 +20,7 @@ public class LobbyContainerLogic
 
 
 
-    public Lobby AddLobby(WsLobbyModel wsLobbyModel)
+    public LobbyViewmodel AddLobby(WsLobbyModel wsLobbyModel)
     {
         User user = new User();
         user.setUserId(wsLobbyModel.getUser().getId());
@@ -51,7 +52,7 @@ public class LobbyContainerLogic
         JSONObject json = new JSONObject(lobbyDTO);
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         //send lobby object with the user that wants to join
-        return restTemplate.postForObject("http://localhost:8083/api/public/lobby/add", request, Lobby.class);
+        return restTemplate.postForObject("http://localhost:8083/api/public/lobby/add", request, LobbyViewmodel.class);
     }
 
     public Lobby GetLobbyById(Lobby lobby, String token)

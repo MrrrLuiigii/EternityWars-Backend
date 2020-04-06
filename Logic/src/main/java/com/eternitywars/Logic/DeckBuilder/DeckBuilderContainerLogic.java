@@ -1,16 +1,13 @@
 package com.eternitywars.Logic.DeckBuilder;
 
-import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsGetDeckByUserId;
 import com.eternitywars.Models.*;
+import com.eternitywars.Models.DTO.DecksDTO;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.ArrayList;
 
 public class DeckBuilderContainerLogic
 {
@@ -81,35 +78,20 @@ public class DeckBuilderContainerLogic
         return restTemplate.postForObject(url, request, boolean.class);
     }
 
-    public DeckCollection GetAllDecks(WsUserToken wsUserToken)
+    public DecksDTO GetAllDecks(WsGetDeckByUserId wsGetDeckByUserId)
     {
         HttpHeaders httpHeaders = new HttpHeaders();
 
         GsonBuilder gs = new GsonBuilder();
         gs.serializeNulls();
         Gson gson = gs.create();
-        HttpEntity<String> request = new HttpEntity<>(gson.toJson(wsUserToken.getParameter()), httpHeaders);
+        HttpEntity<String> request = new HttpEntity<>(gson.toJson(wsGetDeckByUserId.getParameter()), httpHeaders);
 
         String url = "http://localhost:8083/api/public/deck/getByUserId/{userId}";
-        ResponseEntity<DeckCollection> response = restTemplate.exchange(url, HttpMethod.GET, request, DeckCollection.class, wsUserToken.getParameter().getUserId());
+        ResponseEntity<DecksDTO> response = restTemplate.exchange(url, HttpMethod.GET, request, DecksDTO.class, wsGetDeckByUserId.getParameter().getId());
         return response.getBody();
     }
 
-    public DeckCollection GetAllEmptyDecks(JSONObject jsonObject)
-    {
-        HttpHeaders httpHeaders = GetHttpHeaders(jsonObject);
-
-        GsonBuilder gs = new GsonBuilder();
-        gs.serializeNulls();
-        Gson gson = gs.create();
-
-        User user = gson.fromJson(jsonObject.getJSONObject("Content").toString(), User.class);
-        HttpEntity<String> request = new HttpEntity<>(gson.toJson(user), httpHeaders);
-
-        String url = "http://localhost:8083/api/private/deck/getEmptyByUserId/{userId}";
-        ResponseEntity<DeckCollection> response = restTemplate.exchange(url, HttpMethod.GET, request, DeckCollection.class, user.getUserId());
-        return response.getBody();
-    }
 
     public Deck GetDeckById(int deckid, String token)
     {
