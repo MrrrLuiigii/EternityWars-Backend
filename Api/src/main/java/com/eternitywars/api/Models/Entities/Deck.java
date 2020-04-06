@@ -40,9 +40,9 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public Deck(Cards cards, int deckId)
+    public Deck(String name)
     {
-        this.deckId = deckId;
+        this.name = name;
     }
 
     public Deck(int deckId, User user, String name)

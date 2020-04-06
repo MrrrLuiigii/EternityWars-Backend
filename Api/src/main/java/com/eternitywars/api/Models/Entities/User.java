@@ -43,6 +43,15 @@ public class User extends Account
         this.userId = userId;
     }
 
+    public User(String username, String email, AccountStatus accountStatus, int gold, int packAmount)
+    {
+        this.username = username;
+        this.email = email;
+        this.accountStatus = accountStatus;
+        this.gold = gold;
+        this.packAmount = packAmount;
+    }
+
     public User(int id, String email, String username, AccountStatus accountStatus, int gold, int packAmount)
     {
         super(id, username, accountStatus);
