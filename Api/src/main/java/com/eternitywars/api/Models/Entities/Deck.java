@@ -40,6 +40,11 @@ public class Deck
         this.deckId = deckId;
     }
 
+    public Deck(String name)
+    {
+        this.name = name;
+    }
+
     public Deck(Cards cards, int deckId)
     {
         this.deckId = deckId;
