@@ -20,9 +20,10 @@ public class LobbyContainerResource
 
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
-    public Lobby AddLobby(@RequestBody Lobby lobby)
+    public LobbyViewmodel AddLobby(@RequestBody Lobby lobby)
     {
-        return lobbyContainerRepository.AddLobby(lobby);
+        Lobby getLobby = lobbyContainerRepository.AddLobby(lobby);
+        return fillLobbyViewmodel(getLobby);
     }
 
     @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
