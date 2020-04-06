@@ -23,7 +23,12 @@ public class ApiApplication
     private static SessionFactory getSessionFactory()
     {
         Configuration configuration = new Configuration();
+
+        //for production purposes
         configuration.configure("hibernate.cfg.xml");
+
+        //for testing purposes
+//        configuration.configure("hibernate_test.cfg.xml");
 
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Card.class);
