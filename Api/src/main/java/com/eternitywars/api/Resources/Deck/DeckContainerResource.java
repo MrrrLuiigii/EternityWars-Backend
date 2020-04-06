@@ -3,8 +3,14 @@ package com.eternitywars.api.Resources.Deck;
 
 import com.eternitywars.api.DAL.Repositories.Deck.DeckContainerRepository;
 import com.eternitywars.api.Models.Decks;
+import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Entities.Deck;
+import com.eternitywars.api.Models.Viewmodels.Deck.DeckViewmodel;
+import com.eternitywars.api.Models.Viewmodels.Deck.DecksViewmodel;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/public/deck")
@@ -26,9 +32,24 @@ public class DeckContainerResource
     }
 
     @GetMapping(value = "/getByUserId/{userId}")
-    public Decks GetDecksByUserId(@PathVariable("userId") int userId)
+    public DecksViewmodel GetDecksByUserId(@PathVariable("userId") int userId)
     {
-        return deckContainerRepository.GetDecksByUserId(userId);
+        Decks getDecks = deckContainerRepository.GetDecksByUserId(userId);
+
+        DecksViewmodel decks = new DecksViewmodel();
+
+        for (Deck d : getDecks.getDecks())
+        {
+            DeckViewmodel deck = new DeckViewmodel(
+                    d.getDeckId(),
+                    d.getName(),
+                    d.getCards()
+            );
+
+            decks.getDecks().add(deck);
+        }
+
+        return decks;
     }
 
     @GetMapping(value = "/getByDeckId/{deckId}")
