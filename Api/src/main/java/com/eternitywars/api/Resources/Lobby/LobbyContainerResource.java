@@ -23,7 +23,7 @@ public class LobbyContainerResource
     public LobbyViewmodel AddLobby(@RequestBody Lobby lobby)
     {
         Lobby getLobby = lobbyContainerRepository.AddLobby(lobby);
-        return fillLobbyViewmodel(getLobby);
+        return FillLobbyViewmodel(getLobby);
     }
 
     @DeleteMapping(value = "/delete", consumes = "application/json", produces = "application/json")
@@ -36,8 +36,7 @@ public class LobbyContainerResource
     public LobbyViewmodel GetLobbyById(@PathVariable("lobbyId") int lobbyId)
     {
         Lobby getLobby = lobbyContainerRepository.GetLobbyById(lobbyId);
-        LobbyViewmodel lobby = fillLobbyViewmodel(getLobby);
-        return lobby;
+        return FillLobbyViewmodel(getLobby);
     }
 
     @GetMapping(value = "/get")
@@ -49,14 +48,14 @@ public class LobbyContainerResource
 
         for (Lobby l : getLobbies.getLobbies())
         {
-            LobbyViewmodel lobby = fillLobbyViewmodel(l);
+            LobbyViewmodel lobby = FillLobbyViewmodel(l);
             lobbies.getLobbies().add(lobby);
         }
 
         return lobbies;
     }
 
-    private LobbyViewmodel fillLobbyViewmodel(Lobby getLobby)
+    private LobbyViewmodel FillLobbyViewmodel(Lobby getLobby)
     {
         List<PlayerViewmodel> players = new ArrayList<>();
 
@@ -73,14 +72,12 @@ public class LobbyContainerResource
             players.add(player);
         }
 
-        LobbyViewmodel lobby = new LobbyViewmodel(
+        return new LobbyViewmodel(
                 getLobby.getId(),
                 getLobby.getName(),
                 getLobby.getDescription(),
                 getLobby.getHasPassword(),
                 players
         );
-
-        return lobby;
     }
 }
