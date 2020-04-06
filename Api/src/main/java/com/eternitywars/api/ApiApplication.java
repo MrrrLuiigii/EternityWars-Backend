@@ -18,17 +18,15 @@ public class ApiApplication
         SpringApplication.run(ApiApplication.class, args);
     }
 
-    public static SessionFactory sessionFactory = getSessionFactory();
+    public static SessionFactory sessionFactory = getSessionFactory("hibernate.cfg.xml");
 
-    private static SessionFactory getSessionFactory()
+    public static SessionFactory testSessionFactory = getSessionFactory("hibernate_test.cfg.xml");
+
+    private static SessionFactory getSessionFactory(String config)
     {
         Configuration configuration = new Configuration();
 
-        //for production purposes
-        configuration.configure("hibernate.cfg.xml");
-
-        //for testing purposes
-//        configuration.configure("hibernate_test.cfg.xml");
+        configuration.configure(config);
 
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Card.class);
