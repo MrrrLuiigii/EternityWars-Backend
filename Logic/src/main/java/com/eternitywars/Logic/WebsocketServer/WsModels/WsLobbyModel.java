@@ -7,13 +7,13 @@ import com.eternitywars.Models.User;
 public class WsLobbyModel {
     String token;
     LobbyDTO parameter;
-    WsFrontendUser user;
+    User user;
 
-    public WsFrontendUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(WsFrontendUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

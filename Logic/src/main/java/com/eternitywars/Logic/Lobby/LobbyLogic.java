@@ -21,7 +21,7 @@ public class LobbyLogic
     {
 
         Lobby lobby = null;
-        User user = new User(wsLobbyModel.getUser());
+        User user = wsLobbyModel.getUser();
         lobby.getPlayers().add(new Player(user));
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(wsLobbyModel.getToken());

@@ -23,17 +23,9 @@ public class LobbyContainerLogic
 
     public LobbyViewmodel AddLobby(WsLobbyModel wsLobbyModel)
     {
-        User user = new User();
-        user.setUserId(wsLobbyModel.getUser().getId());
-        user.setEmail(wsLobbyModel.getUser().getEmail());
-        user.setUsername(wsLobbyModel.getUser().getUsername());
-        user.setAccountStatus(wsLobbyModel.getUser().getStatus());
-
+        User user = wsLobbyModel.getUser();
         LobbyPlayerDTO lobbyPlayerDTO = new LobbyPlayerDTO(user, LobbyPlayerStatus.NotReady);
-
-
         wsLobbyModel.getParameter().getPlayers().add(lobbyPlayerDTO);
-
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(wsLobbyModel.getToken());
