@@ -35,6 +35,8 @@ public class Lobby
 
     public Lobby(){}
 
+
+
     public Lobby(int lobbyId, String name, String description, boolean hasPassword, String password)
     {
         this.id = lobbyId;
@@ -42,6 +44,13 @@ public class Lobby
         this.description = description;
         this.hasPassword = hasPassword;
         this.password = password;
+    }
+
+    public Lobby(String name, String description, boolean hasPassword)
+    {
+        this.name = name;
+        this.description = description;
+        this.hasPassword = hasPassword;
     }
 
     public int getId()
