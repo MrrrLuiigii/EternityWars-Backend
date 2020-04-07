@@ -2,17 +2,14 @@ package com.eternitywars.Logic.Lobby;
 
 import com.eternitywars.Logic.DeckBuilder.DeckBuilderContainerLogic;
 import com.eternitywars.Logic.Game.GameLogic;
-import com.eternitywars.Logic.WebsocketServer.Collection.GameCollection;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsLobbyModel;
 import com.eternitywars.Models.*;
+import com.eternitywars.Models.DTO.LobbyDTO;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
-import com.eternitywars.Models.Enums.LobbyStatus;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class LobbyLogic
 {
@@ -20,32 +17,19 @@ public class LobbyLogic
     private LobbyContainerLogic lobbyContainerLogic = new LobbyContainerLogic();
     private GameLogic gameLogic = new GameLogic();
 
-    public Lobby JoinLobby(Lobby lobby, Player player, String token)
+    public Lobby JoinLobby(WsLobbyModel wsLobbyModel)
     {
-        Lobby lobby1 = lobbyContainerLogic.GetLobbyById(lobby, token);
 
-       if(lobby1.getPlayers().get(0) != null && lobby1.getPlayers().get(1) == null)
-       {
-           lobby1.setStatus(LobbyStatus.Full);
-           HttpHeaders headers = new HttpHeaders();
-           headers.setBearerAuth(token);
-           headers.setContentType(MediaType.APPLICATION_JSON);
-//           Lobby sendlobby = new Lobby();
-//           sendlobby.setId(lobby.getId());
-//           player.setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
-//           sendlobby.setPlayerOne(player);
-           lobby.getPlayers().set(1, player);
+        Lobby lobby = null;
+        User user = new User(wsLobbyModel.getUser());
+        lobby.getPlayers().add(new Player(user));
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(wsLobbyModel.getToken());
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        JSONObject json = new JSONObject(lobby);
+        HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
 
-           JSONObject json = new JSONObject(lobby);
-
-           HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
-           //send lobby object with the user that wants to join
-           if(restTemplate.postForObject("http://localhost:8083/api/private/lobby/join", request , boolean.class))
-           {
-               lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
-               lobby.setStatus(LobbyStatus.Full);
-           }
-       }
+        restTemplate.postForObject("http://localhost:8083/api/public/lobby/join", request , boolean.class);
         return lobby;
     }
 

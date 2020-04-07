@@ -11,7 +11,7 @@ public class PlayerViewmodel
 {
     private int playerId;
     private String username;
-    private List<Deck> decks;
+    private List<DeckDTO> decks;
     private LobbyPlayerStatus lobbyPlayerStatus;
     private Deck selectedDeck;
 
@@ -19,7 +19,7 @@ public class PlayerViewmodel
     public PlayerViewmodel() {
     }
 
-    public PlayerViewmodel(int playerId, String username, List<Deck> decks, LobbyPlayerStatus lobbyPlayerStatus, Deck selectedDeck)
+    public PlayerViewmodel(int playerId, String username, List<DeckDTO> decks, LobbyPlayerStatus lobbyPlayerStatus, Deck selectedDeck)
     {
         this.playerId = playerId;
         this.username = username;
@@ -48,12 +48,12 @@ public class PlayerViewmodel
         this.username = username;
     }
 
-    public List<Deck> getDecks()
+    public List<DeckDTO> getDecks()
     {
         return decks;
     }
 
-    public void setDecks(List<Deck> decks)
+    public void setDecks(List<DeckDTO> decks)
     {
         this.decks = decks;
     }

@@ -136,29 +136,29 @@ public class LobbyExecutor implements IExecutor
         }
     }
 
-    private void RespondLobbyCollection(JSONObject jsonObject) throws IOException
-    {
-        GsonBuilder gs = new GsonBuilder();
-        gs.serializeNulls();
-        Gson gson = gs.create();
-
-        String token = jsonObject.getString("Token");
-
-
-        WsUserToken wsUserToken = new WsUserToken();
-        wsUserToken.setToken(token);
-
-        lobbyCollection = lobbyContainerLogic.GetLobbies(wsUserToken);
-
-        //update all register sessions
-        for (User user : UserCollection.getConnectedUsers())
-        {
-            WsReturnMessage returnMessage = new WsReturnMessage();
-            returnMessage.setAction("GETLOBBIES");
-            returnMessage.setContent(lobbyCollection);
-            user.getSession().getRemote().sendString(gson.toJson(returnMessage));
-        }
-    }
+//    private void RespondLobbyCollection(JSONObject jsonObject) throws IOException
+//    {
+//        GsonBuilder gs = new GsonBuilder();
+//        gs.serializeNulls();
+//        Gson gson = gs.create();
+//
+//        String token = jsonObject.getString("Token");
+//
+//
+//        WsUserToken wsUserToken = new WsUserToken();
+//        wsUserToken.setToken(token);
+//
+//        lobbyCollection = lobbyContainerLogic.GetLobbies(wsUserToken);
+//
+//        //update all register sessions
+//        for (User user : UserCollection.getConnectedUsers())
+//        {
+//            WsReturnMessage returnMessage = new WsReturnMessage();
+//            returnMessage.setAction("GETLOBBIES");
+//            returnMessage.setContent(lobbyCollection);
+//            user.getSession().getRemote().sendString(gson.toJson(returnMessage));
+//        }
+//    }
 
     @Override
     public void run() {

@@ -23,6 +23,15 @@ public class Player extends Account
         this.boardRow = new BoardRow();
     }
 
+    public Player(User user)
+    {
+        this.email = user.getEmail();
+        this.userId = user.getUserId();
+        this.username = user.getUsername();
+        this.lobbyPlayerStatus = LobbyPlayerStatus.NotReady;
+    }
+
+
 
 
     public Player(int id, String username, AccountStatus accountStatus, Session session, Deck deck, List<Card> cardsInHand, List<Card> cardsInDeck, LobbyPlayerStatus lobbyPlayerStatus, BoardRow boardRow)

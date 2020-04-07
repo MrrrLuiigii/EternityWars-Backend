@@ -1,5 +1,6 @@
 package com.eternitywars.Models;
 
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
 import com.eternitywars.Models.Enums.AccountStatus;
 import org.eclipse.jetty.websocket.api.Session;
 
@@ -30,6 +31,16 @@ public class User extends Account
         this.friendCollection = friendCollection;
         this.deckCollection = deckCollection;
         this.cardCollection = cardCollection;
+    }
+
+    public User(WsFrontendUser frontendUser)
+    {
+        this.email = frontendUser.getEmail();
+        this.gold = frontendUser.getGold();
+        this.userId = frontendUser.getId();
+        this.packAmount = frontendUser.getPackAmount();
+        this.accountStatus = frontendUser.getStatus();
+        this.username = frontendUser.getUsername();
     }
 
     public User(int id, String username, AccountStatus accountStatus, String email, int gold, int packAmount, FriendCollection friendCollection, DeckCollection deckCollection, CardCollection cardCollection) {
