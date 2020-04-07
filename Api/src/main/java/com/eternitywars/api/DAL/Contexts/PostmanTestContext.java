@@ -14,7 +14,7 @@ import java.util.List;
 
 public class PostmanTestContext
 {
-    private static SessionFactory sessionFactory = ApiApplication.testSessionFactory;
+    private static SessionFactory sessionFactory = ApiApplication.sessionFactory;
 
     private Session session;
     private Transaction transaction;
