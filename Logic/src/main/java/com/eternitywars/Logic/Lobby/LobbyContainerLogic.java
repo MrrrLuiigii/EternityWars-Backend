@@ -9,6 +9,7 @@ import com.eternitywars.Models.Lobby;
 import com.eternitywars.Models.LobbyCollection;
 import com.eternitywars.Models.Player;
 import com.eternitywars.Models.User;
+import com.eternitywars.Models.Viewmodels.Lobby.LobbiesViewmodel;
 import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
 import org.json.JSONObject;
 import org.springframework.http.*;
@@ -28,28 +29,17 @@ public class LobbyContainerLogic
         user.setUsername(wsLobbyModel.getUser().getUsername());
         user.setAccountStatus(wsLobbyModel.getUser().getStatus());
 
+        LobbyPlayerDTO lobbyPlayerDTO = new LobbyPlayerDTO(user, LobbyPlayerStatus.NotReady);
 
 
-        LobbyPlayerDTO lobbyPlayerDTO = new LobbyPlayerDTO();
-        lobbyPlayerDTO.setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
-        lobbyPlayerDTO.setUser(user);
-        lobbyPlayerDTO.setSelectedDeck(null);
-
-
-
-        LobbyDTO lobbyDTO = new LobbyDTO();
-        lobbyDTO.setDescription(wsLobbyModel.getParameter().getDescription());
-        lobbyDTO.setName(wsLobbyModel.getParameter().getName());
-        lobbyDTO.setHasPassword(wsLobbyModel.getParameter().getHasPassword());
-        lobbyDTO.setPassword(wsLobbyModel.getParameter().getPassword());
-        lobbyDTO.getPlayers().add(lobbyPlayerDTO);
+        wsLobbyModel.getParameter().getPlayers().add(lobbyPlayerDTO);
 
 
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(wsLobbyModel.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        JSONObject json = new JSONObject(lobbyDTO);
+        JSONObject json = new JSONObject(wsLobbyModel.getParameter());
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         //send lobby object with the user that wants to join
         return restTemplate.postForObject("http://localhost:8083/api/public/lobby/add", request, LobbyViewmodel.class);
@@ -66,17 +56,17 @@ public class LobbyContainerLogic
         return response.getBody();
     }
 
-    public LobbyCollection GetLobbies(WsUserToken wsUserToken)
+    public LobbiesViewmodel GetLobbies(WsUserToken wsUserToken)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(wsUserToken.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> request = new HttpEntity<>(headers);
-        ResponseEntity<LobbyCollection> response = restTemplate.exchange("http://localhost:8083/api/public/lobby/get", HttpMethod.GET, request, LobbyCollection.class);
+        ResponseEntity<LobbiesViewmodel> response = restTemplate.exchange("http://localhost:8083/api/public/lobby/get", HttpMethod.GET, request, LobbiesViewmodel.class);
         return response.getBody();
     }
 
-    public LobbyCollection DeleteLobby(Lobby lobby, String token)
+    public LobbiesViewmodel DeleteLobby(Lobby lobby, String token)
     {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(token);

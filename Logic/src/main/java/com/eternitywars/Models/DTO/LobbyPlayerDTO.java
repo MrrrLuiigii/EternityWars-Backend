@@ -13,9 +13,13 @@ public class LobbyPlayerDTO {
     private Deck selectedDeck;
 
 
-    public LobbyPlayerDTO()
+    public LobbyPlayerDTO(User user, LobbyPlayerStatus lobbyPlayerStatus)
     {
+        this.user = user;
+        this.lobbyPlayerStatus = lobbyPlayerStatus;
     }
+
+
 
     // Getters & Setters
 

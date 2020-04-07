@@ -14,7 +14,10 @@ public class Lobby
     private String password;
     private List<Player> players;
 
-    public Lobby(){}
+    public Lobby()
+    {
+
+    }
 
     public Lobby(int lobbyId, String name, String description, boolean hasPassword, String password)
     {
@@ -89,4 +92,8 @@ public class Lobby
 
     public void setStatus(LobbyStatus full) {
     }
+
+
+
+
 }

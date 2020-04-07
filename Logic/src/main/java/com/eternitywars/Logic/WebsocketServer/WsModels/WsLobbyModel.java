@@ -1,11 +1,12 @@
 package com.eternitywars.Logic.WebsocketServer.WsModels;
 
+import com.eternitywars.Models.DTO.LobbyDTO;
 import com.eternitywars.Models.Lobby;
 import com.eternitywars.Models.User;
 
 public class WsLobbyModel {
     String token;
-    Lobby parameter;
+    LobbyDTO parameter;
     WsFrontendUser user;
 
     public WsFrontendUser getUser() {
@@ -27,11 +28,11 @@ public class WsLobbyModel {
         this.token = token;
     }
 
-    public Lobby getParameter() {
+    public LobbyDTO getParameter() {
         return parameter;
     }
 
-    public void setParameter(Lobby parameter) {
+    public void setParameter(LobbyDTO parameter) {
         this.parameter = parameter;
     }
 
