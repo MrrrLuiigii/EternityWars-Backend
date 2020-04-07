@@ -1,6 +1,6 @@
 package com.eternitywars.api.Resources.Test;
 
-import com.eternitywars.api.PostmanTest;
+import com.eternitywars.api.DAL.Contexts.PostmanTestContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,8 +14,8 @@ public class TestResource
     {
         try
         {
-            PostmanTest postmanTest = new PostmanTest();
-            postmanTest.PrepareEntities();
+            PostmanTestContext postmanTestContext = new PostmanTestContext();
+            postmanTestContext.PrepareEntities();
         } catch (Exception e)
         {
             return false;
