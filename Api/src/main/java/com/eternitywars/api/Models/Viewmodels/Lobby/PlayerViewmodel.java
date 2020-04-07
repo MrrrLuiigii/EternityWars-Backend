@@ -1,6 +1,5 @@
 package com.eternitywars.api.Models.Viewmodels.Lobby;
 
-import com.eternitywars.api.Models.Decks;
 import com.eternitywars.api.Models.Entities.Deck;
 import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 
