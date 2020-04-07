@@ -6,7 +6,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "friend")
-public class Relationship
+public class
+
+Relationship
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +29,13 @@ public class Relationship
 
     public Relationship()
     {
+    }
+
+    public Relationship(User friendOne, User friendTwo, FriendStatus status)
+    {
+        this.friendOne = friendOne;
+        this.friendTwo = friendTwo;
+        this.friendStatus = status;
     }
 
     public int getId()

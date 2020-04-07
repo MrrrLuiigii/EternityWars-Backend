@@ -38,7 +38,6 @@ public class ApiApplication
         configuration.addAnnotatedClass(Message.class);
         configuration.addAnnotatedClass(Chat.class);
 
-
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         return configuration.buildSessionFactory(serviceRegistry);
     }

@@ -35,6 +35,13 @@ public class Player
     {
     }
 
+    public Player(User user, LobbyPlayerStatus status, Deck selectedDeck)
+    {
+        this.user = user;
+        this.lobbyPlayerStatus = status;
+        this.selectedDeck = selectedDeck;
+    }
+
     // Getters & Setters
 
 
