@@ -1,7 +1,8 @@
-import com.eternitywars.api.ApiApplication;
-import com.eternitywars.api.Models.Cards;
+package com.eternitywars.api;
+
 import com.eternitywars.api.Models.Entities.Card;
 import com.eternitywars.api.Models.Entities.Deck;
+import com.eternitywars.api.Models.Entities.Lobby;
 import com.eternitywars.api.Models.Entities.User;
 import com.eternitywars.api.Models.Enums.AccountStatus;
 import org.hibernate.Session;
@@ -11,14 +12,14 @@ import org.hibernate.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostmanTestPreparator
+public class PostmanTest
 {
     private static SessionFactory sessionFactory = ApiApplication.testSessionFactory;
 
     private Session session;
     private Transaction transaction;
 
-    private void FillDatabaseWithTestEntities()
+    public boolean PrepareEntities()
     {
         User user = new User(
                 "MrrrLuiigii",
@@ -59,6 +60,7 @@ public class PostmanTestPreparator
 
         Deck firstDeck = new Deck("MyFirstDeck");
         firstDeck.setCards(cardsInFirstDeck);
+        firstDeck.setUser(user);
 
         List<Card> cardsInSecondDeck = new ArrayList<>();
         cardsInSecondDeck.add(cardThree);
@@ -66,14 +68,52 @@ public class PostmanTestPreparator
 
         Deck secondDeck = new Deck("MySecondDeck");
         secondDeck.setCards(cardsInSecondDeck);
+        secondDeck.setUser(user);
 
-        user.getDecks().add(firstDeck);
-        user.getDecks().add(secondDeck);
+        List<Deck> decks = new ArrayList<>();
+        decks.add(firstDeck);
+        decks.add(secondDeck);
+        user.setDecks(decks);
 
+        Lobby lobby = new Lobby();
 
+        return PersistEntities(cardCollection, decks, user);
+    }
 
+    private boolean PersistEntities(List<Card> cards, List<Deck> decks, User user)
+    {
+        try
+        {
+            session = sessionFactory.openSession();
+            transaction = session.beginTransaction();
 
+            for (Card c : cards)
+            {
+                session.persist(c);
+            }
 
+            session.persist(user);
 
+            for (Deck d : decks)
+            {
+                session.persist(d);
+            }
+
+            transaction.commit();
+        } catch (Exception ex)
+        {
+            if (transaction != null)
+            {
+                transaction.rollback();
+            }
+
+            ex.printStackTrace();
+            return false;
+        } finally
+        {
+            session.close();
+        }
+
+        return true;
     }
 }
