@@ -5,6 +5,8 @@ import com.eternitywars.api.Interfaces.Lobby.ILobbyContext;
 import com.eternitywars.api.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.api.Models.Entities.Lobby;
 import com.eternitywars.api.Models.Entities.Player;
+import com.eternitywars.api.Models.Entities.User;
+import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -25,10 +27,11 @@ public class LobbyHibernateContext implements ILobbyContext
             transaction = session.beginTransaction();
 
             Lobby getLobby = session.find(Lobby.class, lobby.getLobbyID());
-            Player player = session.find(Player.class, lobby.getPlayerID());
+            User user = session.find(User.class, lobby.getPlayerID());
+            Player player = new Player(user, LobbyPlayerStatus.NotReady, null);
+            player.setLobby(getLobby);
 
             getLobby.getPlayers().add(player);
-            player.setLobby(getLobby);
 
             session.merge(getLobby);
 
