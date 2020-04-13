@@ -1,8 +1,11 @@
 package com.eternitywars.Logic.Card;
 
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsGetCards;
 import com.eternitywars.Models.CardCollection;
+import com.eternitywars.Models.DTO.CardsDTO;
 import com.eternitywars.Models.MessageHandler;
 import com.eternitywars.Models.User;
+import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 import com.google.gson.JsonObject;
 import org.json.JSONObject;
 import org.springframework.http.*;
@@ -10,19 +13,22 @@ import org.springframework.web.client.RestTemplate;
 
 public class CardContainerLogic
 {
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
 
-    public CardCollection GetCardsByUserId(JSONObject jsonObject)
+    public CardContainerLogic() {
+        this.restTemplate = new RestTemplate();
+    }
+
+    public CardsDTO GetCardsByUserId(WsGetCards wsGetCards)
     {
-        User user = (User) MessageHandler.HandleMessage(jsonObject.getString("Content"), User.class);
-        String token = jsonObject.getString("token");
+        SingleUserViewmodel user = wsGetCards.getUser();
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(token);
+        headers.setBearerAuth(wsGetCards.getToken());
         HttpEntity<String> request = new HttpEntity<>(headers);
-        ResponseEntity<CardCollection> response = restTemplate.exchange(
-                "http://localhost:8083/api/private/card/getByUserId/{userId}",
-                HttpMethod.GET, request, CardCollection.class, user.getUserId());
+        ResponseEntity<CardsDTO> response = restTemplate.exchange(
+                "http://localhost:8083/api/public/card/getByUserId/{userId}",
+                HttpMethod.GET, request, CardsDTO.class, user.getId());
         return response.getBody();
     }
 }

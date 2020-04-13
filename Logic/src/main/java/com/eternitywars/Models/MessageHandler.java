@@ -10,6 +10,5 @@ public class MessageHandler
         object = g.fromJson(message, object.getClass());
 
         return object;
-
     }
 }
