@@ -1,8 +1,11 @@
 package com.eternitywars.api.Resources.Lobby;
 
 import com.eternitywars.api.DAL.Repositories.Lobby.LobbyContainerRepository;
+import com.eternitywars.api.DAL.Repositories.User.UserContainerRepository;
 import com.eternitywars.api.Models.Entities.Lobby;
 import com.eternitywars.api.Models.Entities.Player;
+import com.eternitywars.api.Models.Entities.User;
+import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.api.Models.Lobbies;
 import com.eternitywars.api.Models.Viewmodels.Lobby.LobbiesViewmodel;
 import com.eternitywars.api.Models.Viewmodels.Lobby.LobbyViewmodel;
@@ -17,12 +20,17 @@ import java.util.List;
 public class LobbyContainerResource
 {
     private LobbyContainerRepository lobbyContainerRepository = new LobbyContainerRepository();
+    private UserContainerRepository userContainerRepository = new UserContainerRepository();
 
 
     @PostMapping(value = "/add", consumes = "application/json", produces = "application/json")
     public LobbyViewmodel AddLobby(@RequestBody Lobby lobby)
     {
+        lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         Lobby getLobby = lobbyContainerRepository.AddLobby(lobby);
+        User user = getLobby.getPlayers().get(0).getUser();
+        user = userContainerRepository.GetUserById(user.getUserId());
+        getLobby.getPlayers().get(0).setUser(user);
         return FillLobbyViewmodel(getLobby);
     }
 

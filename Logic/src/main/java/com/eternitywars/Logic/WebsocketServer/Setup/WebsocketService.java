@@ -16,18 +16,22 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 @Service("WebsocketService")
-public class WebsocketService {
+public class WebsocketService
+{
     private Set<Session> listenerSessions = new CopyOnWriteArraySet<>();
 
-    public void removeSession(Session session){
+    public void removeSession(Session session)
+    {
         listenerSessions.remove(session);
     }
 
-    public void addSession(Session session){
+    public void addSession(Session session)
+    {
         listenerSessions.add(session);
     }
 
-    public void sendmessage(Session session, String message) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, IOException {
+    public void sendmessage(Session session, String message) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, IOException
+    {
         JSONObject jsonObject = new JSONObject(message);
         Class ReflectionClass = Class.forName("com.eternitywars.Logic." + jsonObject.getString("Subject"));
 
@@ -44,9 +48,12 @@ public class WebsocketService {
     }
 
     @PostConstruct
-    private void init(){
-        Runnable runnable = () -> {
-            while (true){
+    private void init()
+    {
+        Runnable runnable = () ->
+        {
+            while (true)
+            {
 
             }
         };
@@ -55,14 +62,14 @@ public class WebsocketService {
         thread.start();
     }
 
-    private Object HandleWebsocketModel(Session session,  JSONObject jsonObject) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-
+    private Object HandleWebsocketModel(Session session, JSONObject jsonObject) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException
+    {
         //getting ws model.
         Object wsModel = Class.forName("com.eternitywars.Logic.WebsocketServer.WsModels." + jsonObject.getString("wsModelName")).getDeclaredConstructor().newInstance();
-        if(jsonObject.getString("wsModelName").equals("WsRegister"))
+        if (jsonObject.getString("wsModelName").equals("WsRegister"))
         {
             Object object = MessageHandler.HandleMessage(jsonObject.getJSONObject("Content").toString(), wsModel);
-            WsRegister wsRegister =  (WsRegister)object;
+            WsRegister wsRegister = (WsRegister) object;
             wsRegister.getParameter().setSession(session);
             return wsRegister;
         }
