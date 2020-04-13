@@ -2,6 +2,7 @@ package com.eternitywars.Models;
 
 import com.eternitywars.Models.Enums.AccountStatus;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
+import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 import org.eclipse.jetty.websocket.api.Session;
 
 import java.net.Socket;
@@ -31,7 +32,13 @@ public class Player extends Account
         this.lobbyPlayerStatus = LobbyPlayerStatus.NotReady;
     }
 
-
+    public Player(SingleUserViewmodel singleUserViewmodel)
+    {
+        this.email = singleUserViewmodel.getEmail();
+        this.userId = singleUserViewmodel.getId();
+        this.username = singleUserViewmodel.getUsername();
+        this.lobbyPlayerStatus = LobbyPlayerStatus.NotReady;
+    }
 
 
     public Player(int id, String username, AccountStatus accountStatus, Session session, Deck deck, List<Card> cardsInHand, List<Card> cardsInDeck, LobbyPlayerStatus lobbyPlayerStatus, BoardRow boardRow)

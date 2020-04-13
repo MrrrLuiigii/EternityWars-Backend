@@ -2,6 +2,7 @@ package com.eternitywars.api.Resources.Lobby;
 
 import com.eternitywars.api.DAL.Repositories.Lobby.LobbyContainerRepository;
 import com.eternitywars.api.DAL.Repositories.Lobby.LobbyRepository;
+import com.eternitywars.api.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.api.Models.Entities.Lobby;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public class LobbyResource
 
 
     @PostMapping(value = "/join", consumes = "application/json", produces = "application/json")
-    public boolean Join(@RequestBody Lobby lobby)
+    public boolean Join(@RequestBody JoinLobbyDTO lobby)
     {
         return lobbyRepository.JoinLobby(lobby);
     }

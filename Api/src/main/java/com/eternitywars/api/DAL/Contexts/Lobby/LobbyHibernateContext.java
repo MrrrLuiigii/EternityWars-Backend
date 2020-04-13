@@ -2,6 +2,7 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 
 import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContext;
+import com.eternitywars.api.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.api.Models.Entities.Lobby;
 import com.eternitywars.api.Models.Entities.Player;
 import org.hibernate.Session;
@@ -16,16 +17,16 @@ public class LobbyHibernateContext implements ILobbyContext
     private Transaction transaction;
 
     @Override
-    public boolean JoinLobby(Lobby lobby)
+    public boolean JoinLobby(JoinLobbyDTO lobby)
     {
         try
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
 
-            Lobby getLobby = session.find(Lobby.class, lobby.getId());
+            Lobby getLobby = session.find(Lobby.class, lobby.getLobbyID());
+            Player player = session.find(Player.class, lobby.getPlayerID());
 
-            Player player = lobby.getPlayers().get(1);
             getLobby.getPlayers().add(player);
             player.setLobby(getLobby);
 
