@@ -20,9 +20,6 @@ public class ApiApplication
 
     public static SessionFactory sessionFactory = getSessionFactory();
 
-//    public static SessionFactory sessionFactory = getSessionFactory("hibernate.cfg.xml");
-//    public static SessionFactory testSessionFactory = getSessionFactory("hibernate_test.cfg.xml");
-
     private static SessionFactory getSessionFactory()
     {
         Configuration configuration = new Configuration();
