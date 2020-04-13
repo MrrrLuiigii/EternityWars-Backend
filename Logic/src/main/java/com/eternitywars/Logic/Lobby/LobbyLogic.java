@@ -3,10 +3,13 @@ package com.eternitywars.Logic.Lobby;
 import com.eternitywars.Logic.DeckBuilder.DeckBuilderContainerLogic;
 import com.eternitywars.Logic.Game.GameLogic;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsJoinLobby;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsLobbyModel;
 import com.eternitywars.Models.*;
+import com.eternitywars.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.Models.DTO.LobbyDTO;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
+import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
@@ -17,20 +20,20 @@ public class LobbyLogic
     private LobbyContainerLogic lobbyContainerLogic = new LobbyContainerLogic();
     private GameLogic gameLogic = new GameLogic();
 
-    public Lobby JoinLobby(WsLobbyModel wsLobbyModel)
+    public JoinLobbyDTO JoinLobby(WsJoinLobby wsJoinLobby)
     {
+        JoinLobbyDTO joinLobbyDTO = new JoinLobbyDTO();
+        joinLobbyDTO.setLobbyID(wsJoinLobby.getLobby().getId());
+        joinLobbyDTO.setPlayerID(wsJoinLobby.getUser().getId());
 
-        Lobby lobby = null;
-        User user = wsLobbyModel.getUser();
-        lobby.getPlayers().add(new Player(user));
         HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(wsLobbyModel.getToken());
+        headers.setBearerAuth(wsJoinLobby.getToken());
         headers.setContentType(MediaType.APPLICATION_JSON);
-        JSONObject json = new JSONObject(lobby);
+        JSONObject json = new JSONObject(joinLobbyDTO);
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
 
         restTemplate.postForObject("http://localhost:8083/api/public/lobby/join", request , boolean.class);
-        return lobby;
+        return joinLobbyDTO;
     }
 
     public Lobby LeaveLobby(Lobby lobby, Player player, String token)

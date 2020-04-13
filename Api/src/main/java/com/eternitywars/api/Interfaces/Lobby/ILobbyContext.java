@@ -1,11 +1,12 @@
 package com.eternitywars.api.Interfaces.Lobby;
 
+import com.eternitywars.api.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.api.Models.Entities.Lobby;
 import com.eternitywars.api.Models.Entities.Player;
 
 public interface ILobbyContext
 {
-    boolean JoinLobby(Lobby lobby);
+    boolean JoinLobby(JoinLobbyDTO lobby);
 
     boolean LeaveLobby(Lobby lobby, Player player);
 
