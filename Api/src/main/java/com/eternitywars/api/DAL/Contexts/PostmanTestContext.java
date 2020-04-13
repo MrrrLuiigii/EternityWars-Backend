@@ -45,18 +45,29 @@ public class PostmanTestContext
                 1, 6, 3, 0, false
         );
 
-        List<Card> cardCollection = new ArrayList<>();
-        cardCollection.add(cardOne);
-        cardCollection.add(cardTwo);
-        cardCollection.add(cardThree);
-        cardCollection.add(cardFour);
+        Card cardFive = new Card(
+                "Test",
+                1, 1, 1, 1, true
+        );
 
-        PersistCard(cardCollection);
+        List<Card> cards = new ArrayList<>();
+        cards.add(cardOne);
+        cards.add(cardTwo);
+        cards.add(cardThree);
+        cards.add(cardFour);
+        cards.add(cardFive);
+
+        PersistCard(cards);
 
         //
         // USER
         //
 
+        List<Card> cardCollection = new ArrayList<>();
+        cardCollection.add(cardOne);
+        cardCollection.add(cardTwo);
+        cardCollection.add(cardThree);
+        cardCollection.add(cardFour);
 
         User userOne = new User(
                 "MrrrLuiigii",
