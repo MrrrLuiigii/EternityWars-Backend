@@ -1,11 +1,12 @@
 package com.eternitywars.api.Models.DTO;
 
-public class JoinLobbyDTO
+public class UpdatePlayerDeckDTO
 {
     private int lobbyID;
     private int playerID;
+    private int playerDeckID;
 
-    public JoinLobbyDTO()
+    public UpdatePlayerDeckDTO()
     {
     }
 
@@ -27,5 +28,15 @@ public class JoinLobbyDTO
     public void setPlayerID(int playerID)
     {
         this.playerID = playerID;
+    }
+
+    public int getPlayerDeckID()
+    {
+        return playerDeckID;
+    }
+
+    public void setPlayerDeckID(int playerDeckID)
+    {
+        this.playerDeckID = playerDeckID;
     }
 }

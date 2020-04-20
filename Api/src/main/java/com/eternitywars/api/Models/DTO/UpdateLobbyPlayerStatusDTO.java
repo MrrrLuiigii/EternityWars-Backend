@@ -1,11 +1,14 @@
 package com.eternitywars.api.Models.DTO;
 
-public class JoinLobbyDTO
+import com.eternitywars.api.Models.Enums.LobbyPlayerStatus;
+
+public class UpdateLobbyPlayerStatusDTO
 {
     private int lobbyID;
     private int playerID;
+    private LobbyPlayerStatus status;
 
-    public JoinLobbyDTO()
+    public UpdateLobbyPlayerStatusDTO()
     {
     }
 
@@ -27,5 +30,15 @@ public class JoinLobbyDTO
     public void setPlayerID(int playerID)
     {
         this.playerID = playerID;
+    }
+
+    public LobbyPlayerStatus getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(LobbyPlayerStatus status)
+    {
+        this.status = status;
     }
 }
