@@ -33,7 +33,6 @@ public class ApiApplication
         configuration.addAnnotatedClass(Relationship.class);
         configuration.addAnnotatedClass(Lobby.class);
         configuration.addAnnotatedClass(Player.class);
-        configuration.addAnnotatedClass(Relationship.class);
         configuration.addAnnotatedClass(Message.class);
         configuration.addAnnotatedClass(Chat.class);
 
