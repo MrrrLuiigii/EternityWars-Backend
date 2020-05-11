@@ -21,7 +21,7 @@ public class LobbyRepository implements ILobbyContext
     }
 
 
-    public boolean JoinLobby(JoinLobbyDTO lobby)
+    public Lobby JoinLobby(JoinLobbyDTO lobby)
     {
         return lobbyContext.JoinLobby(lobby);
     }

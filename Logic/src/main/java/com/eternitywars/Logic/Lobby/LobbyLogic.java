@@ -5,10 +5,12 @@ import com.eternitywars.Logic.Game.GameLogic;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsJoinLobby;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsLobbyModel;
+import com.eternitywars.Logic.utils.APIRequest;
 import com.eternitywars.Models.*;
 import com.eternitywars.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.Models.DTO.LobbyDTO;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
+import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
 import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 import org.json.JSONObject;
 import org.springframework.http.*;
@@ -20,7 +22,7 @@ public class LobbyLogic
     private LobbyContainerLogic lobbyContainerLogic = new LobbyContainerLogic();
     private GameLogic gameLogic = new GameLogic();
 
-    public JoinLobbyDTO JoinLobby(WsJoinLobby wsJoinLobby)
+    public LobbyViewmodel JoinLobby(WsJoinLobby wsJoinLobby)
     {
         JoinLobbyDTO joinLobbyDTO = new JoinLobbyDTO();
         joinLobbyDTO.setLobbyID(wsJoinLobby.getLobby().getId());
@@ -32,8 +34,9 @@ public class LobbyLogic
         JSONObject json = new JSONObject(joinLobbyDTO);
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
 
-        restTemplate.postForObject("http://localhost:8083/api/public/lobby/join", request , boolean.class);
-        return joinLobbyDTO;
+        String url = "http://localhost:8083/api/public/lobby/join";
+        LobbyViewmodel lobbyViewmodel = restTemplate.postForObject(url, request, LobbyViewmodel.class);
+        return lobbyViewmodel;
     }
 
     public Lobby LeaveLobby(Lobby lobby, Player player, String token)

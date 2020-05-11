@@ -8,7 +8,12 @@ import com.eternitywars.api.Models.DTO.UpdatePlayerDeckDTO;
 import com.eternitywars.api.Models.Entities.Deck;
 import com.eternitywars.api.Models.Entities.Lobby;
 import com.eternitywars.api.Models.Entities.Player;
+import com.eternitywars.api.Models.Viewmodels.Lobby.LobbyViewmodel;
+import com.eternitywars.api.Models.Viewmodels.Lobby.PlayerViewmodel;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/public/lobby")
@@ -19,9 +24,10 @@ public class LobbyResource
 
 
     @PostMapping(value = "/join", consumes = "application/json", produces = "application/json")
-    public boolean Join(@RequestBody JoinLobbyDTO lobby)
+    public LobbyViewmodel Join(@RequestBody JoinLobbyDTO lobby)
     {
-        return lobbyRepository.JoinLobby(lobby);
+        Lobby joinedLobby = lobbyRepository.JoinLobby(lobby);
+        return FillLobbyViewmodel(joinedLobby);
     }
 
     @PostMapping(value = "/leave", consumes = "application/json", produces = "application/json")
@@ -54,5 +60,31 @@ public class LobbyResource
         player.setLobbyPlayerStatus(lobbyDTO.getStatus());
 
         return lobbyRepository.UpdatePlayerStatus(lobby, player);
+    }
+
+    private LobbyViewmodel FillLobbyViewmodel(Lobby getLobby)
+    {
+        List<PlayerViewmodel> players = new ArrayList<>();
+
+        for (Player p : getLobby.getPlayers())
+        {
+            PlayerViewmodel player = new PlayerViewmodel(
+                    p.getId(),
+                    p.getUser().getUsername(),
+                    p.getUser().getDecks(),
+                    p.getLobbyPlayerStatus(),
+                    p.getSelectedDeck()
+            );
+
+            players.add(player);
+        }
+
+        return new LobbyViewmodel(
+                getLobby.getId(),
+                getLobby.getName(),
+                getLobby.getDescription(),
+                getLobby.getHasPassword(),
+                players
+        );
     }
 }

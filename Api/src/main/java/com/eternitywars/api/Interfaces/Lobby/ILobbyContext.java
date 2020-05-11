@@ -6,7 +6,7 @@ import com.eternitywars.api.Models.Entities.Player;
 
 public interface ILobbyContext
 {
-    boolean JoinLobby(JoinLobbyDTO lobby);
+    Lobby JoinLobby(JoinLobbyDTO lobby);
 
     boolean LeaveLobby(Lobby lobby, Player player);
 

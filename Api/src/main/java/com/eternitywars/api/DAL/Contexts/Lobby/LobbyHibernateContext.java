@@ -20,8 +20,10 @@ public class LobbyHibernateContext implements ILobbyContext
     private Transaction transaction;
 
     @Override
-    public boolean JoinLobby(JoinLobbyDTO lobby)
+    public Lobby JoinLobby(JoinLobbyDTO lobby)
     {
+        Lobby returnLobby = null;
+
         try
         {
             session = sessionFactory.openSession();
@@ -33,15 +35,16 @@ public class LobbyHibernateContext implements ILobbyContext
             player.setLobby(getLobby);
             player.setId((int)session.save(player));
             transaction.commit();
+            getLobby.getPlayers().add(player);
+            returnLobby = getLobby;
         } catch (Exception ex)
         {
             ex.printStackTrace();
-            return false;
         } finally
         {
             session.close();
         }
-        return true;
+        return returnLobby;
     }
 
     @Override
