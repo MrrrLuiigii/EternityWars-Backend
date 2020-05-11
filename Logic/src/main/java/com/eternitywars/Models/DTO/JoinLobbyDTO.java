@@ -1,25 +1,31 @@
 package com.eternitywars.Models.DTO;
 
-public class JoinLobbyDTO {
+public class JoinLobbyDTO
+{
     int lobbyID;
     int playerID;
 
-    public int getLobbyID() {
+    public JoinLobbyDTO()
+    {
+    }
+
+    public int getLobbyID()
+    {
         return lobbyID;
     }
 
-    public void setLobbyID(int lobbyID) {
+    public void setLobbyID(int lobbyID)
+    {
         this.lobbyID = lobbyID;
     }
 
-    public int getPlayerID() {
+    public int getPlayerID()
+    {
         return playerID;
     }
 
-    public void setPlayerID(int playerID) {
+    public void setPlayerID(int playerID)
+    {
         this.playerID = playerID;
-    }
-
-    public JoinLobbyDTO() {
     }
 }
