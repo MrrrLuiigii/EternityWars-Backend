@@ -22,7 +22,7 @@ public class UserContainerHibernateContext implements IUserContainerContext
     @Override
     public User GetUserById(int userId)
     {
-        User user;
+        User user = null;
 
         try
         {
@@ -30,7 +30,7 @@ public class UserContainerHibernateContext implements IUserContainerContext
             user = session.find(User.class, userId);
         } catch (Exception ex)
         {
-            return null;
+            ex.printStackTrace();
         } finally
         {
             session.close();
@@ -71,7 +71,7 @@ public class UserContainerHibernateContext implements IUserContainerContext
     {
         String hql = "SELECT c FROM User c WHERE c.email = :email";
 
-        User user = new User();
+        User user = null;
 
         try
         {
@@ -139,6 +139,7 @@ public class UserContainerHibernateContext implements IUserContainerContext
             }
 
             ex.printStackTrace();
+            return null;
         } finally
         {
             session.close();
