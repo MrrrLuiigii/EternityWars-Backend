@@ -3,12 +3,14 @@ package com.eternitywars.api.DAL.Contexts.Lobby;
 import com.eternitywars.api.ApiApplication;
 import com.eternitywars.api.Interfaces.Lobby.ILobbyContainerContext;
 import com.eternitywars.api.Models.Entities.Lobby;
+import com.eternitywars.api.Models.Entities.Player;
 import com.eternitywars.api.Models.Lobbies;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
 import java.util.List;
 
 public class LobbyContainerHibernateContext implements ILobbyContainerContext
@@ -25,8 +27,18 @@ public class LobbyContainerHibernateContext implements ILobbyContainerContext
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            lobby.getPlayers().get(0).setLobby(lobby);
-            session.persist(lobby);
+            Player player = lobby.getPlayers().get(0);
+
+            lobby.setPlayers(null);
+
+            lobby.setId((int) session.save(lobby));
+            player.setLobby(lobby);
+            player.setId((int) session.save(player));
+
+            List<Player> players = new ArrayList<>();
+            players.add(player);
+            lobby.setPlayers(players);
+
             transaction.commit();
         } catch (Exception ex)
         {

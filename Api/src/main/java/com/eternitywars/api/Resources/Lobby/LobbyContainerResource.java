@@ -27,10 +27,9 @@ public class LobbyContainerResource
     public LobbyViewmodel AddLobby(@RequestBody Lobby lobby)
     {
         lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
+        User user = userContainerRepository.GetUserByUsername(lobby.getPlayers().get(0).getUser().getUsername());
+        lobby.getPlayers().get(0).setUser(user);
         Lobby getLobby = lobbyContainerRepository.AddLobby(lobby);
-        User user = getLobby.getPlayers().get(0).getUser();
-        user = userContainerRepository.GetUserById(user.getUserId());
-        getLobby.getPlayers().get(0).setUser(user);
         return FillLobbyViewmodel(getLobby);
     }
 
