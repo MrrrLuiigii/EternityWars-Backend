@@ -31,11 +31,7 @@ public class LobbyHibernateContext implements ILobbyContext
             User user = session.find(User.class, lobby.getPlayerID());
             Player player = new Player(user, LobbyPlayerStatus.NotReady, null);
             player.setLobby(getLobby);
-
-            getLobby.getPlayers().add(player);
-
-            session.merge(getLobby);
-
+            player.setId((int)session.save(player));
             transaction.commit();
         } catch (Exception ex)
         {
