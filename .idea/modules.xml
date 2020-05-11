@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/EternityWars-Backend.iml" filepath="$PROJECT_DIR$/.idea/EternityWars-Backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/Api/api.iml" filepath="$PROJECT_DIR$/Api/api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Logic/logic.iml" filepath="$PROJECT_DIR$/Logic/logic.iml" />
     </modules>
   </component>
 </project>
