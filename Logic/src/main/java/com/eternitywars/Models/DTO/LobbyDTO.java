@@ -1,27 +1,19 @@
 package com.eternitywars.Models.DTO;
 
-import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
-import com.eternitywars.Models.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class LobbyDTO {
-
+public class LobbyDTO
+{
     private int id;
-
     private String name;
-
     private String description;
-
     private boolean hasPassword;
-
     private String password;
-
     private List<LobbyPlayerDTO> players;
 
-
-    public LobbyDTO(){
+    public LobbyDTO()
+    {
         players = new ArrayList<>();
     }
 
@@ -84,11 +76,13 @@ public class LobbyDTO {
         this.password = password;
     }
 
-    public List<LobbyPlayerDTO> getPlayers() {
+    public List<LobbyPlayerDTO> getPlayers()
+    {
         return players;
     }
 
-    public void setPlayers(List<LobbyPlayerDTO> players) {
+    public void setPlayers(List<LobbyPlayerDTO> players)
+    {
         this.players = players;
     }
 
