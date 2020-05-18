@@ -74,13 +74,20 @@ public class UserContainerResource
 
     private SingleUserViewmodel FillSingleUserViewmodel(User user)
     {
-        return new SingleUserViewmodel(
-                user.getUserId(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getAccountStatus(),
-                user.getGold(),
-                user.getPackAmount()
-        );
+        if(user != null)
+        {
+            return new SingleUserViewmodel(
+                    user.getUserId(),
+                    user.getUsername(),
+                    user.getEmail(),
+                    user.getAccountStatus(),
+                    user.getGold(),
+                    user.getPackAmount()
+            );
+        }
+        else
+        {
+            return null;
+        }
     }
 }
