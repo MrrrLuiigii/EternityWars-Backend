@@ -1,40 +1,46 @@
 package com.eternitywars.Logic.WebsocketServer.WsModels;
 
-import com.eternitywars.Models.Lobby;
-import com.eternitywars.Models.User;
 import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
 import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 
-public class WsJoinLobby {
-    String token;
-    LobbyViewmodel lobby;
-    SingleUserViewmodel user;
+public class WsJoinLobby
+{
+    private String token;
+    private LobbyViewmodel lobby;
+    private SingleUserViewmodel user;
 
 
-    public SingleUserViewmodel getUser() {
+    public WsJoinLobby()
+    {
+    }
+
+    public SingleUserViewmodel getUser()
+    {
         return user;
     }
 
-    public void setUser(SingleUserViewmodel user) {
+    public void setUser(SingleUserViewmodel user)
+    {
         this.user = user;
     }
 
-    public String getToken() {
+    public String getToken()
+    {
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(String token)
+    {
         this.token = token;
     }
 
-    public LobbyViewmodel getLobby() {
+    public LobbyViewmodel getLobby()
+    {
         return lobby;
     }
 
-    public void setLobby(LobbyViewmodel lobby) {
+    public void setLobby(LobbyViewmodel lobby)
+    {
         this.lobby = lobby;
-    }
-
-    public WsJoinLobby() {
     }
 }
