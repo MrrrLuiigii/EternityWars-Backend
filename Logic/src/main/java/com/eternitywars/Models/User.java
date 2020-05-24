@@ -4,12 +4,14 @@ import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
 import com.eternitywars.Models.Enums.AccountStatus;
 import org.eclipse.jetty.websocket.api.Session;
 
+import java.util.List;
+
 public class User extends Account
 {
     private int gold;
     private int packAmount;
     private FriendCollection friendCollection;
-    private DeckCollection deckCollection;
+    private List<Deck> decks;
     private CardCollection cardCollection;
 
 
@@ -24,12 +26,12 @@ public class User extends Account
     }
 
 
-    public User(String email, int gold, int packAmount, FriendCollection friendCollection, DeckCollection deckCollection, CardCollection cardCollection) {
+    public User(String email, int gold, int packAmount, FriendCollection friendCollection, List<Deck> decks, CardCollection cardCollection) {
         this.email = email;
         this.gold = gold;
         this.packAmount = packAmount;
         this.friendCollection = friendCollection;
-        this.deckCollection = deckCollection;
+        this.decks = decks;
         this.cardCollection = cardCollection;
     }
 
@@ -43,23 +45,23 @@ public class User extends Account
         this.username = frontendUser.getUsername();
     }
 
-    public User(int id, String username, AccountStatus accountStatus, String email, int gold, int packAmount, FriendCollection friendCollection, DeckCollection deckCollection, CardCollection cardCollection) {
+    public User(int id, String username, AccountStatus accountStatus, String email, int gold, int packAmount, FriendCollection friendCollection, List<Deck> decks, CardCollection cardCollection) {
         super(id, username, accountStatus);
         this.email = email;
         this.gold = gold;
         this.packAmount = packAmount;
         this.friendCollection = friendCollection;
-        this.deckCollection = deckCollection;
+        this.decks = decks;
         this.cardCollection = cardCollection;
     }
 
-    public User(int id, String username, AccountStatus accountStatus, Session session, String email, int gold, int packAmount, FriendCollection friendCollection, DeckCollection deckCollection, CardCollection cardCollection) {
+    public User(int id, String username, AccountStatus accountStatus, Session session, String email, int gold, int packAmount, FriendCollection friendCollection, List<Deck> decks, CardCollection cardCollection) {
         super(id, username, accountStatus, session);
         this.email = email;
         this.gold = gold;
         this.packAmount = packAmount;
         this.friendCollection = friendCollection;
-        this.deckCollection = deckCollection;
+        this.decks = decks;
         this.cardCollection = cardCollection;
     }
 
@@ -103,14 +105,14 @@ public class User extends Account
         this.friendCollection = friendCollection;
     }
 
-    public DeckCollection getDeckCollection()
+    public List<Deck> getDecks()
     {
-        return deckCollection;
+        return decks;
     }
 
-    public void setDeckCollection(DeckCollection deckCollection)
+    public void setDecks(List<Deck> decks)
     {
-        this.deckCollection = deckCollection;
+        this.decks = decks;
     }
 
     public CardCollection getCardCollection()

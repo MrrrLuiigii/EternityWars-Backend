@@ -3,14 +3,14 @@ package com.eternitywars.Logic.WebsocketServer.WsModels;
 import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
 import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 
-public class WsJoinLobby
+public class WsLeaveLobby
 {
     private String token;
     private LobbyViewmodel lobby;
     private SingleUserViewmodel user;
 
 
-    public WsJoinLobby()
+    public WsLeaveLobby()
     {
     }
 
