@@ -4,7 +4,7 @@ import com.eternitywars.Models.User;
 
 public class WsUserToken {
     String token;
-    User parameter;
+    WsFrontendUser parameter;
 
     public WsUserToken() {
     }
@@ -17,11 +17,11 @@ public class WsUserToken {
         this.token = token;
     }
 
-    public User getParameter() {
+    public WsFrontendUser getParameter() {
         return parameter;
     }
 
-    public void setParameter(User parameter) {
+    public void setParameter(WsFrontendUser parameter) {
         this.parameter = parameter;
     }
 }

@@ -1,9 +1,11 @@
 package com.eternitywars.Models;
 
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
+
 public class Deck
 {
     private int deckId;
-    private User user;
+    private WsFrontendUser user;
     private String name;
     private CardCollection cards;
 
@@ -21,7 +23,7 @@ public class Deck
         this.cards = cards;
     }
 
-    public Deck(int deckId, User user, String name)
+    public Deck(int deckId, WsFrontendUser user, String name)
     {
         this.deckId = deckId;
         this.user = user;
@@ -38,12 +40,12 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public User getUser()
+    public WsFrontendUser getUser()
     {
         return user;
     }
 
-    public void setUser(User user)
+    public void setUser(WsFrontendUser user)
     {
         this.user = user;
     }

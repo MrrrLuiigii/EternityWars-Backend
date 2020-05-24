@@ -4,7 +4,6 @@ import com.eternitywars.Logic.Lobby.LobbyContainerLogic;
 import com.eternitywars.Logic.Lobby.LobbyLogic;
 import com.eternitywars.Logic.WebsocketServer.Collection.UserCollection;
 import com.eternitywars.Logic.WebsocketServer.Models.WsReturnMessage;
-import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
 import com.eternitywars.Models.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

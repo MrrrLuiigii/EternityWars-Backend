@@ -2,6 +2,7 @@ package com.eternitywars.Logic.DeckBuilder;
 
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsDeck;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsGetDeckByUserId;
+import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
 import com.eternitywars.Models.*;
 import com.eternitywars.Models.DTO.DecksDTO;
 import com.google.gson.Gson;
@@ -80,17 +81,17 @@ public class DeckBuilderContainerLogic
         return restTemplate.postForObject(url, request, boolean.class);
     }
 
-    public DecksDTO GetAllDecks(WsGetDeckByUserId wsGetDeckByUserId)
+    public DecksDTO GetAllDecks(WsUserToken wsUserToken)
     {
         HttpHeaders httpHeaders = new HttpHeaders();
 
         GsonBuilder gs = new GsonBuilder();
         gs.serializeNulls();
         Gson gson = gs.create();
-        HttpEntity<String> request = new HttpEntity<>(gson.toJson(wsGetDeckByUserId.getParameter()), httpHeaders);
+        HttpEntity<String> request = new HttpEntity<>(gson.toJson(wsUserToken.getParameter()), httpHeaders);
 
         String url = "http://localhost:8083/api/public/deck/getByUserId/{userId}";
-        ResponseEntity<DecksDTO> response = restTemplate.exchange(url, HttpMethod.GET, request, DecksDTO.class, wsGetDeckByUserId.getParameter().getId());
+        ResponseEntity<DecksDTO> response = restTemplate.exchange(url, HttpMethod.GET, request, DecksDTO.class, wsUserToken.getParameter().getId());
         return response.getBody();
     }
 
