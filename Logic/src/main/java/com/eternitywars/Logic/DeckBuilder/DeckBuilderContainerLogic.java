@@ -2,7 +2,6 @@ package com.eternitywars.Logic.DeckBuilder;
 
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsDeck;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsGetDeckByUserId;
-import com.eternitywars.Logic.utils.APIRequest;
 import com.eternitywars.Models.*;
 import com.eternitywars.Models.DTO.DecksDTO;
 import com.google.gson.Gson;
@@ -50,15 +49,20 @@ public class DeckBuilderContainerLogic
 
     public Deck AddDeck(WsDeck wsDeck)
     {
-        GsonBuilder gs = new GsonBuilder();
-        gs.serializeNulls();
-        Gson gson = gs.create();
+//        GsonBuilder gs = new GsonBuilder();
+//        gs.serializeNulls();
+//        Gson gson = gs.create();
 
         Deck deck = wsDeck.getDeck();
-        deck.setUserId(wsDeck.getUser().getUserId());
+        deck.setUser(wsDeck.getUser());
+        JSONObject output = new JSONObject(deck);
 
-        Deck returndeck = (Deck)APIRequest.CreateRequest("http://localhost:8083/api/public/deck/add", gson.toJson(deck), Deck.class, HttpMethod.POST);
-        return returndeck;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> request = new HttpEntity<>(output.toString(), headers);
+
+        ResponseEntity<Deck> response = restTemplate.exchange("http://localhost:8083/api/public/deck/add", HttpMethod.POST, request, Deck.class);
+        return response.getBody();
     }
 
     public boolean DeleteDeck(JSONObject jsonObject)

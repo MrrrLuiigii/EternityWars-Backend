@@ -1,12 +1,9 @@
 package com.eternitywars.Models;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Deck
 {
     private int deckId;
-    private int userId;
+    private User user;
     private String name;
     private CardCollection cards;
 
@@ -24,10 +21,10 @@ public class Deck
         this.cards = cards;
     }
 
-    public Deck(int deckId, int userId, String name)
+    public Deck(int deckId, User user, String name)
     {
         this.deckId = deckId;
-        this.userId = userId;
+        this.user = user;
         this.name = name;
     }
 
@@ -41,14 +38,14 @@ public class Deck
         this.deckId = deckId;
     }
 
-    public int getUserId()
+    public User getUser()
     {
-        return userId;
+        return user;
     }
 
-    public void setUserId(int userId)
+    public void setUser(User user)
     {
-        this.userId = userId;
+        this.user = user;
     }
 
     public String getName()

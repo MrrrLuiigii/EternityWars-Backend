@@ -27,6 +27,6 @@ public class MessageConverter {
     public static String getToken(String message){
         JSONObject jsonObject = new JSONObject(message);
 
-        return jsonObject.getString("Token");
+        return jsonObject.getString("token");
     }
 }

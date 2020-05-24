@@ -1,6 +1,7 @@
 package com.eternitywars.api.DAL.Contexts.Deck;
 
 import com.eternitywars.api.ApiApplication;
+import com.eternitywars.api.DAL.Contexts.User.UserContainerHibernateContext;
 import com.eternitywars.api.Interfaces.Deck.IDeckContainerContext;
 import com.eternitywars.api.Models.Decks;
 import com.eternitywars.api.Models.Entities.Card;
@@ -25,7 +26,9 @@ public class DeckContainerHibernateContext implements IDeckContainerContext
         {
             session = sessionFactory.openSession();
             transaction = session.beginTransaction();
-            User user = session.find(User.class, deck.getUser().getUserId());
+            UserContainerHibernateContext userContainerHibernateContext = new UserContainerHibernateContext();
+
+            User user = userContainerHibernateContext.GetUserByEmail(deck.getUser().getEmail());
             deck.setUser(user);
             user.getDecks().add(deck);
             session.persist(deck);
