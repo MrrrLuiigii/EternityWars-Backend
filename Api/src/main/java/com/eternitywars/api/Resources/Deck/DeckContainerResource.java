@@ -33,6 +33,7 @@ public class DeckContainerResource
     @GetMapping(value = "/getByDeckId/{deckId}")
     public Deck GetDeckById(@PathVariable("deckId") int deckId)
     {
-        return deckContainerRepository.GetDeckById(deckId);
+        Deck deck = deckContainerRepository.GetDeckById(deckId);
+        return deck;
     }
 }

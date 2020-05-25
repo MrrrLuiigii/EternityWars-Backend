@@ -4,7 +4,7 @@ import com.eternitywars.Models.Deck;
 import com.eternitywars.Models.User;
 
 public class WsDeck {
-    WsFrontendUser user;
+    WsFrontendUser parameter;
     String token;
     Deck deck;
 
@@ -12,11 +12,11 @@ public class WsDeck {
     }
 
     public WsFrontendUser getUser() {
-        return user;
+        return parameter;
     }
 
     public void setUser(WsFrontendUser user) {
-        this.user = user;
+        this.parameter = user;
     }
 
     public String getToken() {

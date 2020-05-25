@@ -81,8 +81,8 @@ public class LobbyLogic
            if(lobby.getPlayers().get(0).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready && lobby.getPlayers().get(1).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready)
            {
                DeckBuilderContainerLogic deckBuilderContainerLogic = new DeckBuilderContainerLogic();
-               lobby.getPlayers().get(0).setDeck(deckBuilderContainerLogic.GetDeckById(lobby.getPlayers().get(0).getDeck().getDeckId(), token));
-               lobby.getPlayers().get(1).setDeck(deckBuilderContainerLogic.GetDeckById(lobby.getPlayers().get(1).getDeck().getDeckId(), token));
+               lobby.getPlayers().get(0).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(0).getDeck().getDeckId(), token));
+               lobby.getPlayers().get(1).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(1).getDeck().getDeckId(), token));
                gameLogic.LaunchGame(lobby);
                lobbyContainerLogic.DeleteLobby(lobby, token);
 
