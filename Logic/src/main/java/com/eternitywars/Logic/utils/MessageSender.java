@@ -3,14 +3,18 @@ package com.eternitywars.Logic.utils;
 
 import com.eternitywars.Logic.WebsocketServer.Collection.UserCollection;
 import com.eternitywars.Logic.WebsocketServer.Models.WsReturnMessage;
+import com.eternitywars.Models.DTO.LobbyDTO;
 import com.eternitywars.Models.Lobby;
 import com.eternitywars.Models.LobbyCollection;
 import com.eternitywars.Models.User;
+import com.eternitywars.Models.Viewmodels.Lobby.LobbiesViewmodel;
+import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
+
 import java.io.IOException;
 
 public class MessageSender {
 
-    public static void UpdateParticipatingLobby(Lobby lobby, String action) throws IOException {
+    public static void UpdateParticipatingLobby(LobbyViewmodel lobby, String action) throws IOException {
 
         WsReturnMessage returnMessage = new WsReturnMessage();
         returnMessage.setAction(action);
@@ -18,21 +22,22 @@ public class MessageSender {
 
         for (User u : UserCollection.getConnectedUsers()){
             if(lobby.getPlayers().get(0) != null){
-                if(u.getUserId() == lobby.getPlayers().get(0).getUserId()){
+                if(u.getUsername().equals(lobby.getPlayers().get(0).getUsername())){
                     u.getSession().getRemote().sendString(MessageConverter.FromObjectToString(returnMessage));
                 }
             }
             if(lobby.getPlayers().get(1) != null){
-                if(u.getUserId() == lobby.getPlayers().get(1).getUserId()){
+                if(u.getUsername().equals(lobby.getPlayers().get(1).getUsername())){
                     u.getSession().getRemote().sendString(MessageConverter.FromObjectToString(returnMessage));
                 }
             }
         }
     }
 
-    public static void UpdateLobbyList(LobbyCollection lobbies) throws IOException {
+
+    public static void UpdateLobbyList(LobbiesViewmodel lobbies) throws IOException {
         WsReturnMessage returnMessage = new WsReturnMessage();
-        returnMessage.setAction("GETLOBBIES");
+        returnMessage.setAction("GetLobbies");
         returnMessage.setContent(lobbies);
 
 

@@ -2,10 +2,9 @@ package com.eternitywars.Logic.Lobby;
 
 import com.eternitywars.Logic.DeckBuilder.DeckBuilderContainerLogic;
 import com.eternitywars.Logic.Game.GameLogic;
-import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
-import com.eternitywars.Logic.WebsocketServer.WsModels.WsJoinLobby;
-import com.eternitywars.Logic.WebsocketServer.WsModels.WsLobbyModel;
+import com.eternitywars.Logic.WebsocketServer.WsModels.*;
 import com.eternitywars.Logic.utils.APIRequest;
+import com.eternitywars.Logic.utils.MessageSender;
 import com.eternitywars.Models.*;
 import com.eternitywars.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.Models.DTO.LobbyDTO;
@@ -16,14 +15,15 @@ import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+
 public class LobbyLogic
 {
     private RestTemplate restTemplate = new RestTemplate();
     private LobbyContainerLogic lobbyContainerLogic = new LobbyContainerLogic();
     private GameLogic gameLogic = new GameLogic();
 
-    public LobbyViewmodel JoinLobby(WsJoinLobby wsJoinLobby)
-    {
+    public LobbyViewmodel JoinLobby(WsJoinLobby wsJoinLobby) throws IOException {
         JoinLobbyDTO joinLobbyDTO = new JoinLobbyDTO();
         joinLobbyDTO.setLobbyID(wsJoinLobby.getLobby().getId());
         joinLobbyDTO.setPlayerID(wsJoinLobby.getUser().getId());
@@ -35,7 +35,12 @@ public class LobbyLogic
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
 
         String url = "http://localhost:8083/api/public/lobby/join";
+
         LobbyViewmodel lobbyViewmodel = restTemplate.postForObject(url, request, LobbyViewmodel.class);
+        MessageSender.UpdateParticipatingLobby(lobbyViewmodel, "UpdateLobby");
+        WsUserToken user = new WsUserToken();
+        user.setToken(wsJoinLobby.getToken());
+        MessageSender.UpdateLobbyList(lobbyContainerLogic.GetLobbies(user));
         return lobbyViewmodel;
     }
 
@@ -104,32 +109,20 @@ public class LobbyLogic
         return lobby;
     }
 
+    public LobbyViewmodel SetDeck(WsSetDeck wsSetDeck) throws IOException {
+        LobbyViewmodel lobby = wsSetDeck.getLobby();
+        String token = wsSetDeck.getToken();
+        Player player = wsSetDeck.getPlayer();
 
-
-    public Lobby SetDeck(JSONObject jsonObject)
-    {
-        Lobby lobby = (Lobby)MessageHandler.HandleMessage(jsonObject.getString("content"), Lobby.class);
-        Player player = (Player)MessageHandler.HandleMessage(jsonObject.getString("player"), Player.class);
-        String token = jsonObject.getString("token");
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setBearerAuth(token);
-//        headers.setContentType(MediaType.APPLICATION_JSON);
-//        Lobby sendlobby = new Lobby();
-//        sendlobby.setId(lobby.getId());
-//        sendlobby.setPlayerOne(player);
-//
-//        JSONObject json = new JSONObject(sendlobby);
-//
-//        HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
-//        Lobby lobby1 = restTemplate.postForObject("http://localhost:8083/api/private/lobby/updateDeck", request , Lobby.class);
-        if(lobby.getPlayers().get(0).getUserId() == player.getUserId())
+        if(lobby.getPlayers().get(0).getPlayerId() == player.getUserId())
         {
-            lobby.getPlayers().get(0).setDeck(player.getDeck());
+            lobby.getPlayers().get(0).setSelectedDeck(player.getDeck());
         }
-        else if(lobby.getPlayers().get(1).getUserId() == player.getUserId())
+        else if(lobby.getPlayers().get(1).getPlayerId() == player.getUserId())
         {
-            lobby.getPlayers().get(1).setDeck(player.getDeck());
+            lobby.getPlayers().get(1).setSelectedDeck(player.getDeck());
         }
+        MessageSender.UpdateParticipatingLobby(lobby, "UpdateLobby");
         return  lobby;
     }
 }

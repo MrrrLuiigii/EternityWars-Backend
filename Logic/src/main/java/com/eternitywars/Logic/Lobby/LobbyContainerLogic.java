@@ -2,6 +2,7 @@ package com.eternitywars.Logic.Lobby;
 
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsLobbyModel;
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsUserToken;
+import com.eternitywars.Logic.utils.MessageSender;
 import com.eternitywars.Models.DTO.LobbyDTO;
 import com.eternitywars.Models.DTO.LobbyPlayerDTO;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
@@ -15,14 +16,15 @@ import org.json.JSONObject;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
+
 public class LobbyContainerLogic
 {
     private RestTemplate restTemplate = new RestTemplate();
 
 
 
-    public LobbyViewmodel AddLobby(WsLobbyModel wsLobbyModel)
-    {
+    public LobbyViewmodel AddLobby(WsLobbyModel wsLobbyModel) throws IOException {
         User user = wsLobbyModel.getUser();
         LobbyPlayerDTO lobbyPlayerDTO = new LobbyPlayerDTO(user, LobbyPlayerStatus.NotReady);
         wsLobbyModel.getParameter().getPlayers().add(lobbyPlayerDTO);
@@ -34,7 +36,12 @@ public class LobbyContainerLogic
         JSONObject json = new JSONObject(wsLobbyModel.getParameter());
         HttpEntity<String> request = new HttpEntity<>(json.toString(), headers);
         //send lobby object with the user that wants to join
-        return restTemplate.postForObject("http://localhost:8083/api/public/lobby/add", request, LobbyViewmodel.class);
+        LobbyContainerLogic lobbyContainerLogic = new LobbyContainerLogic();
+        LobbyViewmodel lobbyViewmodel = restTemplate.postForObject("http://localhost:8083/api/public/lobby/add", request, LobbyViewmodel.class);
+        WsUserToken usertoken = new WsUserToken();
+        usertoken.setToken(wsLobbyModel.getToken());
+        MessageSender.UpdateLobbyList(lobbyContainerLogic.GetLobbies(usertoken));
+        return  lobbyViewmodel;
     }
 
     public Lobby GetLobbyById(Lobby lobby, String token)
