@@ -71,13 +71,14 @@ public class LobbyLogic
         return null;
     }
 
-    public Lobby PlayerReady(WsSetDeck wsSetDeck)
-    {
-       if(lobby.getPlayers().get(0).getUserId() == player.getUserId())
+    public LobbyViewmodel PlayerReady(WsSetDeck wsSetDeck) throws IOException {
+        Player player = wsSetDeck.getPlayer();
+        LobbyViewmodel lobby = wsSetDeck.getLobby();
+       if(lobby.getPlayers().get(0).getPlayerId() == player.getUserId())
        {
            lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
        }
-       else if(lobby.getPlayers().get(1).getUserId() == player.getUserId())
+       else if(lobby.getPlayers().get(1).getPlayerId() == player.getUserId())
        {
            lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
        }
@@ -85,27 +86,32 @@ public class LobbyLogic
        {
            if(lobby.getPlayers().get(0).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready && lobby.getPlayers().get(1).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready)
            {
-               DeckBuilderContainerLogic deckBuilderContainerLogic = new DeckBuilderContainerLogic();
-               lobby.getPlayers().get(0).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(0).getDeck().getDeckId(), token));
-               lobby.getPlayers().get(1).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(1).getDeck().getDeckId(), token));
-               gameLogic.LaunchGame(lobby);
-               lobbyContainerLogic.DeleteLobby(lobby, token);
+               System.out.println("gassen naar Unity");
+//               DeckBuilderContainerLogic deckBuilderContainerLogic = new DeckBuilderContainerLogic();
+//               lobby.getPlayers().get(0).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(0).getDeck().getDeckId(), token));
+//               lobby.getPlayers().get(1).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(1).getDeck().getDeckId(), token));
+//               gameLogic.LaunchGame(lobby);
+//               lobbyContainerLogic.DeleteLobby(lobby, token);
 
            }
        }
+       MessageSender.UpdateParticipatingLobby(lobby, "UpdateLobby");
         return lobby;
     }
 
-    public Lobby PlayerNotReady(Lobby lobby, Player player)
-    {
-        if(lobby.getPlayers().get(0).getUserId() == player.getUserId())
+    public LobbyViewmodel PlayerNotReady(WsSetDeck wsSetDeck) throws IOException {
+        Player player = wsSetDeck.getPlayer();
+        LobbyViewmodel lobby = wsSetDeck.getLobby();
+
+        if(lobby.getPlayers().get(0).getPlayerId() == player.getUserId())
         {
             lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         }
-        else if(lobby.getPlayers().get(1).getUserId() == player.getUserId())
+        else if(lobby.getPlayers().get(1).getPlayerId() == player.getUserId())
         {
             lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         }
+        MessageSender.UpdateParticipatingLobby(lobby, "UpdateLobby");
         return lobby;
     }
 
