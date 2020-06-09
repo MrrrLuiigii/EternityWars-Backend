@@ -71,7 +71,7 @@ public class LobbyLogic
         return null;
     }
 
-    public Lobby PlayerReady(Lobby lobby, Player player, String token)
+    public Lobby PlayerReady(WsSetDeck wsSetDeck)
     {
        if(lobby.getPlayers().get(0).getUserId() == player.getUserId())
        {
