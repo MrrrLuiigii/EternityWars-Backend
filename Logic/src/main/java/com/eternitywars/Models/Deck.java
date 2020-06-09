@@ -1,6 +1,7 @@
 package com.eternitywars.Models;
 
 import com.eternitywars.Logic.WebsocketServer.WsModels.WsFrontendUser;
+import com.eternitywars.Models.DTO.DeckDTO;
 
 public class Deck
 {
@@ -10,6 +11,13 @@ public class Deck
     private CardCollection cards;
 
     public Deck(){
+    }
+
+    public Deck(DeckDTO deck) {
+        this.deckId = deck.getDeckId();
+        this.name = deck.toString();
+        this.cards = new CardCollection();
+        cards.setCards(deck.getCards());
     }
 
     public Deck(int deckId)

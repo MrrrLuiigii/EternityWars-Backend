@@ -20,17 +20,17 @@ public class GameLogic
     ObjectConverter objectConverter;
     Random rnd = new Random();
 
-    public void LaunchGame(Lobby lobby)
-    {
-        GameConverter gameConverter = new GameConverter();
-
-        Game game = GetFirstThreeCards(ChooseFirstTurn(gameConverter.ConvertToGame(lobby)));
-        try {
-            BroadCastGame(game);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+//    public void LaunchGame(Lobby lobby)
+//    {
+//        GameConverter gameConverter = new GameConverter();
+//
+////        Game game = GetFirstThreeCards(ChooseFirstTurn(gameConverter.ConvertToGame(lobby)));
+//        try {
+////            BroadCastGame(game);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     private Game ChooseFirstTurn(Game game)
     {

@@ -29,4 +29,16 @@ public class APIRequest {
 
         return response.getBody();
     }
+
+    public static boolean UnityRequest(String url, String postData)
+    {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity;
+        entity = new HttpEntity<>(postData, headers);
+        RestTemplate restTemplate = new RestTemplate();
+
+        ResponseEntity<?> response = restTemplate.exchange(url, HttpMethod.POST, entity, boolean.class);
+        return response.hasBody();
+    }
 }

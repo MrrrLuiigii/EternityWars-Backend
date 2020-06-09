@@ -1,23 +1,23 @@
 package com.eternitywars.Models;
 
+import com.eternitywars.Models.DTO.LobbyDTO;
+import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
+import com.eternitywars.Models.Viewmodels.Lobby.PlayerViewmodel;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameConverter
 {
-    public Game ConvertToGame(Lobby lobby)
+    public static Game ConvertToGame(LobbyViewmodel lobby)
     {
         List<Player> players = new ArrayList<Player>();
-        players.add(lobby.getPlayers().get(0));
-        players.add(lobby.getPlayers().get(1));
-        players.get(0).setCardsInHand(new ArrayList<>());
-        players.get(1).setCardsInHand(new ArrayList<>());
-        players.get(0).setHero(new Hero());
-        players.get(1).setHero(new Hero());
+        players.add(new Player(lobby.getPlayers().get(0)));
+        players.add(new Player(lobby.getPlayers().get(1)));
         Game game = new Game();
         game.setConnectedPlayers(players);
-        game.getConnectedPlayers().get(0).setDeck(lobby.getPlayers().get(0).getDeck());
-        game.getConnectedPlayers().get(1).setDeck(lobby.getPlayers().get(1).getDeck());
+        game.getConnectedPlayers().get(0).setDeck(lobby.getPlayers().get(0).getSelectedDeck());
+        game.getConnectedPlayers().get(1).setDeck(lobby.getPlayers().get(1).getSelectedDeck());
         return game;
     }
 }

@@ -8,6 +8,7 @@ import com.eternitywars.Logic.utils.MessageSender;
 import com.eternitywars.Models.*;
 import com.eternitywars.Models.DTO.JoinLobbyDTO;
 import com.eternitywars.Models.DTO.LobbyDTO;
+import com.eternitywars.Models.DTO.LobbyPlayerDTO;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
 import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
 import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
@@ -72,13 +73,13 @@ public class LobbyLogic
     }
 
     public LobbyViewmodel PlayerReady(WsSetDeck wsSetDeck) throws IOException {
-        Player player = wsSetDeck.getPlayer();
+        String username = wsSetDeck.getUserName();
         LobbyViewmodel lobby = wsSetDeck.getLobby();
-       if(lobby.getPlayers().get(0).getPlayerId() == player.getUserId())
+       if(lobby.getPlayers().get(0).getUsername().equals(username))
        {
            lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
        }
-       else if(lobby.getPlayers().get(1).getPlayerId() == player.getUserId())
+       else if(lobby.getPlayers().get(1).getUsername().equals(username))
        {
            lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.Ready);
        }
@@ -86,13 +87,10 @@ public class LobbyLogic
        {
            if(lobby.getPlayers().get(0).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready && lobby.getPlayers().get(1).getLobbyPlayerStatus() == LobbyPlayerStatus.Ready)
            {
-               System.out.println("gassen naar Unity");
-//               DeckBuilderContainerLogic deckBuilderContainerLogic = new DeckBuilderContainerLogic();
-//               lobby.getPlayers().get(0).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(0).getDeck().getDeckId(), token));
-//               lobby.getPlayers().get(1).setDeck(deckBuilderContainerLogic.GetDeckByIdLogic(lobby.getPlayers().get(1).getDeck().getDeckId(), token));
-//               gameLogic.LaunchGame(lobby);
-//               lobbyContainerLogic.DeleteLobby(lobby, token);
-
+               MessageSender.UpdateParticipatingLobby(lobby, "LaunchGame");
+               Game game = GameConverter.ConvertToGame(wsSetDeck.getLobby());
+               APIRequest.UnityRequest("http://25.52.93.57:8085/startGame", new JSONObject(game).toString());
+               return lobby;
            }
        }
        MessageSender.UpdateParticipatingLobby(lobby, "UpdateLobby");
@@ -100,14 +98,14 @@ public class LobbyLogic
     }
 
     public LobbyViewmodel PlayerNotReady(WsSetDeck wsSetDeck) throws IOException {
-        Player player = wsSetDeck.getPlayer();
+        String username = wsSetDeck.getUserName();
         LobbyViewmodel lobby = wsSetDeck.getLobby();
 
-        if(lobby.getPlayers().get(0).getPlayerId() == player.getUserId())
+        if(lobby.getPlayers().get(0).getUsername().equals(username))
         {
             lobby.getPlayers().get(0).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         }
-        else if(lobby.getPlayers().get(1).getPlayerId() == player.getUserId())
+        else if(lobby.getPlayers().get(1).getUsername().equals(username))
         {
             lobby.getPlayers().get(1).setLobbyPlayerStatus(LobbyPlayerStatus.NotReady);
         }
@@ -117,16 +115,16 @@ public class LobbyLogic
 
     public LobbyViewmodel SetDeck(WsSetDeck wsSetDeck) throws IOException {
         LobbyViewmodel lobby = wsSetDeck.getLobby();
-        String token = wsSetDeck.getToken();
-        Player player = wsSetDeck.getPlayer();
+        String username = wsSetDeck.getUserName();
+        Deck deck = new Deck(wsSetDeck.getSelectedDeck());
 
-        if(lobby.getPlayers().get(0).getPlayerId() == player.getUserId())
+        if(lobby.getPlayers().get(0).getUsername().equals(username))
         {
-            lobby.getPlayers().get(0).setSelectedDeck(player.getDeck());
+            lobby.getPlayers().get(0).setSelectedDeck(deck);
         }
-        else if(lobby.getPlayers().get(1).getPlayerId() == player.getUserId())
+        else if(lobby.getPlayers().get(1).getUsername().equals(username))
         {
-            lobby.getPlayers().get(1).setSelectedDeck(player.getDeck());
+            lobby.getPlayers().get(1).setSelectedDeck(deck);
         }
         MessageSender.UpdateParticipatingLobby(lobby, "UpdateLobby");
         return  lobby;

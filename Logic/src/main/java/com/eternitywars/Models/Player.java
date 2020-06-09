@@ -2,6 +2,7 @@ package com.eternitywars.Models;
 
 import com.eternitywars.Models.Enums.AccountStatus;
 import com.eternitywars.Models.Enums.LobbyPlayerStatus;
+import com.eternitywars.Models.Viewmodels.Lobby.PlayerViewmodel;
 import com.eternitywars.Models.Viewmodels.SingleUserViewmodel;
 import org.eclipse.jetty.websocket.api.Session;
 
@@ -38,6 +39,16 @@ public class Player extends Account
         this.userId = singleUserViewmodel.getId();
         this.username = singleUserViewmodel.getUsername();
         this.lobbyPlayerStatus = LobbyPlayerStatus.NotReady;
+    }
+
+    public Player(PlayerViewmodel player)
+    {
+        super(0, player.getUsername(), null, null);
+        this.cardsInHand = new ArrayList<>();
+        this.cardsInDeck= new ArrayList<>();
+        this.boardRow = new BoardRow();
+        this.deck = player.getSelectedDeck();
+        this.hero = new Hero();
     }
 
 

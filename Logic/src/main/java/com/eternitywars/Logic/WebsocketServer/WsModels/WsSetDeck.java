@@ -1,12 +1,33 @@
 package com.eternitywars.Logic.WebsocketServer.WsModels;
 
+import com.eternitywars.Models.DTO.DeckDTO;
+import com.eternitywars.Models.DTO.LobbyDTO;
+import com.eternitywars.Models.DTO.LobbyPlayerDTO;
+import com.eternitywars.Models.Deck;
 import com.eternitywars.Models.Player;
 import com.eternitywars.Models.Viewmodels.Lobby.LobbyViewmodel;
 
 public class WsSetDeck {
     LobbyViewmodel lobby;
-    Player player;
+    String username;
+    DeckDTO selectedDeck;
     String token;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public WsSetDeck() {
     }
@@ -19,19 +40,19 @@ public class WsSetDeck {
         this.lobby = lobby;
     }
 
-    public Player getPlayer() {
-        return player;
+    public DeckDTO getSelectedDeck() {
+        return selectedDeck;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setSelectedDeck(DeckDTO selectedDeck) {
+        this.selectedDeck = selectedDeck;
     }
 
-    public String getToken() {
-        return token;
+    public String getUserName() {
+        return username;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setUserName(String userName) {
+        this.username = userName;
     }
 }
